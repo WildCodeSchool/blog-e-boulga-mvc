@@ -1,6 +1,29 @@
 {% extends 'layout.html.twig' %}
-
+{% block stylesheet %} <link rel="assets/css/home.css" {% endblock %}
 {% block content %}
-    <h1>Hello Wilder !</h1>
-    <p>Find a complete CRUD example on <a href="/items">/items</a> page.</p>
+    <section class="hotNews_block">
+    
+        <article class="card bigNews">
+            <a href="article.php?article=<?= $art['parameter_url'] ?>">
+                <div class="title_bigNews title_news">
+                    <img class="big" src="<?= $art['coverImg'] ?>" alt="image de l'article principal">
+                    <div class="articleTeasing">
+                        <h1>titlehome</h1>
+                        <p>description</p>
+                    </div>
+                </div>
+            </a>
+        </article>
+    
+    <article class="card middle_news">
+        <?php foreach ($twoArticle as $artTwo) : ?>
+            <a href="article.php?article=<?= $artTwo['parameter_url'] ?>">
+                <div class="card1">
+                    <img class="small" src="<?= $artTwo['coverImg'] ?>" alt="image de l'article secondaire">
+                    <h2><?= $artTwo['titleHome'] ?></h2>
+                </div>
+            </a>
+        
+    </article>
+</section>
 {% endblock %}

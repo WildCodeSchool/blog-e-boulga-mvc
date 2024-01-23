@@ -181,7 +181,7 @@ CREATE TABLE `user` (
                         `last_name` varchar(80) NOT NULL,
                         `email_address` varchar(255) NOT NULL,
                         `login` varchar(80) NOT NULL,
-                        `password` varchar(80) NOT NULL,
+                        `password` varchar(255) NOT NULL,
                         `account_status` tinyint NOT NULL,
                         `roles` varchar(255) NOT NULL,
                         PRIMARY KEY (`id`),

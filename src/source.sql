@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `article`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `article` (
                            `id` int NOT NULL AUTO_INCREMENT,
-                           `author_id` int DEFAULT NULL,
+                           `author_id` int NOT NULL,
                            `category_id` int DEFAULT NULL,
                            `article_title` varchar(255) NOT NULL,
                            `home_title` varchar(80) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `author` (
                           `github_url` varchar(255) DEFAULT NULL,
                           `website_url` varchar(255) DEFAULT NULL,
                           `img_src` varchar(255) DEFAULT NULL,
-                          `user_id` int DEFAULT NULL,
+                          `user_id` int NOT NULL,
                           PRIMARY KEY (`id`),
                           KEY `user_id` (`user_id`),
                           CONSTRAINT `author_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)

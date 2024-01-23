@@ -71,7 +71,6 @@ Gestion du menu burger !
     height: calc(100vh - var(--header-height-desktop));
     list-style-type: none;
     z-index: 2;
-    /* margin-top: var(--header-height-desktop); */
 }
 
 #burger_menue a {

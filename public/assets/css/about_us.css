@@ -11,7 +11,7 @@ main {
 /* Block Header */
 
 #pageTitle {
-    color: --our-black;
+    color: var(--our-black);
     text-align: justify;
     font-family: Titillium Web;
     font-size: 1.5rem;
@@ -25,7 +25,7 @@ main {
 }
 
 #pagePresentation {
-    color: --our-black;
+    color: var(--our-black);
     text-align: justify;
     font-family: Titillium Web;
     font-size: 1.125rem;
@@ -53,7 +53,7 @@ article {
     grid-template-rows: 1fr 50px 50px;
     margin-bottom: 6.63rem;
     text-decoration: none;
-    color: --our-black;
+    color: var(--our-black);
     text-align: justify;
     font-family: Titillium Web;
     font-size: 1.125rem;
@@ -102,14 +102,12 @@ article aside p span {
 
 .authorName {
     display: flex;
-    /* grid-row: 1;
-    grid-column: 1; */
     justify-content: center;
     align-items: center;
 }
 
 .authorName h2 {
-    color: --our-black;
+    color: var(--our-black);
     font-family: Titillium Web;
     font-size: 1rem;
     font-style: normal;
@@ -120,8 +118,6 @@ article aside p span {
 }
 
 .website {
-    /* grid-row: 1;
-    grid-column: 1; */
     margin-top: 1rem;
     display: flex;
     justify-content: center;
@@ -143,7 +139,6 @@ article aside p span {
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    /* box-shadow: 0px 12px 12px 0px rgba(0, 0, 0, 0.25); */
 }
 
 .linkedinProfil {
@@ -154,7 +149,7 @@ article aside p span {
     text-decoration: inherit;
     color: var(--our-black);
     border-radius: 0.625rem;
-    background: var(--Orange, #FFA458);
+    background: var(--main-color);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     max-width: 255px;
     min-width: 190px;
@@ -172,7 +167,6 @@ article aside p span {
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    /* box-shadow: 0px 12px 12px 0px rgba(0, 0, 0, 0.25); */
 }
 
 .githubProfil {
@@ -188,7 +182,7 @@ article aside p span {
     width: 90%;
     max-height: 53px;
     border-radius: 0.625rem;
-    border: 1px solid var(--Orange, #FFA458);
+    border: 1px solid var(--main-color);
     background: rgba(255, 164, 88, 0.07);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -200,7 +194,6 @@ article aside p span {
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    /* box-shadow: 0px 12px 12px 0px rgba(0, 0, 0, 0.25); */
 }
 
 article a img {

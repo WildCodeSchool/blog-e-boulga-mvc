@@ -29,7 +29,7 @@ a {
     visibility: visible;
 }
 
- .big { 
+ .big {
     width: 710px;
     height: 527px;
     transition: ease-in-out 1s;
@@ -96,7 +96,6 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* background-color: #f0f; */
 }
 
 .middle_news .card1 .img:hover {
@@ -176,8 +175,8 @@ a {
     font-weight: 400;
     max-height: 312px;
     transition: ease-in-out 0.7s;
-    
-    
+
+
 }
 
 .little_article p {
@@ -216,12 +215,11 @@ h3 {
 .card2:hover {
     rotate:Y 30deg;
     transition: ease-in-out 0.7s;
-    /* transform:translateZ(200px) ; Effet marteau de piano(à enregistrer pour plus tard)*/
 }
 
 .medium:hover {
     box-shadow: -0.7em 0.5em 0.5em -0.4em #00cc99;
-    
+
 }
 
  .little_article:hover {
@@ -242,7 +240,7 @@ main {
         animation-timeline: view();
         animation-range:0px 400px;
     }
-    
+
     @keyframes fade-in {
         from {scale: .8; opacity: 0;}
         to {scale: 1; opacity: 1;}
@@ -273,12 +271,10 @@ main {
         animation: none ;
         animation-timeline: none;
         animation-range:none;
-        /* background-color: blue; */
     }
 
     .article_list {
         align-items: center;
-        /* background-color: #f0f; */
         max-width: none;
     }
 }
@@ -301,7 +297,7 @@ main {
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-    
+
     .card2,
     .card2 img {
         width: 224px;

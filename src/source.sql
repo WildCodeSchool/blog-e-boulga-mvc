@@ -1,86 +1,239 @@
--- Create the database 'blogeboulga' if it doesn't exist
-CREATE DATABASE IF NOT EXISTS blogeboulga;
-USE blogeboulga;
+-- MySQL dump 10.13  Distrib 8.2.0, for macos13.5 (arm64)
+--
+-- Host: localhost    Database: blogeboulga
+-- ------------------------------------------------------
+-- Server version	8.2.0
 
--- Create the 'category' table
-CREATE TABLE category (
-                          id INT PRIMARY KEY,
-                          category_name VARCHAR(255) NOT NULL,
-                          status TINYINT(2) NOT NULL
-);
+CREATE DATABASE IF NOT EXISTS blogeboulga CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- Create the 'newsletter' table
-CREATE TABLE newsletter (
-                            id INT AUTO_INCREMENT PRIMARY KEY,
-                            email_address VARCHAR(255) NOT NULL,
-                            subscription_date DATE,
-                            unsubscribe DATE,
-                            status TINYINT NOT NULL
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Create the 'user' table
-CREATE TABLE user (
-                      id INT AUTO_INCREMENT PRIMARY KEY,
-                      first_name VARCHAR(80) NOT NULL,
-                      last_name VARCHAR(80) NOT NULL,
-                      email_address VARCHAR(255) NOT NULL,
-                      login VARCHAR(80) NOT NULL,
-                      password VARCHAR(80) NOT NULL,
-                      account_status TINYINT(2) NOT NULL,
-                      roles VARCHAR(255) NOT NULL,
-                      UNIQUE KEY unique_email (email_address)
-);
+--
+-- Table structure for table `article`
+--
 
--- Create the 'form' table
-CREATE TABLE form (
-                      id INT AUTO_INCREMENT PRIMARY KEY,
-                      first_name VARCHAR(80) NOT NULL,
-                      last_name VARCHAR(80) NOT NULL,
-                      email_address VARCHAR(255) NOT NULL,
-                      topic VARCHAR(80) NOT NULL,
-                      message_content TEXT NOT NULL,
-                      sending_status TINYINT NOT NULL
-);
+DROP TABLE IF EXISTS `article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `article` (
+                           `id` int NOT NULL AUTO_INCREMENT,
+                           `author_id` int DEFAULT NULL,
+                           `category_id` int DEFAULT NULL,
+                           `article_title` varchar(255) NOT NULL,
+                           `home_title` varchar(80) NOT NULL,
+                           `img_src` varchar(255) NOT NULL,
+                           `alt_img` varchar(255) NOT NULL,
+                           `home_preview` varchar(255) NOT NULL,
+                           `introduction` text NOT NULL,
+                           `detail` text NOT NULL,
+                           `description` text NOT NULL,
+                           `shadow_color` varchar(80) NOT NULL,
+                           `release_date` date DEFAULT NULL,
+                           `status` tinyint NOT NULL,
+                           `updated_at` date DEFAULT NULL,
+                           PRIMARY KEY (`id`),
+                           KEY `category_id` (`category_id`),
+                           KEY `article_ibfk_1` (`author_id`),
+                           CONSTRAINT `article_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`),
+                           CONSTRAINT `article_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- Create the 'author' table
-CREATE TABLE author (
-                        id INT PRIMARY KEY,
-                        short_description TEXT,
-                        full_description TEXT,
-                        linkedin_url VARCHAR(255),
-                        github_url VARCHAR(255),
-                        website_url VARCHAR(255),
-                        img_src VARCHAR(255),
-                        user_id INT,
-                        FOREIGN KEY (user_id) REFERENCES user(id)
-);
+--
+-- Dumping data for table `article`
+--
 
--- Create the 'article' table
-CREATE TABLE article (
-                         id INT AUTO_INCREMENT PRIMARY KEY,
-                         author_id INT,
-                         category_id INT,
-                         article_title VARCHAR(255) NOT NULL,
-                         home_title VARCHAR(80) NOT NULL,
-                         img_src VARCHAR(255) NOT NULL,
-                         alt_img VARCHAR(255) NOT NULL,
-                         home_preview VARCHAR(255) NOT NULL,
-                         introduction TEXT NOT NULL,
-                         detail TEXT NOT NULL,
-                         description TEXT NOT NULL,
-                         shadow_color VARCHAR(80) NOT NULL,
-                         release_date DATE,
-                         status TINYINT NOT NULL,
-                         updated_at DATE,
-                         FOREIGN KEY (author_id) REFERENCES author(id),
-                         FOREIGN KEY (category_id) REFERENCES category(id)
-);
+LOCK TABLES `article` WRITE;
+/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+INSERT INTO `article` VALUES (1,NULL,NULL,'L\'Essentiel sur les Flux RSS','Découvrir les Flux RSS','assets/img/articles/flux_rss.jpg','Image représentant les flux rss','Explorez le monde des flux RSS et découvrez comment ils révolutionnent la manière dont nous consommons l\'information au quotidien...','Les Flux RSS, abréviation de Really Simple Syndication, sont des outils puissants qui facilitent la gestion des informations en ligne. Dans cet article, plongeons dans l\'univers des flux RSS et comprenons comment ils simplifient notre accès aux contenus qui nous intéressent le plus.','Les flux RSS, souvent perçus comme de simples agrégateurs d\'informations, revêtent une importance particulière dans le monde du développement web. Comprendre et exploiter ces flux peut enrichir considérablement le parcours d\'apprentissage d\'un développeur web en herbe. Plongeons dans les multiples facettes de cette technologie, en examinant comment elle s\'intègre harmonieusement dans l\'écosystème du développement web. <br><br>Lorsqu\'on aborde l\'apprentissage du développement web, la gestion dynamique du contenu est une compétence cruciale. Les flux RSS offrent une solution élégante en permettant aux développeurs d\'agréger du contenu en temps réel à partir de différentes sources. Cette fonctionnalité peut être particulièrement pertinente pour les projets de sites d\'actualités, de blogs, ou tout autre site nécessitant une mise à jour constante du contenu. L\'intégration habile de flux RSS dans un site web devient ainsi une compétence clé pour tout développeur web souhaitant offrir une expérience utilisateur dynamique.<br><br>La personnalisation des expériences utilisateur est un autre aspect essentiel du développement web contemporain. Les flux RSS, en permettant aux utilisateurs de choisir les sources d\'information qui les intéressent, jouent un rôle crucial dans la création d\'interfaces utilisateur conviviales. Comprendre comment implémenter cette personnalisation non seulement améliore la satisfaction des utilisateurs, mais développe également les compétences du développeur en matière de conception et d\'ergonomie. La capacité de créer des interfaces interactives et hautement personnalisables est une compétence précieuse dans le monde du développement web.<br><br>L\'intégration des flux RSS offre également une opportunité d\'approfondir les compétences en programmation côté serveur. Le processus de récupération, de traitement et d\'affichage des données des flux RSS nécessite une compréhension approfondie des langages de programmation back-end. En apprenant à manipuler ces données dynamiques, les développeurs peuvent renforcer leurs compétences en PHP, Python, Node.js, ou tout autre langage de leur choix. Cette application pratique accélère le processus d\'apprentissage en liant directement la théorie à des projets concrets.<br><br>Un avantage supplémentaire réside dans la facilité d\'implémentation des flux RSS. De nombreuses API et bibliothèques disponibles simplifient le processus d\'intégration, permettant aux développeurs d\'accéder rapidement à des fonctionnalités avancées sans avoir à créer des solutions complexes à partir de zéro. Cette facilité d\'utilisation rend les flux RSS accessibles même aux débutants, offrant ainsi une excellente opportunité d\'initiation au développement web.<br><br>En conclusion, les flux RSS ne sont pas simplement des canaux d\'information, mais plutôt des outils polyvalents qui s\'intègrent de manière transparente dans le monde du développement web. L\'apprentissage de leur utilisation va au-delà de la simple consommation d\'informations, offrant aux développeurs des compétences précieuses en gestion de contenu, en personnalisation d\'interface utilisateur, et en programmation côté serveur. Les flux RSS deviennent ainsi une passerelle vers une compréhension plus approfondie et pratique du développement web, facilitant l\'acquisition de compétences essentielles pour évoluer dans le monde numérique en constante évolution.','Avec la surabondance d\'informations en ligne, il devient de plus en plus crucial de trouver des moyens efficaces de filtrer le contenu. Les flux RSS offrent une solution élégante en organisant les mises à jour de manière structurée. Dans cet article, nous explorerons les avantages pratiques des flux RSS, comment les configurer, et comment ils peuvent améliorer votre expérience en ligne.','..',NULL,1,NULL),(2,NULL,NULL,'Optimiser votre Flux de Travail Web avec les Serveurs FTP/SFTP','Explorer les Serveurs FTP/SFT','assets/img/articles/sftp.png','Image représentant les serveurs FTP et sftp','Découvrez comment les serveurs FTP/SFTP peuvent révolutionner votre façon de gérer les fichiers sur le web...','Les serveurs FTP (File Transfer Protocol) et SFTP (SSH File Transfer Protocol) sont des piliers du monde du développement web, facilitant le transfert sécurisé de fichiers entre votre machine locale et un serveur distant. Dans cet article, plongeons dans l\'univers de ces protocoles essentiels et comprenons comment ils optimisent votre flux de travail web.','Les serveurs FTP et SFTP jouent un rôle crucial dans le développement web, offrant une solution efficace pour le transfert de fichiers. Lorsque l\'on explore le développement web, la gestion des fichiers sur un serveur distant devient incontournable. Les serveurs FTP facilitent grandement cette tâche en permettant aux développeurs de téléverser et télécharger des fichiers en toute simplicité. Que vous travailliez sur la mise à jour d\'un site web ou le déploiement d\'une application, la compréhension des serveurs FTP et SFTP est essentielle pour un flux de travail efficace.<br><br>La sécurité des données est un enjeu majeur dans le développement web. Les serveurs SFTP, basés sur le protocole SSH, offrent une couche de sécurité supplémentaire en cryptant le transfert de fichiers. Comprendre comment configurer et utiliser des connexions SFTP renforce la sécurité de vos transferts de fichiers, assurant ainsi la confidentialité et l\'intégrité des données sensibles. Cette dimension sécurisée des serveurs FTP/SFTP est un aspect incontournable du développement web moderne.<br><br>La collaboration entre développeurs et la gestion de versions exigent souvent le partage rapide et sécurisé de fichiers. Les serveurs FTP/SFTP répondent à cette exigence en permettant un accès rapide et fiable aux fichiers nécessaires. En apprenant à configurer les accès et à gérer les permissions sur les serveurs FTP/SFTP, les développeurs peuvent faciliter la collaboration tout en maintenant un contrôle précis sur l\'accès aux fichiers.<br><br>L\'intégration de serveurs FTP/SFTP dans des environnements de développement intégrés (IDE) est une pratique courante. Comprendre comment connecter votre IDE préféré à un serveur FTP/SFTP simplifie le processus de transfert de fichiers directement depuis votre environnement de développement. Cela accélère le flux de travail en minimisant les interruptions causées par le basculement entre des applications distinctes.<br><br>En conclusion, les serveurs FTP/SFTP sont des outils fondamentaux pour tout développeur web. Ils facilitent le transfert de fichiers, renforcent la sécurité des données, favorisent la collaboration et s\'intègrent harmonieusement dans les environnements de développement. Explorer ces protocoles essentiels ouvre de nouvelles possibilités pour optimiser votre flux de travail web, améliorant ainsi votre productivité et votre efficacité.','Dans le monde numérique en constante évolution, la gestion efficace des fichiers sur le web est cruciale pour tout développeur web. Les serveurs FTP (File Transfer Protocol) et SFTP (SSH File Transfer Protocol) sont des outils essentiels qui simplifient le transfert de fichiers entre votre machine locale et un serveur distant. Explorez les avantages pratiques de ces protocoles, apprenez comment les configurer, et découvrez comment ils peuvent optimiser votre flux de travail web.','..',NULL,1,NULL),(3,NULL,NULL,'Décoder les API','Explorer le Monde des API','assets/img/articles/api.webp','Image représentant les API','Plongez dans l\'univers des API et découvrez comment elles révolutionnent la manière dont les applications communiquent entre elles...','Les API, ou Interfaces de Programmation d\'Application, sont les fondations invisibles qui permettent à différentes applications de communiquer entre elles de manière fluide. Dans cet article, explorons l\'essentiel des API et comprenons comment elles ouvrent la voie à une connectivité sans limite dans le monde numérique.','Les API, souvent considérées comme des passerelles invisibles, jouent un rôle crucial dans le développement web moderne. Comprendre et exploiter ces interfaces peut considérablement enrichir le parcours d\'apprentissage d\'un développeur web en herbe. Plongeons dans les multiples facettes de cette technologie, en examinant comment elle s\'intègre harmonieusement dans l\'écosystème du développement web. <br><br>Lorsqu\'on aborde l\'apprentissage du développement web, la communication entre différentes applications devient une compétence incontournable. Les API offrent une solution élégante en permettant à des applications distinctes de partager des données et des fonctionnalités de manière standardisée. Comprendre comment utiliser les API pour créer des connexions fluides entre différentes parties d\'un système est essentiel pour un développeur web cherchant à construire des applications interconnectées.<br><br>La personnalisation des expériences utilisateur est un autre aspect essentiel du développement web contemporain. Les API, en permettant l\'accès à des services tiers, jouent un rôle crucial dans la création d\'interfaces utilisateur conviviales et riches en fonctionnalités. Comprendre comment intégrer des API dans des applications web offre aux développeurs la possibilité d\'ajouter des fonctionnalités dynamiques sans avoir à réinventer la roue. La capacité de tirer parti des API élargit considérablement le potentiel créatif d\'un développeur.<br><br>L\'intégration des API offre également une opportunité d\'approfondir les compétences en manipulation de données. Le processus d\'envoi de requêtes et de traitement des réponses API nécessite une compréhension approfondie des langages de programmation côté client. En apprenant à naviguer dans ces interactions, les développeurs peuvent renforcer leurs compétences en JavaScript, React, Angular, ou tout autre langage front-end de leur choix. Cette application pratique accélère le processus d\'apprentissage en permettant aux développeurs de voir directement les résultats concrets de leurs actions.<br><br>Un avantage supplémentaire réside dans la diversité des API disponibles. De nombreuses entreprises fournissent des API publiques, permettant aux développeurs d\'accéder à une multitude de services, de la géolocalisation aux réseaux sociaux en passant par les services de paiement en ligne. Cette variété offre aux développeurs une multitude de possibilités pour enrichir leurs applications avec des fonctionnalités externes, contribuant ainsi à créer des expériences utilisateur plus complètes.<br><br>En conclusion, les API sont les liens invisibles qui tissent la toile du monde numérique. Comprendre comment exploiter ces interfaces ouvre des portes infinies pour les développeurs web. L\'apprentissage de l\'utilisation des API va au-delà de la simple transmission de données ; c\'est une invitation à explorer un univers d\'interconnectivité qui façonne le paysage du développement web moderne.','Dans le monde numérique en constante évolution, les API sont les maillons invisibles qui permettent aux applications de travailler de concert. Explorez les avantages pratiques des API, apprenez comment les intégrer dans vos projets, et découvrez comment elles peuvent révolutionner la manière dont les applications communiquent entre elles.','..',NULL,1,NULL),(4,NULL,NULL,'Les Fondamentaux des Bases de Données Relationnelles','Les Bases de Données Relationnelles','assets/img/articles/bdd_relationnelles.webp','Image représentant les Données reslationnelles','Plongez dans le monde des bases de données relationnelles et découvrez comment elles façonnent la gestion des informations dans le domaine du développement web...','Les bases de données relationnelles constituent le socle central de la gestion de l\'information dans le développement web. Dans cet article, explorons les bases de données relationnelles et comprenons comment elles simplifient la manière dont nous stockons et récupérons des données essentielles.','Les bases de données relationnelles, souvent perçues comme le cœur battant du développement web, revêtent une importance particulière dans la construction d\'applications robustes. Comprendre et maîtriser ces bases peut considérablement enrichir le parcours d\'apprentissage d\'un développeur web en herbe. Plongeons dans les multiples facettes de cette technologie, en examinant comment elle s\'intègre harmonieusement dans l\'écosystème du développement web. <br><br>Lorsqu\'on aborde l\'apprentissage du développement web, la gestion structurée des données devient une compétence cruciale. Les bases de données relationnelles offrent une solution élégante en permettant aux développeurs de stocker et organiser des informations de manière logique. Cette fonctionnalité devient particulièrement pertinente pour les projets nécessitant une gestion complexe des données, tels que les systèmes d\'authentification utilisateur, les paniers d\'achat en ligne, ou toute application nécessitant un stockage fiable et organisé des informations.<br><br>La normalisation des données, un principe clé des bases de données relationnelles, contribue à réduire la redondance et à améliorer l\'intégrité des données. Comprendre comment concevoir des schémas de base de données normalisés devient ainsi une compétence essentielle pour tout développeur cherchant à optimiser la performance et la fiabilité de ses applications.<br><br>L\'intégration des bases de données relationnelles offre également une opportunité d\'approfondir les compétences en langage SQL (Structured Query Language). Le processus de récupération, d\'insertion, et de manipulation des données nécessite une compréhension approfondie de ce langage standard dans le domaine des bases de données. En apprenant à formuler des requêtes SQL efficaces, les développeurs peuvent renforcer leurs compétences pour interagir avec les bases de données relationnelles et garantir un accès rapide et précis aux informations stockées.<br><br>Un avantage supplémentaire réside dans la capacité des bases de données relationnelles à faciliter la gestion des relations entre les entités. Les clés étrangères et les jointures permettent de créer des liens entre différentes tables, ouvrant la voie à des structures de données complexes et interconnectées. Comprendre comment modéliser et utiliser ces relations offre aux développeurs la possibilité de créer des applications flexibles et adaptables, capables de répondre aux besoins évolutifs des utilisateurs.<br><br>En conclusion, les bases de données relationnelles ne sont pas simplement des coffres-forts pour les données, mais plutôt des outils puissants qui façonnent la manière dont les applications web stockent, récupèrent, et interagissent avec l\'information. L\'apprentissage de leur utilisation va au-delà de la simple manipulation de données, offrant aux développeurs des compétences précieuses en conception de bases de données, en normalisation, et en langage SQL. Les bases de données relationnelles deviennent ainsi un pilier essentiel pour comprendre la gestion intelligente et efficace de l\'information dans le monde du développement web.','Dans le monde numérique en constante évolution, la gestion efficace des données est cruciale pour tout développeur web. Les bases de données relationnelles constituent la pierre angulaire de cette gestion, offrant des solutions structurées pour stocker et récupérer des informations essentielles. Explorez les avantages pratiques des bases de données relationnelles, apprenez comment concevoir des schémas efficaces, et découvrez comment elles peuvent façonner la manière dont les applications interagissent avec les données.','..',NULL,1,NULL),(5,NULL,NULL,'Les Enjeux de la Veille Technologique','La Veille Technologique','assets/img/articles/veille_techno.png','Image représentant la veille technologique','Plongez dans le monde de la veille technologique et découvrez comment elle révolutionne notre compréhension des avancées dans le domaine du développement web...','La veille technologique, pratique consistant à rester informé des dernières avancées dans le domaine de la technologie, joue un rôle crucial dans le développement web. Dans cet article, explorons les tenants et aboutissants de la veille technologique et comprenons comment elle impacte notre approche du développement web.','La veille technologique, souvent perçue comme une quête constante de connaissances, revêt une importance particulière dans un secteur aussi dynamique que le développement web. Comprendre et maîtriser les rouages de cette pratique peut considérablement enrichir le parcours d\'apprentissage d\'un développeur web en herbe. Plongeons dans les multiples facettes de la veille technologique, en examinant comment elle s\'intègre harmonieusement dans l\'écosystème du développement web. <br><br>Lorsqu\'on aborde l\'apprentissage du développement web, la capacité à s\'adapter rapidement aux nouvelles technologies devient une compétence cruciale. La veille technologique offre une solution élégante en permettant aux développeurs de rester à l\'affût des derniers frameworks, langages de programmation, et outils émergents. Cette fonctionnalité devient particulièrement pertinente pour les projets nécessitant une utilisation optimale des technologies les plus récentes, assurant ainsi une compétitivité constante sur le marché.<br><br>La personnalisation des outils et des approches de développement constitue un autre aspect essentiel du développement web contemporain. La veille technologique, en fournissant une compréhension approfondie des tendances du marché, permet aux développeurs de choisir judicieusement les technologies les mieux adaptées à leurs besoins spécifiques. Comprendre comment intégrer ces nouvelles technologies dans des projets existants ou futurs devient ainsi une compétence précieuse, contribuant à l\'efficacité et à la pertinence des solutions développées.<br><br>L\'intégration de la veille technologique offre également une opportunité d\'approfondir les compétences en résolution de problèmes. Être au courant des dernières failles de sécurité, des meilleures pratiques de développement, et des solutions innovantes permet aux développeurs de prévenir et résoudre efficacement les défis rencontrés. Cette application pratique accélère le processus d\'apprentissage en liant directement la théorie à des situations réelles et en évolution constante.<br><br>Un avantage supplémentaire réside dans la facilité d\'adaptation à l\'évolution des besoins du marché. La veille technologique, en fournissant une vision anticipée des tendances, permet aux développeurs de se positionner stratégiquement sur le marché du travail. Comprendre comment anticiper les besoins futurs en termes de compétences et d\'expertise offre aux professionnels du développement web un avantage concurrentiel significatif.<br><br>En conclusion, la veille technologique n\'est pas simplement une quête d\'informations, mais plutôt une stratégie proactive qui s\'intègre de manière transparente dans le monde du développement web. L\'apprentissage de cette pratique va au-delà de la simple connaissance des dernières tendances, offrant aux développeurs des compétences précieuses en adaptation rapide, personnalisation d\'approches, résolution de problèmes, et anticipation des évolutions du marché. La veille technologique devient ainsi un outil essentiel pour rester au sommet de son jeu dans un univers numérique en constante évolution.','Dans un monde technologique en constante mutation, rester informé des dernières avancées est essentiel. La veille technologique offre une solution élégante en organisant la quête d\'informations de manière structurée. Dans cet article, nous explorerons les avantages pratiques de la veille technologique, comment l\'initier, et comment elle peut considérablement améliorer votre approche du développement web.','..',NULL,1,NULL),(6,NULL,NULL,'Découvrir Git & GitHub','Explorer Git & GitHub','assets/img/articles/git.jpg','Image représentant git et git hub','Plongez dans l\'univers de Git & GitHub et découvrez comment ces outils révolutionnent la gestion de versions et la collaboration dans le développement web...','Git & GitHub, des piliers du développement collaboratif, sont des outils puissants qui simplifient la gestion de versions et la collaboration entre développeurs. Dans cet article, explorons en profondeur ces technologies et comprenons comment elles facilitent notre approche du développement web.','Git & GitHub, souvent perçus comme des outils réservés aux experts, revêtent une importance particulière dans le monde du développement web. Comprendre et maîtriser ces technologies peut considérablement enrichir le parcours d\'apprentissage d\'un développeur web en herbe. Plongeons dans les multiples facettes de Git & GitHub, en examinant comment ils s\'intègrent harmonieusement dans l\'écosystème du développement web. <br><br>Lorsqu\'on aborde l\'apprentissage du développement web, la gestion efficace de versions devient une compétence cruciale. Git offre une solution élégante en permettant aux développeurs de suivre l\'évolution du code, de collaborer sur des projets complexes, et de revenir à des versions antérieures si nécessaire. La maîtrise de Git devient ainsi une compétence clé pour tout développeur web souhaitant contribuer efficacement à des projets collaboratifs.<br><br>La collaboration transparente entre développeurs est un autre aspect essentiel du développement web contemporain. GitHub, en tant que plateforme d\'hébergement de projets Git, facilite le travail d\'équipe en fournissant des outils de suivi des problèmes, des demandes de fusion, et des espaces de discussion. Comprendre comment tirer parti de ces fonctionnalités non seulement améliore la productivité des équipes, mais développe également les compétences du développeur en matière de travail collaboratif.<br><br>L\'intégration de Git & GitHub offre également une opportunité d\'approfondir les compétences en intégration continue. La mise en place de workflows automatisés pour les tests, la construction, et le déploiement devient une étape naturelle dans un environnement Git. En apprenant à configurer ces processus, les développeurs peuvent renforcer leurs compétences en matière de développement agile, accélérant ainsi la livraison de logiciels de haute qualité.<br><br>Un avantage supplémentaire réside dans la facilité d\'implémentation de Git & GitHub. La documentation exhaustive, les communautés actives, et les fonctionnalités conviviales rendent ces outils accessibles même aux débutants. Cette facilité d\'utilisation offre ainsi une excellente opportunité d\'initiation au développement web collaboratif.<br><br>En conclusion, Git & GitHub ne sont pas simplement des outils de gestion de versions, mais plutôt des piliers de la collaboration dans le monde du développement web. L\'apprentissage de leur utilisation va au-delà de la simple manipulation de code, offrant aux développeurs des compétences précieuses en gestion de versions, en collaboration efficace, en intégration continue, et en contribution à des projets open source. Git & GitHub deviennent ainsi une passerelle vers une compréhension plus approfondie et pratique du développement web, facilitant l\'acquisition de compétences essentielles pour évoluer dans le monde numérique en constante évolution.','Dans un environnement de développement collaboratif, la gestion de versions devient cruciale. Git & GitHub offrent une solution élégante en organisant la collaboration de manière structurée. Dans cet article, nous explorerons les avantages pratiques de Git & GitHub, comment les configurer, et comment ils peuvent considérablement améliorer votre approche du développement web.','..',NULL,1,NULL),(7,NULL,NULL,'Maîtriser le Responsive Design','Découvrir le Responsive Design','assets/img/articles/responsive.webp','Image représentant le responsive design','Plongez dans le monde du Responsive Design et découvrez comment il révolutionne la manière dont nous concevons des sites web pour s\'adapter à tous les appareils...','Le Responsive Design, une approche incontournable dans le développement web, offre une solution élégante pour créer des interfaces utilisateur qui s\'adaptent harmonieusement à divers appareils. Dans cet article, explorons les principes fondamentaux du Responsive Design et comprenons comment il transforme notre approche de la conception web.','Le Responsive Design va au-delà de la simple esthétique, il s\'agit d\'une philosophie de conception centrée sur l\'utilisateur. Comprendre et appliquer les principes du Responsive Design peut considérablement améliorer l\'expérience utilisateur sur différents dispositifs, des écrans larges des ordinateurs de bureau aux petits écrans des smartphones. Plongeons dans les multiples facettes de cette approche, en examinant comment elle s\'intègre harmonieusement dans le processus de conception web. <br><br>La diversité croissante des appareils rend essentielle la création de sites web qui s\'adaptent naturellement à chaque écran. Le Responsive Design, en utilisant des techniques telles que les media queries et les images flexibles, permet aux développeurs de concevoir des sites web fluides, offrant une expérience utilisateur cohérente et agréable sur tous les appareils.<br><br>La rapidité croissante des connexions mobiles souligne l\'importance du Responsive Design dans la rétention des utilisateurs. En optimisant les performances et la vitesse de chargement des sites web, les développeurs peuvent garantir une expérience utilisateur fluide, quel que soit le dispositif utilisé. Maîtriser ces techniques devient donc une compétence clé pour tout professionnel du développement web souhaitant rester compétitif dans un monde numérique en évolution constante.<br><br>La mise en œuvre réussie du Responsive Design nécessite une compréhension approfondie des principes de conception UI/UX. En développant des interfaces utilisateur intuitives et réactives, les designers et développeurs peuvent créer des expériences utilisateur mémorables et engageantes. Cet article explorera également les synergies entre le Responsive Design et l\'UI/UX, démontrant comment ces deux domaines convergent pour créer des interfaces modernes et performantes.<br><br>En conclusion, le Responsive Design n\'est pas simplement une tendance, mais plutôt une nécessité dans le monde du développement web. L\'apprentissage de cette approche va au-delà de la simple création de sites web adaptatifs, offrant aux professionnels des compétences précieuses en conception centrée sur l\'utilisateur, en performance web et en compétitivité sur le marché du développement web.','Dans un paysage numérique en constante évolution, le Responsive Design devient un impératif pour les sites web. Découvrez les avantages pratiques, les techniques de mise en œuvre, et comment il peut transformer la manière dont vous concevez des interfaces utilisateur pour répondre aux besoins de tous les utilisateurs, quel que soit leur appareil.','..',NULL,1,NULL),(8,NULL,NULL,'Maîtriser l\'UI/UX Design','Explorer l\'UI/UX Design','assets/img/articles/ui_ux.jpg','Image représentant l\'ui et l\'ux.','Plongez dans l\'univers captivant de l\'UI/UX Design et découvrez comment il façonne les expériences utilisateur qui captivent et enchantent...','L\'UI/UX Design, un domaine essentiel du développement web, va au-delà de l\'aspect visuel. C\'est l\'art de créer des interfaces utilisateur intuitives et des expériences mémorables. Dans cet article, explorons les fondamentaux de l\'UI/UX Design et comprenons comment il influence positivement la perception des utilisateurs.','L\'UI/UX Design est bien plus qu\'une simple question de couleurs et de polices. C\'est une discipline centrée sur l\'utilisateur, visant à créer des interfaces intuitives et des expériences fluides. Plongeons dans les multiples facettes de l\'UI/UX Design, en examinant comment il s\'intègre harmonieusement dans le processus de développement web. <br><br>La première impression d\'un site web est souvent déterminante. L\'UI Design, axé sur l\'interface utilisateur, concerne la création d\'interfaces visuellement attrayantes et fonctionnelles. En comprenant les principes de conception, les concepteurs peuvent créer des interfaces qui attirent et retiennent l\'attention des utilisateurs, contribuant ainsi à une expérience utilisateur positive.<br><br>L\'UX Design, ou expérience utilisateur, se concentre sur le parcours global de l\'utilisateur à travers un site web ou une application. En optimisant la navigation, la structure de l\'information, et la convivialité, les concepteurs UX peuvent créer des expériences qui laissent une impression durable. Comprendre comment ces deux disciplines interagissent devient essentiel pour tout professionnel du développement web cherchant à créer des produits numériques exceptionnels.<br><br>La collaboration entre designers et développeurs est cruciale dans la mise en œuvre réussie de l\'UI/UX Design. En comprenant le langage et les besoins de chaque discipline, les équipes peuvent travailler de manière synergique pour créer des produits qui allient esthétique et fonctionnalité. Cet article explorera également les meilleures pratiques pour une collaboration efficace entre concepteurs UI/UX et développeurs.<br><br>En conclusion, l\'UI/UX Design n\'est pas simplement une question de conception visuelle, mais plutôt une discipline qui influence la manière dont les utilisateurs interagissent avec les produits numériques. L\'apprentissage de cette approche offre aux professionnels des compétences précieuses en conception centrée sur l\'utilisateur, en esthétique, et en collaboration interdisciplinaire.','Dans le paysage numérique actuel, l\'UI/UX Design devient un facteur déterminant pour le succès d\'une application ou d\'un site web. Explorez les principes fondamentaux, les meilleures pratiques de conception, et comment cette discipline peut transformer la manière dont vous créez des expériences utilisateur mémorables.','..',NULL,1,NULL),(9,NULL,NULL,'Comprendre Linux, Unix et Windows','Les Systèmes d\'exploitations','assets/img/articles/windows_vs_linux.jpg','Image représentant windows, linux et unix','Plongez dans le monde des systèmes d\'exploitation avec Linux, Unix et Windows. Découvrez leurs différences, avantages et comment choisir le bon système pour vos besoins...','Les systèmes d\'exploitation jouent un rôle crucial dans le monde de l\'informatique. Linux, Unix et Windows sont des acteurs majeurs, chacun avec ses caractéristiques uniques. Dans cet article, explorons les bases de ces systèmes d\'exploitation et comprenons comment ils influencent notre manière d\'interagir avec les ordinateurs.','Linux, Unix et Windows sont des systèmes d\'exploitation omniprésents, mais ils diffèrent considérablement dans leur architecture, leur philosophie et leurs fonctionnalités. Comprendre ces différences devient essentiel pour choisir le système d\'exploitation adapté à vos besoins et préférences. Plongeons dans les multiples facettes de ces systèmes, en examinant comment ils s\'intègrent dans le paysage informatique. <br><br>Linux, célèbre pour sa nature open source, offre une flexibilité et une personnalisation exceptionnelles. Unix, précurseur de nombreux concepts informatiques, est largement utilisé dans les environnements professionnels. Windows, populaire dans le monde des PC, offre une interface conviviale et une compatibilité logicielle étendue. Explorer ces systèmes d\'exploitation vous permettra de prendre des décisions éclairées lors du choix de la plateforme adaptée à vos besoins.<br><br>La ligne de commande, souvent intimidante pour les débutants, est un élément central dans les systèmes Linux et Unix. Comprendre comment utiliser efficacement la ligne de commande peut améliorer considérablement la productivité et ouvrir de nouvelles possibilités dans le développement et l\'administration système. Cet article expliquera les bases de la ligne de commande et montrera comment elle devient un outil puissant dans le contexte de Linux et Unix.<br><br>La sécurité informatique est une préoccupation majeure, et les choix du système d\'exploitation peuvent avoir un impact significatif. Linux est souvent loué pour sa sécurité robuste, tandis que Windows offre des fonctionnalités conviviales pour les utilisateurs familiaux. Comprendre les considérations de sécurité de chaque système vous permettra de prendre des mesures appropriées pour protéger votre système et vos données.<br><br>En conclusion, le choix entre Linux, Unix et Windows va au-delà de la simple préférence personnelle. Il s\'agit d\'une décision informée qui dépend de vos besoins, de vos préférences et des exigences de vos projets informatiques. Cet article vous guidera dans la compréhension de ces systèmes d\'exploitation, vous permettant ainsi de faire des choix éclairés pour votre parcours informatique.','Dans le monde diversifié des systèmes d\'exploitation, le choix entre Linux, Unix et Windows peut être déterminant. Explorez les différences fondamentales, les avantages distincts et comment choisir le système qui répond le mieux à vos besoins.','..',NULL,1,NULL),(10,NULL,NULL,'Maîtriser PHP dans le Développement Web','Explorer PHP','assets/img/articles/php.jpg','Image représentant PHP.','Plongez dans l\'univers de PHP et découvrez comment ce langage de programmation serveur est au cœur du développement web moderne...','PHP, Hypertext Preprocessor, est un langage de script largement utilisé dans le développement web. Dans cet article, explorons en détail les multiples facettes de PHP et comprenons comment il facilite la création d\'applications web dynamiques et robustes.','PHP, souvent considéré comme un pilier du développement web, revêt une importance particulière dans la création d\'applications interactives. Comprendre et maîtriser PHP peut considérablement enrichir le parcours d\'apprentissage d\'un développeur web en herbe. Plongeons dans les aspects fondamentaux de ce langage, en examinant comment il s\'intègre harmonieusement dans l\'écosystème du développement web. <br><br>Lorsqu\'on aborde l\'apprentissage du développement web, la manipulation dynamique de contenu côté serveur est une compétence cruciale. PHP offre une solution élégante en permettant aux développeurs de créer des pages web interactives, de gérer des formulaires, et d\'interagir avec des bases de données. La maîtrise de PHP devient ainsi une compétence clé pour tout développeur web souhaitant créer des applications dynamiques et performantes.<br><br>L\'intégration de PHP offre également une opportunité d\'approfondir les compétences en développement back-end. Le processus de création d\'API, de gestion de sessions, et de sécurisation des applications web devient une étape naturelle dans un environnement PHP. En apprenant à exploiter ces fonctionnalités, les développeurs peuvent renforcer leurs compétences en matière de création d\'applications robustes.<br><br>Un avantage supplémentaire réside dans la large communauté PHP et la multitude de ressources disponibles. Les frameworks tels que Laravel et Symfony simplifient le processus de développement, permettant aux développeurs d\'accéder rapidement à des fonctionnalités avancées. Cette facilité d\'utilisation rend PHP accessible même aux débutants, offrant ainsi une excellente opportunité d\'initiation au développement web.<br><br>En conclusion, PHP n\'est pas simplement un langage de programmation, mais plutôt un outil puissant pour créer des applications web dynamiques. L\'apprentissage de son utilisation va au-delà de la simple manipulation de scripts, offrant aux développeurs des compétences précieuses en développement back-end, en création d\'API, et en sécurisation des applications web.','Dans le monde du développement web, PHP joue un rôle crucial en permettant la création d\'applications interactives et dynamiques. Dans cet article, nous explorerons les avantages pratiques de PHP, comment le maîtriser, et comment il peut considérablement enrichir votre parcours de développement web.','..',NULL,1,NULL),(11,NULL,NULL,'Découvrir Java dans le Monde de la Programmation','Explorer Java','assets/img/articles/java.jpg','Image représentant le language java','Plongez dans l\'univers de Java et découvrez comment ce langage de programmation polyvalent influence divers secteurs, de l\'entreprise au développement Android...','Java, avec sa portabilité et sa polyvalence, est un langage de programmation largement utilisé. Dans cet article, explorons en détail les nombreuses applications de Java et comprenons comment il continue de façonner le paysage de la programmation.','Java, souvent perçu comme un langage incontournable, revêt une importance particulière dans le développement d\'applications diverses. Comprendre et maîtriser Java peut considérablement enrichir le parcours d\'apprentissage d\'un développeur, ouvrant la voie à la création d\'applications pour l\'entreprise, le web, et même les appareils mobiles. <br><br>Lorsqu\'on aborde l\'apprentissage de la programmation, la portabilité devient une compétence cruciale. Java offre une solution élégante en permettant aux développeurs de créer des applications qui s\'exécutent sur diverses plates-formes sans modification majeure. La maîtrise de Java devient ainsi une compétence clé pour tout développeur souhaitant créer des solutions logicielles polyvalentes.<br><br>L\'intégration de Java offre également une opportunité d\'approfondir les compétences en développement Android. En utilisant le kit de développement Android (SDK) basé sur Java, les développeurs peuvent créer des applications pour des milliards d\'appareils mobiles. En apprenant à exploiter ces fonctionnalités, les développeurs peuvent renforcer leurs compétences en matière de développement mobile.<br><br>Un avantage supplémentaire réside dans la longévité de Java et sa vaste communauté. Les frameworks tels que Spring simplifient le développement d\'applications d\'entreprise, tandis que les bibliothèques Java facilitent la création de logiciels robustes. Cette pérennité rend Java accessible même aux débutants, offrant ainsi une excellente opportunité d\'initiation à la programmation.<br><br>En conclusion, Java n\'est pas simplement un langage de programmation, mais plutôt une plateforme polyvalente qui influence de nombreux secteurs. L\'apprentissage de son utilisation va au-delà de la simple manipulation de code, offrant aux développeurs des compétences précieuses en développement d\'applications portables et en création d\'applications Android.','Java continue d\'être un langage de programmation influent, utilisé dans une variété d\'applications, de l\'entreprise au développement Android. Dans cet article, nous explorerons les avantages pratiques de Java, comment le maîtriser, et comment il peut considérablement enrichir votre parcours de programmation.','..',NULL,1,NULL),(12,NULL,NULL,'L\'Art de la Programmation en Binôme','Le Peer Programming','assets/img/articles/pair_programming.png','Image représentant le pair programming','Découvrez les avantages de la programmation en binôme et comment cette approche collaborative peut améliorer la qualité du code et accélérer le processus de développement...','La programmation en binôme, une approche collaborative où deux développeurs travaillent ensemble sur un même code, est une pratique qui gagne en popularité. Dans cet article, explorons les multiples avantages de la programmation en binôme et comprenons comment elle peut transformer votre approche du développement logiciel.','La programmation en binôme, souvent perçue comme une méthode de travail innovante, revêt une importance particulière dans le monde du développement logiciel. Comprendre et maîtriser cette approche peut considérablement améliorer la qualité du code, favoriser la collaboration et accélérer le processus de développement. <br><br>Lorsqu\'on aborde l\'apprentissage de la programmation, la collaboration devient une compétence cruciale. La programmation en binôme offre une solution élégante en permettant aux développeurs de travailler ensemble, partageant leurs connaissances et leurs idées. Cette approche peut être particulièrement pertinente pour résoudre des problèmes complexes, favoriser la créativité, et garantir la qualité du code produit.<br><br>La transparence et la communication sont des aspects essentiels de la programmation en binôme. En travaillant en étroite collaboration, les développeurs peuvent détecter et résoudre les erreurs plus rapidement, éviter les impasses, et partager efficacement les bonnes pratiques. La maîtrise de la programmation en binôme devient ainsi une compétence clé pour tout développeur souhaitant améliorer sa collaboration au sein d\'une équipe.<br><br>L\'intégration de la programmation en binôme offre également une opportunité d\'approfondir les compétences en mentorat. Travailler avec un partenaire plus expérimenté peut accélérer le processus d\'apprentissage, permettant aux développeurs d\'acquérir des connaissances approfondies et des perspectives uniques. Cette approche collaborative favorise le transfert de compétences et contribue à la croissance professionnelle.<br><br>Un avantage supplémentaire réside dans l\'amélioration de la satisfaction au travail. La programmation en binôme crée un environnement de travail collaboratif, renforçant le sentiment d\'appartenance à une équipe. Cette satisfaction accrue peut conduire à une productivité et à une créativité plus élevées.<br><br>En conclusion, la programmation en binôme n\'est pas simplement une méthode de travail, mais plutôt une approche collaborative qui transforme la manière dont les développeurs créent du logiciel. L\'apprentissage de cette méthode va au-delà de la simple écriture de code, offrant aux développeurs des compétences précieuses en collaboration, en communication, et en mentorat.','La programmation en binôme est une approche collaborative qui améliore la qualité du code, favorise la collaboration, et accélère le processus de développement. Dans cet article, nous explorerons les avantages pratiques de la programmation en binôme, comment la maîtriser, et comment elle peut transformer votre approche du développement logiciel.','..',NULL,1,NULL);
+/*!40000 ALTER TABLE `article` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- Create the 'user_favourite' table (many-to-many relationship)
-CREATE TABLE user_favourite (
-                                id INT AUTO_INCREMENT PRIMARY KEY,
-                                id_article INT,
-                                id_user INT,
-                                FOREIGN KEY (id_article) REFERENCES article(id),
-                                FOREIGN KEY (id_user) REFERENCES user(id)
-);
+--
+-- Table structure for table `author`
+--
+
+DROP TABLE IF EXISTS `author`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `author` (
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `short_description` text,
+                          `full_description` text,
+                          `linkedin_url` varchar(255) DEFAULT NULL,
+                          `github_url` varchar(255) DEFAULT NULL,
+                          `website_url` varchar(255) DEFAULT NULL,
+                          `img_src` varchar(255) DEFAULT NULL,
+                          `user_id` int DEFAULT NULL,
+                          PRIMARY KEY (`id`),
+                          KEY `user_id` (`user_id`),
+                          CONSTRAINT `author_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `author`
+--
+
+LOCK TABLES `author` WRITE;
+/*!40000 ALTER TABLE `author` DISABLE KEYS */;
+INSERT INTO `author` VALUES (1,'Bonjour ! Je suis un passionné de développement web, et j\'ai 24 ans. Après une première année de licence d\'anglais, j\'ai suivi une formation d\'un an en développement web et web mobile. Mon parcours professionnel m\'a ensuite conduit à travailler pendant un an en tant que développeur full-stack au sein d\'une start-up innovante. Fort de cette expérience, j\'ai décidé de perfectionner mon anglais en poursuivant ma licence d\'anglais, ouvrant ainsi la voie à des projets futurs au sein d\'entreprises anglophones. Actuellement, je me lance dans une nouvelle aventure en reprenant le code, avec une spécialisation dans le back-end, plus précisément en PHP/Symfony. Parallèlement, je m\'engage dans une formation de 3 mois à la Wild Code School pour approfondir mes compétences. Je suis ravi de partager ce parcours et d\'explorer de nouvelles opportunités dans le monde numérique.','Bonjour ! Je m\'appelle Lucas, et je suis un passionné de développement web et j\'ai 24 ans. Mon parcours académique a débuté par une première année de licence d\'anglais, mais ma passion pour le monde numérique m\'a rapidement dirigé vers une formation intensive en développement web et web mobile. Après avoir acquis des compétences polyvalentes au cours de cette année de formation, j\'ai intégré une start-up en tant que développeur web full-stack.<br><br>Cette expérience m\'a permis de mettre en pratique mes connaissances et de participer à des projets stimulants. J\'ai appris à jongler avec les technologies front-end et back-end, à collaborer au sein d\'une équipe dynamique, et à trouver des solutions créatives aux défis techniques.<br><br>Fort de cette expérience, j\'ai décidé de poursuivre mes études en licence d\'anglais afin d\'améliorer considérablement mes compétences linguistiques, ouvrant ainsi la porte à de futures opportunités de travailler dans des environnements anglophones.<br><br>Actuellement, je suis plongé dans le monde du développement back-end, en me spécialisant particulièrement dans le langage PHP et le framework Symfony. Cette décision découle de ma passion pour la logique et la structure sous-jacentes des applications, ainsi que du désir constant de relever des défis techniques stimulants.<br><br>Parallèlement à mes études, je m\'engage également dans une formation de 3 mois à la Wild Code School. Cette initiative vise à approfondir mes connaissances, à rester à la pointe des nouvelles technologies et à élargir mon réseau professionnel.','https://www.linkedin.com/in/lucas-boillot/','https://github.com/LuckyShuii?tab=repositories','https://hackertyper.net','Lucas.jpg',1),(2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum facilisis massa nec maximus. Ut convallis fringilla finibus. Praesent convallis placerat risus. Morbi luctus commodo magna rhoncus lobortis. Morbi dignissim id ante a imperdiet.','My full description','https://www.linkedin.com/in/lucas-boillot/','https://github.com/LuckyShuii?tab=repositories','https://hackertyper.net','lucas.jpg',3),(3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum facilisis massa nec maximus. Ut convallis fringilla finibus. Praesent convallis placerat risus. Morbi luctus commodo magna rhoncus lobortis. Morbi dignissim id ante a imperdiet.','Je suis un professionnel de 34 ans, doté d\'une formation dans le domaine du développement. Fort d\'une expérience de 10 ans au sein d\'environnements dynamiques de start-up, j\'ai occupé des postes tels que Scrum Master et Product Manager. Mon parcours professionnel m\'a permis d\'acquérir une expertise dans la gestion de projets, l\'optimisation des processus et la livraison de produits.<br><br>Récemment, je me suis engagé dans une réorientation professionnelle axée sur le développement web. Mon objectif est d\'élargir mes compétences techniques d\'explorer de nouveaux horizons dans le monde du web et de contribuer de manière significative à des projets stimulants. Mon bagage en gestion de projets et en organisation combiné à ma volonté d\'apprendre de nouvelles technologies font de moi un professionnel adaptable et motivé, prêt à relever les défis du développement web.<br><br> Merci Chatgpt O7','https://www.linkedin.com/in/quentin-guillemineau-065802a7/','https://github.com/Monost0ne','https://www.instagram.com/quentinguillemineau/','Quentin.jpg',2);
+/*!40000 ALTER TABLE `author` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `category` (
+                            `id` int NOT NULL AUTO_INCREMENT,
+                            `category_name` varchar(255) NOT NULL,
+                            `status` tinyint NOT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `form`
+--
+
+DROP TABLE IF EXISTS `form`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `form` (
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `first_name` varchar(80) NOT NULL,
+                        `last_name` varchar(80) NOT NULL,
+                        `email_address` varchar(255) NOT NULL,
+                        `topic` varchar(80) NOT NULL,
+                        `message_content` text NOT NULL,
+                        `sending_status` tinyint NOT NULL,
+                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `form`
+--
+
+LOCK TABLES `form` WRITE;
+/*!40000 ALTER TABLE `form` DISABLE KEYS */;
+/*!40000 ALTER TABLE `form` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newsletter`
+--
+
+DROP TABLE IF EXISTS `newsletter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `newsletter` (
+                              `id` int NOT NULL AUTO_INCREMENT,
+                              `email_address` varchar(255) NOT NULL,
+                              `subscription_date` date DEFAULT NULL,
+                              `unsubscribe` date DEFAULT NULL,
+                              `status` tinyint NOT NULL,
+                              PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newsletter`
+--
+
+LOCK TABLES `newsletter` WRITE;
+/*!40000 ALTER TABLE `newsletter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `newsletter` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `first_name` varchar(80) NOT NULL,
+                        `last_name` varchar(80) NOT NULL,
+                        `email_address` varchar(255) NOT NULL,
+                        `login` varchar(80) NOT NULL,
+                        `password` varchar(80) NOT NULL,
+                        `account_status` tinyint NOT NULL,
+                        `roles` varchar(255) NOT NULL,
+                        PRIMARY KEY (`id`),
+                        UNIQUE KEY `unique_email` (`email_address`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Lucas','Boillot','lucasnimes30000@gmail.com','lucasboillot','lucas',1,'admin'),(2,'Quentin','Guillemineau','quentin@gmail.com','quentin','quentin',1,'admin'),(3,'Richard','Desnoues','richard@gmail.com','richard','richard',1,'admin');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_favourite`
+--
+
+DROP TABLE IF EXISTS `user_favourite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_favourite` (
+                                  `id` int NOT NULL AUTO_INCREMENT,
+                                  `id_article` int DEFAULT NULL,
+                                  `id_user` int DEFAULT NULL,
+                                  PRIMARY KEY (`id`),
+                                  KEY `id_article` (`id_article`),
+                                  KEY `id_user` (`id_user`),
+                                  CONSTRAINT `user_favourite_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`),
+                                  CONSTRAINT `user_favourite_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_favourite`
+--
+
+LOCK TABLES `user_favourite` WRITE;
+/*!40000 ALTER TABLE `user_favourite` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_favourite` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-01-23 15:45:37

@@ -25,7 +25,7 @@ CREATE TABLE user (
                       last_name VARCHAR(80) NOT NULL,
                       email_address VARCHAR(255) NOT NULL,
                       login VARCHAR(80) NOT NULL,
-                      password VARCHAR(80) NOT NULL,
+                      password VARCHAR(255) NOT NULL,
                       account_status TINYINT(2) NOT NULL,
                       roles VARCHAR(255) NOT NULL,
                       UNIQUE KEY unique_email (email_address)

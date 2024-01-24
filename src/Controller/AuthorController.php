@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Model\AuthorManager;
+
 class AuthorController extends AbstractController
 {
-    public function showAuthor() : string
+    public function show(): string
     {
-        $authorManager = new AuthorManager();
-        $author = $authorManager->selectAll('lastName');
+        $author = new AuthorManager();
+        $authors = $author->selectAll();
 
-        return $this->twig->render('Item/show.html.twig', ['author' => $author]);
+        return $this->twig->render('AboutUs/index.html.twig', ['authors' => $authors]);
     }
 }

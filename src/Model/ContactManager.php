@@ -4,38 +4,25 @@ namespace App\Model;
 
 use PDO;
 
-class ItemManager extends AbstractManager
+class ContactManager extends AbstractManager
 {
-    public const TABLE = 'item';
-    public const CLASSNAME = "App\Model\ItemModel";
-
+    public const TABLE = 'form';
+    public const CLASSNAME = "App\Model\FormModel";
 
     /**
-     * Insert new item in database
+     * Insert new form data in database
      */
-    public function insert(array $item): int
+    public function insert(array $form): int
     {
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`title`) VALUES (:title)");
-        $statement->bindValue('title', $item['title'], PDO::PARAM_STR);
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`firstName`, `lastName`, `emailAddress`, `topic`, `messageContent`, `sendingStatus`) VALUES (:firstName, :lastName, :emailAddress, :topic, :messageContent, 1)");
+        $statement->bindValue('firstName', $form['firstName'], PDO::PARAM_STR);
+        $statement->bindValue('lastName', $form['lastName'], PDO::PARAM_STR);
+        $statement->bindValue('emailAddress', $form['emailAddress'], PDO::PARAM_STR);
+        $statement->bindValue('topic', $form['topic'], PDO::PARAM_STR);
+        $statement->bindValue('messageContent', $form['messageContent'], PDO::PARAM_STR);
 
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
     }
 
-    /**
-     * Update item in database
-     */
-    public function update(array $item): bool
-    {
-        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `title` = :title WHERE id=:id");
-        $statement->bindValue('id', $item['id'], PDO::PARAM_INT);
-        $statement->bindValue('title', $item['title'], PDO::PARAM_STR);
-
-        return $statement->execute();
-    }
-
-    public function getItem(int $id): ItemModel|false
-    {
-        return $this->selectOneById($id);
-    }
 }

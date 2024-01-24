@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/article.css">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <section class="content-width body_text">
+            <h1 id="article_title">
+                {{ article.articleTitle }}
+            </h1>
+
+            <p class="content-width article_P">
+                {{ article.description }}
+            </p>
+        </section>
+        <section id="img_section">
+            <img id="article_img" src="{{ article.imgSrc
+            }}" alt="{{ article.altImg }}" />
+        </section>
+
+        <section class="content-width body_text">
+            <h2 class="body_title">Introduction</h2>
+            <p class="article_P">
+                {{ article.imgSrc }}{{ article.introduction }}
+            </p>
+
+            <h2 class="body_title">Le détail</h2>
+            <p class="article_P">
+                {{ article.detail|raw }}
+                {{ classname }}
+            </p>
+        </section>
+    </main>
+{% endblock %}

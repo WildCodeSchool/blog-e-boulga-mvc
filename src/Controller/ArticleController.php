@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Model\ArticleManager;
-use App\Model\ItemManager;
 
 class ArticleController extends AbstractController
 {
@@ -13,11 +12,10 @@ class ArticleController extends AbstractController
     public function show(int $id): string
     {
         $articleManager = new ArticleManager();
-        $article = $articleManager->selectOneById($id);
+        $article = $articleManager->getArticle($id);
 
         return $this->twig->render('Article/article.html.twig', [
             'article' => $article,
-            'classname' => ItemManager::CLASSNAME,
         ]);
     }
 }

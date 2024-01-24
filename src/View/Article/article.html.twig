@@ -16,20 +16,19 @@
             </p>
         </section>
         <section id="img_section">
-            <img id="article_img" src="assets/images/article/{{ article.img_src
-            }}" alt="<?php echo
-            $altImg === " ? "Image de l'article " . $title : $altImg; ?>" />
+            <img id="article_img" src="{{ article.imgSrc
+            }}" alt="{{ article.altImg }}" />
         </section>
 
         <section class="content-width body_text">
             <h2 class="body_title">Introduction</h2>
             <p class="article_P">
-                {{ article.img_src }}{{ article.introduction }}
+                {{ article.imgSrc }}{{ article.introduction }}
             </p>
 
             <h2 class="body_title">Le détail</h2>
             <p class="article_P">
-                {{ article.detail }}
+                {{ article.detail|raw }}
                 {{ classname }}
             </p>
         </section>

@@ -15,8 +15,6 @@ class ArticleController extends AbstractController
         $articleManager = new ArticleManager();
         $article = $articleManager->selectOneById($id);
 
-        // use html_entities_decode()
-
         return $this->twig->render('Article/article.html.twig', [
             'article' => $article,
             'classname' => ItemManager::CLASSNAME,

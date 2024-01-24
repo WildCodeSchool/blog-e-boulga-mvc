@@ -33,4 +33,9 @@ class ItemManager extends AbstractManager
 
         return $statement->execute();
     }
+
+    public function getItem(int $id): ItemModel|false
+    {
+        return $this->selectOneById($id);
+    }
 }

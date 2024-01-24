@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-class ItemModel {
+class ItemModel
+{
     private int $id;
     private string $title;
 

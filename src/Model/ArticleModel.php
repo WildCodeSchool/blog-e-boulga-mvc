@@ -112,7 +112,7 @@ class ArticleModel
 
     public function getDetail(): string
     {
-        return $this->detail;
+        return htmlspecialchars_decode($this->detail);
     }
 
     public function setDetail(string $detail): void

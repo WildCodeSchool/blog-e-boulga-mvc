@@ -1,11 +1,14 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/article.css">
+{% endblock %}
+
 {% block content %}
-    {{ dump(article) }}
     <main>
         <section class="content-width body_text">
             <h1 id="article_title">
-                {{ article.title }}
+                {{ article.articleTitle }}
             </h1>
 
             <p class="content-width article_P">

@@ -39,7 +39,8 @@ class ContactController extends AbstractController
             'Le message doit contenir au moins 10 caractères',
             $errors
         );
-        $this->validateStringLength('firstName',
+        $this->validateStringLength(
+            'firstName',
             2,
             PHP_INT_MAX,
             'Le prénom doit contenir au moins 2 caractères',

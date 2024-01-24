@@ -32,8 +32,19 @@ class ContactController extends AbstractController
 
         $this->validateRequiredFields(['firstName', 'lastName', 'emailAddress', 'topic', 'messageContent'], $errors);
         $this->validateEmailAddress('emailAddress', 'L\'adresse email n\'est pas valide', $errors);
-        $this->validateStringLength('messageContent', 10, PHP_INT_MAX, 'Le message doit contenir au moins 10 caractères', $errors);
-        $this->validateStringLength('firstName', 2, PHP_INT_MAX, 'Le prénom doit contenir au moins 2 caractères', $errors);
+        $this->validateStringLength(
+            'messageContent',
+            10,
+            PHP_INT_MAX,
+            'Le message doit contenir au moins 10 caractères',
+            $errors
+        );
+        $this->validateStringLength('firstName',
+            2,
+            PHP_INT_MAX,
+            'Le prénom doit contenir au moins 2 caractères',
+            $errors
+        );
         $this->validateStringLength('lastName', 2, PHP_INT_MAX, 'Le nom doit contenir au moins 2 caractères', $errors);
         $this->validateStringLength('topic', 4, 80, 'Le sujet doit contenir entre 4 et 80 caractères', $errors);
         $this->validateCheckbox('validation', 'Vous devez accepter les conditions d\'utilisation', $errors);
@@ -45,8 +56,7 @@ class ContactController extends AbstractController
     {
         foreach ($fields as $field) {
             if (empty($_POST[$field])) {
-
-                match($field) {
+                match ($field) {
                     'firstName' => $field = 'prénom',
                     'lastName' => $field = 'nom',
                     'emailAddress' => $field = 'adresse email',
@@ -67,8 +77,13 @@ class ContactController extends AbstractController
         }
     }
 
-    private function validateStringLength(string $field, int $minLength, int $maxLength, string $errorMessage, array &$errors): void
-    {
+    private function validateStringLength(
+        string $field,
+        int $minLength,
+        int $maxLength,
+        string $errorMessage,
+        array &$errors
+    ): void {
         $value = $_POST[$field] ?? '';
         $length = mb_strlen($value, 'UTF-8');
 

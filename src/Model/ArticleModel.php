@@ -5,7 +5,7 @@ namespace App\Model;
 class ArticleModel
 {
     private int $id;
-    private ?int $authorId;
+    private ?int $author_id;
     private ?int $categoryId;
     private string $articleTitle;
     private string $homeTitle;

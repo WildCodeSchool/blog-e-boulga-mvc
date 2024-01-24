@@ -23,26 +23,26 @@ DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `article` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `authorId` int DEFAULT NULL,
-  `categoryId` int DEFAULT NULL,
-  `articleTitle` varchar(255) NOT NULL,
-  `homeTitle` varchar(80) NOT NULL,
-  `imgSrc` varchar(255) NOT NULL,
-  `altImg` varchar(255) NOT NULL,
-  `homePreview` varchar(255) NOT NULL,
-  `introduction` text NOT NULL,
-  `detail` text NOT NULL,
-  `description` text NOT NULL,
-  `shadowColor` varchar(80) NOT NULL,
-  `releaseDate` date DEFAULT NULL,
-  `status` tinyint NOT NULL,
-  `updatedAt` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category_id` (`categoryId`),
-  KEY `article_ibfk_1` (`authorId`),
-  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `author` (`id`),
-  CONSTRAINT `article_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
+                           `id` int NOT NULL AUTO_INCREMENT,
+                           `authorId` int NOT NULL,
+                           `categoryId` int DEFAULT NULL,
+                           `articleTitle` varchar(255) NOT NULL,
+                           `homeTitle` varchar(80) NOT NULL,
+                           `imgSrc` varchar(255) NOT NULL,
+                           `altImg` varchar(255) NOT NULL,
+                           `homePreview` varchar(255) NOT NULL,
+                           `introduction` text NOT NULL,
+                           `detail` text NOT NULL,
+                           `description` text NOT NULL,
+                           `shadowColor` varchar(80) NOT NULL,
+                           `releaseDate` date DEFAULT NULL,
+                           `status` tinyint NOT NULL,
+                           `updatedAt` date DEFAULT NULL,
+                           PRIMARY KEY (`id`),
+                           KEY `category_id` (`categoryId`),
+                           KEY `article_ibfk_1` (`authorId`),
+                           CONSTRAINT `article_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `author` (`id`),
+                           CONSTRAINT `article_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,17 +64,17 @@ DROP TABLE IF EXISTS `author`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `author` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `shortDescription` text,
-  `fullDescription` text,
-  `linkedinUrl` varchar(255) DEFAULT NULL,
-  `githubUrl` varchar(255) DEFAULT NULL,
-  `websiteUrl` varchar(255) DEFAULT NULL,
-  `imgSrc` varchar(255) DEFAULT NULL,
-  `userId` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`userId`),
-  CONSTRAINT `author_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `shortDescription` text,
+                          `fullDescription` text,
+                          `linkedinUrl` varchar(255) DEFAULT NULL,
+                          `githubUrl` varchar(255) DEFAULT NULL,
+                          `websiteUrl` varchar(255) DEFAULT NULL,
+                          `imgSrc` varchar(255) DEFAULT NULL,
+                          `userId` int NOT NULL,
+                          PRIMARY KEY (`id`),
+                          KEY `user_id` (`userId`),
+                          CONSTRAINT `author_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,10 +96,10 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `categoryName` varchar(255) NOT NULL,
-  `status` tinyint NOT NULL,
-  PRIMARY KEY (`id`)
+                            `id` int NOT NULL AUTO_INCREMENT,
+                            `categoryName` varchar(255) NOT NULL,
+                            `status` tinyint NOT NULL,
+                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -120,14 +120,14 @@ DROP TABLE IF EXISTS `form`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `form` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(80) NOT NULL,
-  `lastName` varchar(80) NOT NULL,
-  `emailAddress` varchar(255) NOT NULL,
-  `topic` varchar(80) NOT NULL,
-  `messageContent` text NOT NULL,
-  `sendingStatus` tinyint NOT NULL,
-  PRIMARY KEY (`id`)
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `firstName` varchar(80) NOT NULL,
+                        `lastName` varchar(80) NOT NULL,
+                        `emailAddress` varchar(255) NOT NULL,
+                        `topic` varchar(80) NOT NULL,
+                        `messageContent` text NOT NULL,
+                        `sendingStatus` tinyint NOT NULL,
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -148,12 +148,12 @@ DROP TABLE IF EXISTS `newsletter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `newsletter` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `emailAddress` varchar(255) NOT NULL,
-  `subscriptionDate` date DEFAULT NULL,
-  `unsubscribe` date DEFAULT NULL,
-  `status` tinyint NOT NULL,
-  PRIMARY KEY (`id`)
+                              `id` int NOT NULL AUTO_INCREMENT,
+                              `emailAddress` varchar(255) NOT NULL,
+                              `subscriptionDate` date DEFAULT NULL,
+                              `unsubscribe` date DEFAULT NULL,
+                              `status` tinyint NOT NULL,
+                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -174,16 +174,16 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(80) NOT NULL,
-  `lastName` varchar(80) NOT NULL,
-  `emailAddress` varchar(255) NOT NULL,
-  `login` varchar(80) NOT NULL,
-  `password` varchar(80) NOT NULL,
-  `accountStatus` tinyint NOT NULL,
-  `roles` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_email` (`emailAddress`)
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `firstName` varchar(80) NOT NULL,
+                        `lastName` varchar(80) NOT NULL,
+                        `emailAddress` varchar(255) NOT NULL,
+                        `login` varchar(80) NOT NULL,
+                        `password` varchar(80) NOT NULL,
+                        `accountStatus` tinyint NOT NULL,
+                        `roles` varchar(255) NOT NULL,
+                        PRIMARY KEY (`id`),
+                        UNIQUE KEY `unique_email` (`emailAddress`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,14 +205,14 @@ DROP TABLE IF EXISTS `userFavourite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `userFavourite` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idArticle` int DEFAULT NULL,
-  `idUuser` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_article` (`idArticle`),
-  KEY `id_user` (`idUser`),
-  CONSTRAINT `userfavourite_ibfk_1` FOREIGN KEY (`idArticle`) REFERENCES `article` (`id`),
-  CONSTRAINT `userfavourite_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`)
+                                 `id` int NOT NULL AUTO_INCREMENT,
+                                 `idArticle` int DEFAULT NULL,
+                                 `idUuser` int DEFAULT NULL,
+                                 PRIMARY KEY (`id`),
+                                 KEY `id_article` (`idArticle`),
+                                 KEY `id_user` (`idUser`),
+                                 CONSTRAINT `userfavourite_ibfk_1` FOREIGN KEY (`idArticle`) REFERENCES `article` (`id`),
+                                 CONSTRAINT `userfavourite_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

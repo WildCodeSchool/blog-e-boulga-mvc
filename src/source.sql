@@ -210,9 +210,9 @@ CREATE TABLE `userFavourite` (
   `idUuser` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_article` (`idArticle`),
-  KEY `id_user` (`idUuser`),
+  KEY `id_user` (`idUser`),
   CONSTRAINT `userfavourite_ibfk_1` FOREIGN KEY (`idArticle`) REFERENCES `article` (`id`),
-  CONSTRAINT `userfavourite_ibfk_2` FOREIGN KEY (`idUuser`) REFERENCES `user` (`id`)
+  CONSTRAINT `userfavourite_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -133,15 +133,17 @@ function send(e, form) {
         method: 'post', body: new FormData(form)
     });
     e.preventDefault();
-    */
-    inputs.forEach(element => { element.value = "" })
 
+    inputs.forEach(element => { element.value = "" })
+    */
     /**
      * Affichage du message de confirmation
      * On le cache au bout de 10 secondes
      */
+    /*
     msg_sent.style.display = "block";
     setTimeout(() => {
         msg_sent.style.display = "none";
     }, 10000);
+    */
 }

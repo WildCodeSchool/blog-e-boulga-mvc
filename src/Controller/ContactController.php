@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-//use App\Model\ContactManager;
-
 class ContactController extends AbstractController
 {
     /**
@@ -13,5 +11,4 @@ class ContactController extends AbstractController
     {
         return $this->twig->render('Contact/contact.html.twig');
     }
-
 }

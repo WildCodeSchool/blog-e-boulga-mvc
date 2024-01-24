@@ -5,28 +5,19 @@ namespace App\Model;
 class AuthorModel
 {
     private int $id;
-    private string $firstName;
-    private string $lastName;
-    private ?string $shortDescription;
-    private ?string $fullDescription;
-    private string $linkedinURL;
-    private string $githubURL;
-    private string $webSite;
-    private string $image;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
+    private ?string $firstName = '';
+    private ?string $lastName = '';
+    private ?string $shortDescription = '';
+    private ?string $fullDescription = '';
+    private ?string $linkedinUrl = '';
+    private ?string $githubUrl = '';
+    private ?string $websiteUrl = '';
+    private ?string $imgSrc = '';
+    private ?int $userId;
 
     public function setId(int $id): void
     {
         $this->id = $id;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
     }
 
     public function setFirstName(string $firstName): void
@@ -34,73 +25,93 @@ class AuthorModel
         $this->firstName = $firstName;
     }
 
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
     public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
-    public function getShortDescription(): string
-    {
-        return $this->shortDescription;
-    }
-
-    public function setShortDescription(string $shortDescription): void
+    public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;
     }
 
-    public function getFullDescription(): string
-    {
-        return $this->fullDescription;
-    }
-
-    public function setFullDescription(string $fullDescription): void
+    public function setFullDescription(?string $fullDescription): void
     {
         $this->fullDescription = $fullDescription;
     }
 
-    public function getLinkedinURL(): string
+    public function setLinkedinUrl(string $linkedinUrl): void
     {
-        return $this->linkedinURL;
+        $this->linkedinUrl = $linkedinUrl;
     }
 
-    public function setLinkedinURL(string $linkedinURL): void
+    public function setGithubUrl(string $githubUrl): void
     {
-        $this->linkedinURL = $linkedinURL;
+        $this->githubUrl = $githubUrl;
     }
 
-    public function getGithubURL(): string
+    public function setWebsiteUrl(string $websiteUrl): void
     {
-        return $this->githubURL;
+        $this->websiteUrl = $websiteUrl;
     }
 
-    public function setGithubURL(string $githubURL): void
+    public function setImgSrc(string $imgSrc): void
     {
-        $this->githubURL = $githubURL;
+        $this->imgSrc = $imgSrc;
     }
 
-    public function getWebSite(): string
+    public function setUserId(?int $userId): void
     {
-        return $this->webSite;
+        $this->userId = $userId;
     }
 
-    public function setWebSite(string $webSite): void
+    public function getId(): int
     {
-        $this->webSite = $webSite;
+        return $this->id;
     }
 
-    public function getImage(): string
+    public function getFirstName(): string
     {
-        return $this->image;
+        return $this->firstName;
     }
 
-    public function setImage(string $image): void
+    public function getLastName(): string
     {
-        $this->image = $image;
+        return $this->lastName;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function getFullDescription(): ?string
+    {
+        return $this->fullDescription;
+    }
+
+    public function getLinkedinUrl(): string
+    {
+        return $this->linkedinUrl;
+    }
+
+    public function getGithubUrl(): string
+    {
+        return $this->githubUrl;
+    }
+
+    public function getWebsiteUrl(): string
+    {
+        return $this->websiteUrl;
+    }
+
+    public function getImgSrc(): string
+    {
+        return $this->imgSrc;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
     }
 }

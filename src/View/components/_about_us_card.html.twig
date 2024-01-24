@@ -1,7 +1,7 @@
 <article>
     <div class="leftSide">
         <figure class="profil">
-            <img src="assets/imges/authors/{{ author.imgSrc }}" alt="Lucas Boillot">
+            <img src="assets/images/authors/{{ author.imgSrc }}" alt="Lucas Boillot">
         </figure>
         <span class="authorName">
                                 <h2> {{ author.firstName }} . ' ' . {{ author.lastName }} </h2>
@@ -15,7 +15,8 @@
     <img class="firstquote" src="assets/images/components/quote.svg" alt="quote">
     <aside>
         <p>
-            {{ author.fullDescription }}  <span> <img src="assets/images/components/entypo_quote.svg" alt="endquote">
+            {{ author.fullDescription|raw }}  <span> <img src="assets/images/components/entypo_quote.svg"
+                                                          alt="endquote">
             </span>
         </p>
     </aside>

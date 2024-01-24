@@ -7,6 +7,8 @@ use PDO;
 class ItemManager extends AbstractManager
 {
     public const TABLE = 'item';
+    public const CLASSNAME = "App\Model\ItemModel";
+
 
     /**
      * Insert new item in database
@@ -30,5 +32,10 @@ class ItemManager extends AbstractManager
         $statement->bindValue('title', $item['title'], PDO::PARAM_STR);
 
         return $statement->execute();
+    }
+
+    public function getItem(int $id): ItemModel|false
+    {
+        return $this->selectOneById($id);
     }
 }

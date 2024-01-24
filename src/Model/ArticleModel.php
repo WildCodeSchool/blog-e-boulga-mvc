@@ -25,9 +25,19 @@ class ArticleModel
         return $this->id;
     }
 
+    private function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getAuthorId(): int
     {
         return $this->authorId;
+    }
+
+    private function setAuthorId(int $authorId): void
+    {
+        $this->authorId = $authorId;
     }
 
     public function getCategoryId(): int

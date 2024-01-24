@@ -2,8 +2,6 @@
 
 namespace App\Model;
 
-use PDO;
-
 class ArticleManager extends AbstractManager
 {
     public const TABLE = 'article';

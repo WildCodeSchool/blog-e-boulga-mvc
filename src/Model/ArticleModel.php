@@ -25,7 +25,7 @@ class ArticleModel
         return $this->id;
     }
 
-    private function setId(int $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -35,7 +35,7 @@ class ArticleModel
         return $this->authorId;
     }
 
-    private function setAuthorId(int $authorId): void
+    public function setAuthorId(int $authorId): void
     {
         $this->authorId = $authorId;
     }

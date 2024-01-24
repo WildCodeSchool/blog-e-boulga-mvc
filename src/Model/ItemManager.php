@@ -7,6 +7,8 @@ use PDO;
 class ItemManager extends AbstractManager
 {
     public const TABLE = 'item';
+    public const CLASSNAME = "App\Model\ItemModel";
+
 
     /**
      * Insert new item in database
@@ -31,4 +33,6 @@ class ItemManager extends AbstractManager
 
         return $statement->execute();
     }
+
+
 }

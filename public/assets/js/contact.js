@@ -16,67 +16,63 @@ btn_envoie.addEventListener("click", (event) => {
      */
     inputs.forEach(element => {
 
-        let valueInput = element.value
         let elementID = element.id
+        let valueInput = element.value
 
-        /**
-         * Vérification du type de l'input
-         */
         switch (element.type) {
             case "text":
-                if (elementID === "prenom") {
+                if (elementID === "prenom" || elementID === "nom" || elementID === "subject") {
                     if (valueInput === "") {
-                        error_input(element)
+                        error_input(element);
                     } else {
-                        element.style.borderBottom = "1px solid black"
-                        element.nextElementSibling.style.display = "none"
+                        element.style.borderBottom = "1px solid black";
+                        element.nextElementSibling.style.display = "none";
                     }
-                } else if (elementID === "nom") {
-                    if (valueInput === "") {
-                        error_input(element)
-                    } else {
-                        element.style.borderBottom = "1px solid black"
-                        element.nextElementSibling.style.display = "none"
+
+                    if (elementID === "prenom" && valueInput.length < 2) {
+                        error_input(element);
                     }
-                } else if (elementID === "subject") {
-                    if (valueInput === "") {
-                        error_input(element)
-                    } else {
-                        element.style.borderBottom = "1px solid black"
-                        element.nextElementSibling.style.display = "none"
+
+                    if (elementID === "nom" && valueInput.length < 2) {
+                        error_input(element);
+                    }
+
+                    if (elementID === "subject" && (valueInput.length < 4 || valueInput.length > 80)) {
+                        error_input(element);
                     }
                 }
                 break;
             case "textarea":
                 if (valueInput === "") {
-                    element.style.border = "2px solid #Ec1d1d"
-                    check_form.push("empty")
-                    element.nextElementSibling.style.display = "block"
-                    element.nextElementSibling.style.marginBottom = "1rem"
+                    element.style.border = "2px solid #Ec1d1d";
+                    check_form.push("empty");
+                    element.nextElementSibling.style.display = "block";
+                    element.nextElementSibling.style.marginBottom = "1rem";
                     event.preventDefault();
                 } else {
-                    element.style.border = "1px solid black"
-                    element.nextElementSibling.style.display = "none"
+                    element.style.border = "1px solid black";
+                    element.nextElementSibling.style.display = "none";
+
+                    if (valueInput.length < 10) {
+                        error_input(element);
+                    }
                 }
                 break;
             case "email":
-                /**
-                 * Vérification du mail avec la fonction créée plus bas
-                 */
-                let check_mail = isMail(valueInput)
+                let check_mail = isMail(valueInput);
                 if (valueInput === "" || check_mail == null) {
-                    error_input(element)
+                    error_input(element);
                 } else {
-                    element.style.borderBottom = "1px solid black"
-                    element.nextElementSibling.style.display = "none"
+                    element.style.borderBottom = "1px solid black";
+                    element.nextElementSibling.style.display = "none";
                 }
                 break;
             case "checkbox":
                 if (element.checked === false) {
-                    label_mod.style.color = "#Ec1d1d"
-                    check_form.push("unchecked")
+                    label_mod.style.color = "#Ec1d1d";
+                    check_form.push("unchecked");
                 } else if (element.checked === true) {
-                    label_mod.style.color = "var(--our-black)"
+                    label_mod.style.color = "var(--our-black)";
                 }
                 break;
             default:
@@ -89,7 +85,6 @@ btn_envoie.addEventListener("click", (event) => {
      */
     if (check_form.length === 0) {
         check_box = document.querySelector("#validation")
-        check_box.checked = false
         send(event, contact_form)
     } else {
         if(document.querySelector(".msg_sent") !== null){

@@ -17,7 +17,6 @@ class ArticleController extends AbstractController
 
         return $this->twig->render('Article/article.html.twig', [
             'article' => $article,
-            'classname' => ItemManager::CLASSNAME,
         ]);
     }
 }

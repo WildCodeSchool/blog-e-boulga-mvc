@@ -50,94 +50,25 @@ header {
     flex-wrap: wrap;
 }
 
-/*
-Gestion du menu burger !
-*/
-
 #burger_icon {
     display: none;
 }
 
-#burger_menue {
-    border-top: 1px solid black;
+.menuToggle {
     display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    /* position: fixed; */
-    bottom: 0;
-    background-color: var(--main-color);
-    width: 100%;
-    height: calc(100vh - var(--header-height-desktop));
-    list-style-type: none;
-    z-index: 2;
 }
 
-#burger_menue a {
-    text-decoration: none;
-    color: var(--our-black);
-}
-
-#burger_menue li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 6rem;
-    width: 14rem;
-    border-bottom: 1px solid black;
-}
-
-#burger_menue li:hover {
-    cursor: pointer;
-}
-
-.item-li {
-    width: 14rem;
-    border: none;
-    height: 3px;
-    border-bottom: 1px solid black;
-}
-
-.burger_separation_header {
-    width: 100%;
-    border: none;
-    height: 1px;
-    background-color: black;
-}
-
-/**
- * ----------------------------------------
- * gestion des classes dynamiques javascript du menu burger
- * ----------------------------------------
- */
-
-.isFlexed {
-    display: flex !important;
-}
-
-.undisplayed {
-    display: none !important;
-}
-
-.asBlock {
-    display: block !important;
-}
-
-.easeOutAnimation {
-    animation: slide-right 0.5s ease-out both !important;
-}
-
-.easeInAnimation {
-    animation: slide-left 0.5s ease-in both !important;
+.wrap {
+    display: none;
 }
 
 /*
 Gestion des media querries
 */
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1270px) {
     #list_nav_header {
-        width: 30rem;
+        width: 35rem;
     }
 }
 
@@ -159,6 +90,61 @@ Gestion des media querries
         right: 2rem;
     }
 
+    .menuToggle {
+        display: flex;
+    }
+
+    .wrap {
+        display: flex;
+    }
+
+    .nav {
+        position: fixed;
+        left: 100%;
+        top: 0;
+        bottom: 0;
+        overflow: auto;
+        z-index: 5;
+        width: 100%;
+        display: block;
+        margin: var(--header-height-desktop) 0 0 0;
+        text-align: center;
+        transition: all 0.6s ease;
+    }
+    .nav li {
+        display: block;
+    }
+    .nav li a {
+        line-height: normal;
+        padding: 2rem;
+        border-bottom: 1px solid black;
+        display: flex;
+    }
+
+    .nav li a img {
+        margin-right: 0.5rem;
+    }
+    .toggle .nav {
+        left: 0;
+        transition: all 0.6s ease;
+    }
+
+    .header-toggle {
+        position: relative;
+        z-index: 10;
+    }
+
+    .body-toggle {
+        overflow: hidden;
+    }
+
+    .nav a.active {
+        border: none;
+        border-bottom: 1px solid black;
+        background: #000;
+    }
+    .menuToggle{position:relative;z-index:5;}
+
 }
 
 @media screen and (max-width: 450px) {
@@ -173,38 +159,39 @@ Gestion des media querries
 }
 
 /**
- * ----------------------------------------
- * animation slide-left
- * ----------------------------------------
- */
+* Burger Menu handling
+*/
 
-@keyframes slide-left {
-    0% {
-        transform: translateX(50vh);
-    }
-
-    100% {
-        transform: translateX(0px);
-    }
+.nav {
+    list-style-type: none;
+    background: var(--main-color);
+    overflow: hidden;
+    clear: both;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+}
+.nav li {
+    display: inline-block;
+}
+.nav a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 2px;
+    color: var(--our-black);
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid black;
+    height: 6rem;
+}
+.nav a:hover {
+    background-color: var(--color-hover);
+    color: white;
 }
 
-@keyframes slide-right {
-    0% {
-        transform: translateX(0px)
-    }
-
-    100% {
-        transform: translateX(50vh)
-    }
-}
-
-/**
- * ----------------------------------------
- * animation burger button
- * ----------------------------------------
- */
-
-.menuBurgerGlobal {
+.menuToggle {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -214,12 +201,20 @@ Gestion des media querries
     right: 1rem;
 }
 
+
+/**
+ * ----------------------------------------
+ * animation burger button
+ * ----------------------------------------
+ */
+
+
 .line {
     fill: none;
     stroke: black;
     stroke-width: 6;
     transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .line1 {

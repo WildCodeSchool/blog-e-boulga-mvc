@@ -2,7 +2,6 @@ let btn_envoie = document.querySelector("#btn_submit")
 let inputs = document.querySelectorAll(".input_form")
 let label_mod = document.querySelector(".labelMod")
 let contact_form = document.querySelector(".contactUsForm")
-let msg_sent = document.querySelector("#msg_sent")
 let check_form = []
 
 btn_envoie.addEventListener("click", (event) => {
@@ -93,6 +92,9 @@ btn_envoie.addEventListener("click", (event) => {
         check_box.checked = false
         send(event, contact_form)
     } else {
+        if(document.querySelector(".msg_sent") !== null){
+            document.querySelector(".msg_sent").style.display = "none"
+        }
         event.preventDefault();
     }
 
@@ -118,7 +120,6 @@ function error_input(element) {
     check_form.push("empty")
     element.nextElementSibling.style.display = "block"
     element.nextElementSibling.style.marginBottom = "1rem"
-    msg_sent.style.display = "none"
 }
 
 /**

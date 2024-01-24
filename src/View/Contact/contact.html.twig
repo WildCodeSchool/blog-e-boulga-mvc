@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="/assets/css/contact_us.css">
 {% endblock %}
 
+{% block javascript %}
+<script src="assets/js/contact.js"></script>
+{% endblock %}
+
 {% block content %}
 <main>
     <div id="mainPage">
@@ -24,38 +28,46 @@
 
         <div id="contactUsBlock">
 
-            <form action="controller/contact_form.php" method="post" class="contactUsForm">
+            <form action="" method="post" class="contactUsForm">
                 <p id="header-form">Contacter l’équipe e-Boulga</p>
                 <div>
-                    <label for="firstname">Votre prénom :<span class="asterix"> *</span></label>
-                    <input id="prenom" class="input_form" type="text" name="firstname" placeholder="John" />
+                    <label for="firstName">Votre prénom :<span class="asterix"> *</span></label>
+                    <input id="prenom" class="input_form" type="text" name="firstName" placeholder="John" value="{% if post is defined %}{{ post.firstName }}{% endif %}"/>
                     <small style="display: none;">Champs obligatoire</small>
                 </div>
                 <div>
-                    <label for="name">Votre nom :<span class="asterix"> *</span></label>
-                    <input id="nom" class="input_form" type="text" name="name" placeholder="Doe" />
+                    <label for="lastName">Votre nom :<span class="asterix"> *</span></label>
+                    <input id="nom" class="input_form" type="text" name="lastName" placeholder="Doe" value="{% if post is defined %}{{ post.lastName
+                    }}{% endif %}"/>
                     <small style="display: none;">Champs obligatoire</small>
                 </div>
                 <div>
-                    <label for="mail">Votre adresse mail :<span class="asterix"> *</span></label>
-                    <input id="mail" class="input_form" type="email" name="mail" placeholder="john@doe.com" />
+                    <label for="emailAddress">Votre adresse mail :<span class="asterix"> *</span></label>
+                    <input id="mail" class="input_form" type="email" name="emailAddress" placeholder="john@doe.com" value="{% if post is defined
+                    %}{{ post.emailAddress }}{% endif %}"/>
                     <small style="display: none;">Adresse valide requise</small>
                 </div>
                 <div>
-                    <label for="subject">Sujet de votre message :<span class="asterix"> *</span></label>
-                    <input id="subject" class="input_form" type="text" name="subject" placeholder="Propostion d'article" />
+                    <label for="topic">Sujet de votre message :<span class="asterix"> *</span></label>
+                    <input id="subject" class="input_form" type="text" name="topic" placeholder="Propostion d'article" value="{% if post is defined
+                    %}{{ post.topic }}{% endif %}"/>
                     <small style="display: none;">Champs obligatoire</small>
                 </div>
                 <div>
-                    <label for="message">Votre message :<span class="asterix"> *</span></label>
-                    <textarea class="input_form" id="message" rows="5"></textarea>
+                    <label for="messageContent">Votre message :<span class="asterix"> *</span></label>
+                    <textarea class="input_form" id="message" rows="5" name="messageContent">{% if post is defined %}{{ post.messageContent }}{% endif %}</textarea>
                     <small style="display: none;">Champs obligatoire</small>
                 </div>
                 <div id="validationCheck">
                     <input class="input_form" type="checkbox" name="validation" id="validation" />
                     <label class="labelMod" for="validation">En cochant cette case, vous acceptez nos <a href="#">modalités et conditions</a> d'utilisation ainsi que notre <a href="#">politique de confidentitalité</a> pour la gestion des données fournies dans ce formulaire.<span class="asterix"> *</span></label>
                 </div>
-                <p id="msg_sent">Votre message a bien été envoyé !</p>
+                {% if success is defined %}
+                    <p class="msg_sent">{{ success }}</p>
+                {% endif %}
+                {% if error is defined %}
+                <p class="error">{{ error }}</p>
+                {% endif %}
                 <div id="validationButton">
                     <button name="envoyer" id="btn_submit" type="submit">Envoyer</button>
                 </div>

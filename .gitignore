@@ -5,3 +5,7 @@
 db.php
 .idea
 .vscode
+ItemManager.php
+ItemModel.php
+ItemController.php
+/src/View/Item/*

@@ -8,14 +8,17 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
     {% block stylesheet %}{% endblock %}
 </head>
 
-<body>
+<body id="body">
     {% include 'components/_header.html.twig' %}
     {% block content %}{% endblock %}
     {% include 'components/_footer.html.twig' %}
+    <script src="/assets/js/header.js"></script>
     {% block javascript %}{% endblock %}
 </body>
 </html>

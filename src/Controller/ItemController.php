@@ -23,7 +23,7 @@ class ItemController extends AbstractController
     public function show(int $id): string
     {
         $itemManager = new ItemManager();
-        $item = $itemManager->selectOneById($id);
+        $item = $itemManager->getItem($id);
 
         return $this->twig->render('Item/show.html.twig', ['item' => $item]);
     }
@@ -34,7 +34,7 @@ class ItemController extends AbstractController
     public function edit(int $id): ?string
     {
         $itemManager = new ItemManager();
-        $item = $itemManager->selectOneById($id);
+        $item = $itemManager->getItem($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data

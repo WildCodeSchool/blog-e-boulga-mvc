@@ -16,4 +16,5 @@ return [
     'items/show' => ['ItemController', 'show', ['id']],
     'items/add' => ['ItemController', 'add',],
     'items/delete' => ['ItemController', 'delete',],
+    'about_us' => ['AuthorController','index'],
 ];

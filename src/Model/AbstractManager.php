@@ -30,7 +30,6 @@ abstract class AbstractManager
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }
-
         return $this->pdo->query($query)->fetchAll(PDO::FETCH_CLASS, static::CLASSNAME);
     }
 

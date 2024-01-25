@@ -7,7 +7,7 @@ use App\Model\ArticleManager;
 class ArticleController extends AbstractController
 {
     /**
-     * Display home page
+     * Display article informations specified by $id.
      */
     public function show(int $id): string
     {

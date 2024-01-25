@@ -8,10 +8,10 @@
         <article class="card bigNews">
             <a href="#">
                 <div class="title_bigNews title_news">
-                    <img class="big" src="/assets/images/home_picture/montagne1.png" alt="image de l'article principal">
+                    <img class="big" src="{{ mainArticle.images }}" alt="image de l'article principal">
                     <div class="articleTeasing">
-                        <h1>titlehome</h1>
-                        <p>description</p>
+                        <h1>{{ mainArticle.homeTitle }}</h1>
+                        <p>{{ mainArticle.homePreview }}</p>
                     </div>
                 </div>
             </a>

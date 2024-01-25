@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\ArticleManager;
+use App\Model\AuthorManager;
 
 class ArticleController extends AbstractController
 {
@@ -16,13 +17,12 @@ class ArticleController extends AbstractController
         $authorId = $article->getAuthorId();
 
         $authorManager = new AuthorManager();
-        $author = $authorManager->getAuthor($authorId);
+        $author = $authorManager->getById($authorId);
 
         return $this->twig->render('Article/article.html.twig', [
             'article' => $article,
             'author' => $author,
+            'authorId' => $authorId,
         ]);
     }
-
-
 }

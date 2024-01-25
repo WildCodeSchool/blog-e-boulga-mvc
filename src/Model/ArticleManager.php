@@ -29,6 +29,13 @@ class ArticleManager extends AbstractManager
         return $statement->fetchAll();
     }
 
+    public function getAllArticles()
+    {
+        $statement = $this->pdo->query('SELECT * FROM article ORDER BY releaseDate DESC LIMIT 15 OFFSET 3');
+        $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
+        return $statement->fetchAll();
+    }
+
     public function update(array $item): bool
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `title` = :title WHERE id=:id");

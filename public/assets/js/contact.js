@@ -49,13 +49,11 @@ btn_submit.addEventListener("click", (event) => {
                     element.nextElementSibling.style.display = "block";
                     element.nextElementSibling.style.marginBottom = "1rem";
                     event.preventDefault();
+                } else if (valueInput.length < 10) {
+                    error_input(element);
                 } else {
                     element.style.border = "1px solid black";
                     element.nextElementSibling.style.display = "none";
-
-                    if (valueInput.length < 10) {
-                        error_input(element);
-                    }
                 }
                 break;
             case "email":

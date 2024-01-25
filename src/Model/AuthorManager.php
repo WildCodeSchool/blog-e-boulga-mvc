@@ -10,10 +10,10 @@ class AuthorManager extends AbstractManager
     public const CLASSNAME = "App\Model\AuthorModel";
 
     /* Récupération des infos concernant tous les authors */
-    public function getAllAuthor(string $orderBy = '', string $direction = 'ASC'): array
+    public function getAll(string $orderBy = '', string $direction = 'ASC'): array
     {
         $query = 'SELECT u.firstName, u.lastName, a.fullDescription, a.linkedinUrl, a.githubUrl, a.websiteUrl,
-        a.imgSrc FROM author as a INNER JOIN user as u ON u.id = a.userId';
+        a.imgSrc, a.userId FROM author as a INNER JOIN user as u ON u.id = a.userId';
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }
@@ -21,10 +21,10 @@ class AuthorManager extends AbstractManager
     }
 
     /* Récupération des infos concernant un author */
-    public function getAuthorById(int $id): object|false
+    public function getById(int $id): AuthorModel|false
     {
         $query = 'SELECT u.firstName, u.lastName, a.shortDescription,
-        a.imgSrc FROM author as a INNER JOIN user as u ON u.id = a.userId WHERE id=:id';
+        a.imgSrc, a.userId FROM author as a INNER JOIN user as u ON u.id = a.userId WHERE a.id=:id';
 
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('id', $id, \PDO::PARAM_INT);

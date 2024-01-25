@@ -5,15 +5,15 @@ namespace App\Model;
 class AuthorModel
 {
     private int $id;
-    private ?string $firstName = '';
-    private ?string $lastName = '';
+    private ?string $firstName;
+    private ?string $lastName;
     private ?string $shortDescription = '';
     private ?string $fullDescription = '';
     private ?string $linkedinUrl = '';
     private ?string $githubUrl = '';
     private ?string $websiteUrl = '';
-    private ?string $imgSrc = '';
-    private ?int $userId;
+    private ?string $imgSrc;
+    private int $userId;
 
     public function setId(int $id): void
     {

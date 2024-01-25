@@ -32,12 +32,14 @@
                 <p id="header-form">Contacter l’équipe e-Boulga</p>
                 <div>
                     <label for="firstName">Votre prénom :<span class="asterix"> *</span></label>
-                    <input id="prenom" class="input_form" type="text" name="firstName" placeholder="John" value="{% if post is defined %}{{ post.firstName }}{% endif %}"/>
+                    <input id="firstName" class="input_form" type="text" name="firstName" placeholder="John" value="{%
+                        if post is defined %}{{ post.firstName }}{% endif %}"/>
                     <small style="display: none;">Minimum 2 caractères requis</small>
                 </div>
                 <div>
                     <label for="lastName">Votre nom :<span class="asterix"> *</span></label>
-                    <input id="nom" class="input_form" type="text" name="lastName" placeholder="Doe" value="{% if post is defined %}{{ post.lastName
+                    <input id="lastName" class="input_form" type="text" name="lastName" placeholder="Doe" value="{% if
+                        post is defined %}{{ post.lastName
                     }}{% endif %}"/>
                     <small style="display: none;">Minimum 2 caractères requis</small>
                 </div>

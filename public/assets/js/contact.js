@@ -1,10 +1,10 @@
-let btn_envoie = document.querySelector("#btn_submit")
+let btn_submit = document.querySelector("#btn_submit")
 let inputs = document.querySelectorAll(".input_form")
 let label_mod = document.querySelector(".labelMod")
 let contact_form = document.querySelector(".contactUsForm")
 let check_form = []
 
-btn_envoie.addEventListener("click", (event) => {
+btn_submit.addEventListener("click", (event) => {
 
     /**
      * On vide le tableau check_form à chaque fois que l'on clique sur le bouton
@@ -21,7 +21,7 @@ btn_envoie.addEventListener("click", (event) => {
 
         switch (element.type) {
             case "text":
-                if (elementID === "prenom" || elementID === "nom" || elementID === "subject") {
+                if (elementID === "firstName" || elementID === "lastName" || elementID === "subject") {
                     if (valueInput === "") {
                         error_input(element);
                     } else {
@@ -29,11 +29,11 @@ btn_envoie.addEventListener("click", (event) => {
                         element.nextElementSibling.style.display = "none";
                     }
 
-                    if (elementID === "prenom" && valueInput.length < 2) {
+                    if (elementID === "firstName" && valueInput.length < 2) {
                         error_input(element);
                     }
 
-                    if (elementID === "nom" && valueInput.length < 2) {
+                    if (elementID === "lastName" && valueInput.length < 2) {
                         error_input(element);
                     }
 

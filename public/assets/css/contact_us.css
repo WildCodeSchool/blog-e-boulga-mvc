@@ -82,6 +82,7 @@ small {
 #mainPage {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    margin: 5rem 0;
 }
 
 /*Right block desktop*/
@@ -89,14 +90,13 @@ small {
 #rightSide {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #informationSocietyBlock {
     display: flex;
     justify-content: center;
     grid-column: 2;
-    margin-top: 7.81rem;
-    margin-bottom: 19.38rem;
     max-width: 25.3125rem;
     height: 42.4375rem;
     border-radius: 0rem 0.625rem 0.625rem 0rem;
@@ -123,11 +123,10 @@ img+address {
     display: flex;
     grid-column: 1;
     grid-row: 1;
-    margin-top: 9.81rem;
-    margin-bottom: 19.38rem;
     width: 100%;
     max-width: 40rem;
-    justify-content: end;
+    justify-content: center;
+    align-items: center;
 }
 
 .contactUsForm {

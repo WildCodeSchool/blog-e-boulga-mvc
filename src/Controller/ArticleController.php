@@ -13,9 +13,16 @@ class ArticleController extends AbstractController
     {
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticle($id);
+        $authorId = $article->getAuthorId();
+
+        $authorManager = new AuthorManager();
+        $author = $authorManager->getAuthor($authorId);
 
         return $this->twig->render('Article/article.html.twig', [
             'article' => $article,
+            'author' => $author,
         ]);
     }
+
+
 }

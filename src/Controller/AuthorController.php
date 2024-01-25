@@ -9,7 +9,7 @@ class AuthorController extends AbstractController
     public function show(): string
     {
         $author = new AuthorManager();
-        $authors = $author->selectAll();
+        $authors = $author->getAllAuthor();
 
         return $this->twig->render('AboutUs/index.html.twig', ['authors' => $authors]);
     }

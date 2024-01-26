@@ -127,6 +127,7 @@ img+address {
     max-width: 40rem;
     justify-content: center;
     align-items: center;
+    min-width: 405px;
 }
 
 .contactUsForm {
@@ -255,7 +256,11 @@ input {
     main {
         margin: 0 1.9rem;
     }
-}
+    #informationSocietyBlock {
+        max-width: 350px;
+    }
+    }
+
 
 @-webkit-keyframes pulse {
     0% {

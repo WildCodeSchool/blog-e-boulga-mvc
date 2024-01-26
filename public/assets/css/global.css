@@ -1,0 +1,13 @@
+* {
+    --main-color: #FFA458;
+    --color-hover: #793700;
+    --our-black: rgb(11, 11, 11);
+    --header-height-desktop: 8rem;
+    --footer-height-desktop: 195px;
+    --footer-height-responsive: 366px;
+    --min-height-main: calc(100vh - var(--footer-height-desktop) - var(--header-height-desktop));
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Titillium Web', sans-serif;
+}

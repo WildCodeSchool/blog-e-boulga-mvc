@@ -13,6 +13,7 @@ abstract class AbstractManager
     protected PDO $pdo;
 
     public const TABLE = '';
+    public const CLASSNAME = '';
 
     public function __construct()
     {
@@ -29,18 +30,18 @@ abstract class AbstractManager
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }
-
-        return $this->pdo->query($query)->fetchAll();
+        return $this->pdo->query($query)->fetchAll(PDO::FETCH_CLASS, static::CLASSNAME);
     }
 
     /**
      * Get one row from database by ID.
      */
-    public function selectOneById(int $id): array|false
+    public function selectOneById(int $id): object|false
     {
         // prepared request
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
         $statement->execute();
 
         return $statement->fetch();

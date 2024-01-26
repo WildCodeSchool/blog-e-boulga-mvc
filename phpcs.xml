@@ -11,11 +11,7 @@
 
     <rule ref="PSR12"/>
 
-    <rule ref="Generic.Files.LineEndings">
-        <properties>
-            <property name="eolChar" value="\r\n"/>
-        </properties>
-    </rule>
+    <rule ref="Generic.Files.LineEndings.InvalidEOLChar"><message>End of line character is invalid.
 
     <file>config/</file>
     <file>public/</file>

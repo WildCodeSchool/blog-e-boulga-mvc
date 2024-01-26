@@ -15,6 +15,11 @@ class ContactController extends AbstractController
         $errors = $this->validateForm();
 
         if (empty($errors)) {
+            array_map('trim', $_POST);
+            foreach ($_POST as $key => $value) {
+                $_POST[$key] = htmlentities($value);
+            }
+
             (new ContactManager())->insert($_POST);
             header('Location: /contact_sent');
             exit();

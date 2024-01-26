@@ -11,10 +11,11 @@ class ContactController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return $this->twig->render('Contact/contact.html.twig');
         }
-        $_POST = array_map('trim', $_POST);
+
         foreach ($_POST as $key => $value) {
-            $_POST[$key] = htmlentities($value);
+            $_POST[$key] = trim(htmlentities($value));
         }
+
         $errors = $this->validateForm();
 
         if (empty($errors)) {

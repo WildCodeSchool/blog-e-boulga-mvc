@@ -17,7 +17,7 @@ btn_submit.addEventListener("click", (event) => {
     inputs.forEach(element => {
 
         let elementID = element.id
-        let valueInput = element.value
+        let valueInput = element.value.trim()
 
         switch (element.type) {
             case "text":

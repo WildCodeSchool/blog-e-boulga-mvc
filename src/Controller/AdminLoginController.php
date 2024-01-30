@@ -6,8 +6,8 @@ use App\Controller\AbstractController;
 
 class AdminLoginController extends AbstractController
 {
-    public function index(): void
+    public function index(): string
     {
-        $this->twig->render('admin/index.html.twig');
+        return $this->twig->render('Admin/login.html.twig');
     }
 }

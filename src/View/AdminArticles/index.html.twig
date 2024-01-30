@@ -6,6 +6,15 @@
 
 {% block content %}
     <main>
-
+        {% for article in articles %}
+            <div class="article">
+                <img src="/{{ article.imgSrc }}" alt="{{ article.altImg }}">
+                <p>{{ article.homeTitle }}</p>
+                <div class="buttons">
+                    <a class="seeButton" href="/article?id={{ article.id }}">Voir</a>
+                    <a href="/admin/articles/edit/{{ article.id }}">Modifier</a>
+                </div>
+            </div>
+        {% endfor %}
     </main>
 {% endblock %}

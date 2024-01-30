@@ -1,0 +1,26 @@
+{% extends 'Admin/adminLayout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/adminLogin.css">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <section class="login">
+            <h2>Mon Espace Admin</h2>
+            <form action="" method="POST">
+                <div class="inputSection">
+                    <label for="firstname">Votre prénom</label>
+                    <input type="text" name="firstname" id="firstname" placeholder="john">
+                </div>
+                <div class="inputSection">
+                    <label for="password">Votre mot de passe</label>
+                    <input type="password" name="password" id="password" placeholder="********">
+                </div>
+                <div class="button">
+                    <button type="submit">Se connecter</button>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}

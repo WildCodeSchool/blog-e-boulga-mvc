@@ -9,7 +9,19 @@
         {% for article in articles %}
             <div class="article">
                 <img src="/{{ article.imgSrc }}" alt="{{ article.altImg }}">
-                <p>{{ article.homeTitle }}</p>
+                <div>
+                    <p>{{ article.homeTitle }}</p>
+                    <small class="{{
+                    article.status == 1 ? 'draft' :
+                    article.status == 2 ? 'live' :
+                    article.status == 3 ? 'archived' :
+                    'unknownStatus'}}">
+                        {{ article.status == 1 ? 'Brouillon' :
+                        article.status == 2 ? 'Publié' :
+                        article.status == 3 ? 'Archivé' :
+                        'Error: Unknown status'}}
+                    </small>
+                </div>
                 <div class="buttons">
                     <a class="seeButton" href="/article?id={{ article.id }}">Voir</a>
                     <a href="/admin/articles/edit/{{ article.id }}">Modifier</a>

@@ -26,3 +26,24 @@ main {
 .seeButton {
     margin-right: 1rem;
 }
+
+.draft {
+    color: gray;
+    font-weight: bold;
+}
+
+.live {
+    color: green;
+    font-weight: bold;
+}
+
+.archived {
+    color: red;
+    font-weight: bold;
+}
+
+.unknownStatus {
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+}

@@ -6,9 +6,11 @@
 
 {% block content %}
     <main>
-        <a class="filterButton" href="/admin/articles/">Tous les articles</a>
-        <a class="filterButton" href="/admin/articles?status=archived">Articles archivés</a>
-        <a class="filterButton" href="/admin/articles?status=draft">Brouillons</a>
+        <section class="filterButtons">
+            <a class="filterButton" href="/admin/articles/">Tous les articles</a>
+            <a class="filterButton" href="/admin/articles?status=archived">Articles archivés</a>
+            <a class="filterButton" href="/admin/articles?status=draft">Brouillons</a>
+        </section>
         <section class="articles">
             {{ articles.error ?? '' }}
 

@@ -57,4 +57,16 @@ abstract class AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
+
+    public function selectByConditions(string $firstCondition, string $secondCondition): array
+    {
+        $statement = $this->pdo->prepare(
+            "SELECT * FROM " . static::TABLE . " WHERE " . $firstCondition . "= :secondCondition"
+        );
+        $statement->bindValue('secondCondition', $secondCondition, \PDO::PARAM_STR);
+        $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }

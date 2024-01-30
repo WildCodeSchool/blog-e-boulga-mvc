@@ -6,27 +6,34 @@
 
 {% block content %}
     <main>
-        {% for article in articles %}
-            <div class="article">
-                <img src="/{{ article.imgSrc }}" alt="{{ article.altImg }}">
-                <div>
-                    <p>{{ article.homeTitle }}</p>
-                    <small class="{{
-                    article.status == 1 ? 'draft' :
-                    article.status == 2 ? 'live' :
-                    article.status == 3 ? 'archived' :
-                    'unknownStatus'}}">
-                        {{ article.status == 1 ? 'Brouillon' :
-                        article.status == 2 ? 'Publié' :
-                        article.status == 3 ? 'Archivé' :
-                        'Error: Unknown status'}}
-                    </small>
+        <a class="filterButton" href="/admin/articles/">Tous les articles</a>
+        <a class="filterButton" href="/admin/articles?status=archived">Articles archivés</a>
+        <a class="filterButton" href="/admin/articles?status=draft">Brouillons</a>
+        <section class="articles">
+            {{ articles.error ?? '' }}
+
+            {% for article in articles %}
+                <div class="article">
+                    <img src="/{{ article.imgSrc }}" alt="{{ article.altImg }}">
+                    <div>
+                        <p>{{ article.homeTitle }}</p>
+                        <small class="{{
+                        article.status == 1 ? 'draft' :
+                        article.status == 2 ? 'live' :
+                        article.status == 3 ? 'archived' :
+                        'unknownStatus'}}">
+                            {{ article.status == 1 ? 'Brouillon' :
+                            article.status == 2 ? 'Publié' :
+                            article.status == 3 ? 'Archivé' :
+                            'Error: Unknown status'}}
+                        </small>
+                    </div>
+                    <div class="buttons">
+                        <a class="seeButton" href="/article?id={{ article.id }}">Voir</a>
+                        <a href="/admin/articles/edit/{{ article.id }}">Modifier</a>
+                    </div>
                 </div>
-                <div class="buttons">
-                    <a class="seeButton" href="/article?id={{ article.id }}">Voir</a>
-                    <a href="/admin/articles/edit/{{ article.id }}">Modifier</a>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </section>
     </main>
 {% endblock %}

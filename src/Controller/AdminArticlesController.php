@@ -25,7 +25,7 @@ class AdminArticlesController extends AbstractController
         }
 
 
-        return $this->twig->render('AdminArticles/index.html.twig', [
+        return $this->twig->render('Admin/Article/index.html.twig', [
             'articles' => $articles
         ]);
     }

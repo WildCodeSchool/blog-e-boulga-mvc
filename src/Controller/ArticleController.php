@@ -7,6 +7,33 @@ use App\Model\AuthorManager;
 
 class ArticleController extends AbstractController
 {
+    public function index(): string
+    {
+        if (!$this->user) {
+            header('Location: /admin/login');
+            exit();
+        }
+
+        $articleManager = new ArticleManager();
+
+        if (isset($_GET['status'])) {
+            $list = $_GET['status'];
+            if ($list === 'archived') {
+                $articles = $articleManager->selectByConditions('status', '3');
+            } elseif ($list === 'draft') {
+                $articles = $articleManager->selectByConditions('status', '1');
+            } else {
+                $articles = ['error' => 'Aucun article ne correspond à votre recherche'];
+            }
+        } else {
+            $articles = $articleManager->selectAll();
+        }
+
+
+        return $this->twig->render('Admin/Article/index.html.twig', [
+            'articles' => $articles
+        ]);
+    }
     /**
      * Display article informations specified by $id.
      */

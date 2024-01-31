@@ -12,10 +12,6 @@ class ContactController extends AbstractController
             return $this->twig->render('Contact/contact.html.twig');
         }
 
-        foreach ($_POST as $key => $value) {
-            $_POST[$key] = trim(htmlentities($value));
-        }
-
         $errors = $this->validateForm();
 
         if (empty($errors)) {

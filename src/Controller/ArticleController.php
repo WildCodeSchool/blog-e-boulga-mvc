@@ -36,6 +36,8 @@ class ArticleController extends AbstractController implements UploadFile
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->getAllCategory();
 
+        $this->uploadFile();
+
         return $this->twig->render('Admin/Article/add.html.twig', [
             'authors' => $authors,
             'categories' => $categories
@@ -47,7 +49,7 @@ class ArticleController extends AbstractController implements UploadFile
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors = [];
 
-            $image = $_FILES['avatar'];
+            $image = $_FILES['imageUpload'];
 
             $fileTmp = $image['tmp_name'];
             $fileName = $image['name'];
@@ -66,11 +68,8 @@ class ArticleController extends AbstractController implements UploadFile
             $uploaded = [];
             $failed = [];
 
-            $fileExt = explode('.', $fileName);
-            $fileExt = strtolower(end($fileExt));
-
             if (empty($errors)) {
-                $fileNameNew = uniqid('', true) . '.' . $fileExt;
+                $fileNameNew = uniqid('', true) . '.' . $extension;
                 $fileDestination = $uploadDir . $fileNameNew;
 
                 if (move_uploaded_file($fileTmp, $fileDestination)) {

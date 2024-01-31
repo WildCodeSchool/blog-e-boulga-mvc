@@ -2,7 +2,7 @@
 
 {% block content %}
 <main>
-    <form method="post" action="">
+    <form action="" method="post" enctype="multipart/form-data">
         <p>Add un article</p>
         <div>
             <label for="title">Titre de votre article </label>
@@ -47,7 +47,7 @@
         </div>
         <div>
             <label for="imageUpload">Télécharger votre image d'article</label>
-            <input type="file" name="imgSrc" id="imageUpload" />
+            <input type="file" name="imageUpload" id="imageUpload" />
         </div>
         <div>
             <input type="submit" value="Valider">

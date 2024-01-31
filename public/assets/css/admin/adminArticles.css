@@ -80,7 +80,7 @@ main {
 }
 
 .mainButton {
-    margin-left: 1.4rem;
+    margin-right: 1.2rem;
 }
 
 .mainButton:hover {
@@ -90,7 +90,7 @@ main {
 
 .modalMain {
     position: sticky;
-    background: #abb5c2;
+    background: whitesmoke;
     width: 40rem;
     height: 15rem;
     bottom: 50vh;
@@ -102,6 +102,7 @@ main {
     margin-right: auto;
     display: none;
     border-radius: 10px;
+    border: 1px solid var(--our-black);
 }
 
 .displayed {
@@ -175,8 +176,6 @@ main {
     pointer-events: none;
 }
 
-.warning {
-    margin: 1rem 0;
-    color: #773333;
-    font-weight: bold;
+.marged {
+    margin-left: 5rem;
 }

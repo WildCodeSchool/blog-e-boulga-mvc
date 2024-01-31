@@ -9,3 +9,4 @@ ItemManager.php
 ItemModel.php
 ItemController.php
 /src/View/Item/*
+.DS_Store

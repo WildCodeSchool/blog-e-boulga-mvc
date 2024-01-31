@@ -36,4 +36,9 @@ class ArticleManager extends AbstractManager
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
         return $statement->fetchAll();
     }
+
+    /*public function createArticle(array $form)
+    {
+        $query = 'INSERT INTO self::TABLE';
+    }*/
 }

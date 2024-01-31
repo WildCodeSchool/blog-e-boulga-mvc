@@ -15,6 +15,7 @@ class HomeController extends AbstractController
         $mainArticle = $articleManager->getMainArticle();
         $relatedArticles = $articleManager->getRelatedArticles();
         $allArticles = $articleManager->getAllArticles();
+
         return $this->twig->render('Home/index.html.twig', [
                 'mainArticle' => $mainArticle,
                 'relatedArticles' => $relatedArticles,

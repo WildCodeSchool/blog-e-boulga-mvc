@@ -22,7 +22,7 @@
         </div>
         <div>
             <label for="category">Choix de la catégorie </label>
-            <select id="category">
+            <select name="category">
                 {% for category in categories %}
                     <option value="{{ category.id }}"> {{ category.categoryName }}</option>
                 {% endfor %}
@@ -30,7 +30,7 @@
         </div>
         <div>
             <label for="author">Choix de l'auteur </label>
-            <select id="author">
+            <select name="author">
                 {% for author in authors %}
                     <option value="{{ author.id }}"> {{ author.firstName }} {{ author
                         .lastName }}</option>
@@ -39,7 +39,7 @@
         </div>
         <div>
             <label for="status">Choix du statut </label>
-            <select id="status">
+            <select name="status">
                 <option value="1">Brouillon</option>
                 <option value="2">Publié</option>
                 <option value="3">Archivé</option>

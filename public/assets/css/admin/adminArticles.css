@@ -15,6 +15,12 @@ main {
     text-align: center;
 }
 
+.buttons a img:hover {
+    transform: scale(1.1);
+    background: var(--admin-color);
+    border-radius: 10rem;
+}
+
 .article > img {
     width: 200px;
     height: 120px;

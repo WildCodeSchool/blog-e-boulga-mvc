@@ -15,6 +15,11 @@ class CategoryModel
     {
         return $this->id;
     }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
     public function getCategoryName(): ?string
     {
         return $this->categoryName;
@@ -25,12 +30,12 @@ class CategoryModel
         $this->categoryName = $categoryName;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?int
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): void
+    public function setStatus(?int $status): void
     {
         $this->status = $status;
     }

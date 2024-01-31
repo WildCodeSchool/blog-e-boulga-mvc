@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\UploadFile;
 use PDO;
 
 class ArticleManager extends AbstractManager

@@ -24,7 +24,7 @@
             <label for="category">Choix de la catégorie </label>
             <select id="category">
                 {% for category in categories %}
-                    <option value="{{ category.categoryName }}"> {{ category.categoryName }}</option>
+                    <option value="{{ category.id }}"> {{ category.categoryName }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -32,7 +32,7 @@
             <label for="author">Choix de l'auteur </label>
             <select id="author">
                 {% for author in authors %}
-                    <option value="{{ author.firstName }} {{ author.lastName }}"> {{ author.firstName }} {{ author
+                    <option value="{{ author.id }}"> {{ author.firstName }} {{ author
                         .lastName }}</option>
                 {% endfor %}
             </select>
@@ -45,8 +45,15 @@
                 <option value="3">Archivé</option>
             </select>
         </div>
-
+        <div>
+            <label for="imageUpload">Télécharger votre image d'article</label>
+            <input type="file" name="imgSrc" id="imageUpload" />
+        </div>
+        <div>
+            <input type="submit" value="Valider">
+        </div>
     </form>
+    <button id="cancel">Annuler</button>
 </main>
 
 {% endblock %}

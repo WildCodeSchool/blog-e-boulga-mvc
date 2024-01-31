@@ -15,6 +15,7 @@ class ArticleController extends AbstractController
         }
 
         $articleManager = new ArticleManager();
+        $mainArticleId = $articleManager->getMainArticleId();
 
         if (isset($_GET['status'])) {
             $list = $_GET['status'];
@@ -31,7 +32,8 @@ class ArticleController extends AbstractController
 
 
         return $this->twig->render('Admin/Article/index.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'mainArticleId' => $mainArticleId->getIdArticle(),
         ]);
     }
     /**
@@ -51,5 +53,14 @@ class ArticleController extends AbstractController
             'author' => $author,
             'authorId' => $authorId,
         ]);
+    }
+
+    public function setMain(int $id): void
+    {
+        $articleManager = new ArticleManager();
+        $articleManager->setMainArticle($id);
+
+        header('Location: /admin/articles');
+        exit();
     }
 }

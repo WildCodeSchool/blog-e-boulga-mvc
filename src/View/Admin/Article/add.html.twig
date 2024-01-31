@@ -1,0 +1,58 @@
+{% extends 'Admin/adminLayout.html.twig' %}
+
+{% block content %}
+<main>
+    <form method="post" action="">
+        <p>Add un article</p>
+        <div>
+            <label for="title">Titre de votre article </label>
+            <input type="text" name="title" id="title" required />
+        </div>
+        <div>
+            <label for="description">Description de votre article </label>
+            <textarea id="description" rows="5" name="description"></textarea>
+        </div>
+        <div>
+            <label for="introduction">Introduction de votre article </label>
+            <textarea id="introduction" rows="5" name="introduction"></textarea>
+        </div>
+        <div>
+            <label for="detail">Le corps de votre article </label>
+            <textarea id="detail" rows="20" name="detail"></textarea>
+        </div>
+        <div>
+            <label for="category">Choix de la catégorie </label>
+            <select id="category">
+                {% for category in categories %}
+                    <option value="{{ category.categoryName }}"> {{ category.categoryName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="author">Choix de l'auteur </label>
+            <select id="author">
+                {% for author in authors %}
+                    <option value="{{ author.firstName }} {{ author.lastName }}"> {{ author.firstName }} {{ author
+                        .lastName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="status">Choix du statut </label>
+            <select id="status">
+                <option value="1">Brouillon</option>
+                <option value="2">Publié</option>
+                <option value="3">Archivé</option>
+            </select>
+        </div>
+
+    </form>
+</main>
+
+{% endblock %}
+
+{#
+Un champ Image où on insert notre image
+Un champ pour définir si l'article est mis en avant ou non
+Un bouton pour valider le formulaire
+Un bouton pour annuler la création en cours#}

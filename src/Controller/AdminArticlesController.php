@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Controller\AbstractController;
 use App\Model\ArticleManager;
+use App\Model\AuthorManager;
+use App\Model\CategoryManager;
 
 class AdminArticlesController extends AbstractController
 {
@@ -27,6 +29,20 @@ class AdminArticlesController extends AbstractController
 
         return $this->twig->render('Admin/Article/index.html.twig', [
             'articles' => $articles
+        ]);
+    }
+
+    public function add(): string
+    {
+        $author = new AuthorManager();
+        $authors = $author->getAll();
+
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->getAllCategory();
+
+        return $this->twig->render('Admin/Article/add.html.twig', [
+            'authors' => $authors,
+            'categories' => $categories
         ]);
     }
 }

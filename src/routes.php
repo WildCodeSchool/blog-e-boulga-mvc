@@ -18,5 +18,5 @@ return [
     'items/delete' => ['ItemController', 'delete',],
     'about_us' => ['AuthorController','index'],
     'admin/login' => ['AdminUserController', 'login'],
-    'admin/articles' => ['AdminArticlesController', 'index',],
+    'admin/articles' => ['ArticleController', 'index',],
 ];

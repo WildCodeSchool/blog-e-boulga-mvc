@@ -10,7 +10,6 @@ class AdminUserController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $credentials = array_map('trim', $_POST);
-//      @todo make some controls on email and password fields and if errors, send them to the view
             $userManager = new AdminUserManager();
             $user = $userManager->selectByLogin($credentials['login']);
             if ($user && password_verify($credentials['password'], $user->getPassword())) {

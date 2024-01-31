@@ -9,6 +9,10 @@ header {
     width: 100%;
 }
 
+.admin-header {
+    background-color: var(--admin-color) !important;
+}
+
 #aHeaderLogo {
     display: flex;
     align-items: center;
@@ -187,7 +191,6 @@ Gestion des media querries
     height: 6rem;
 }
 .nav a:hover {
-    background-color: var(--color-hover);
     color: white;
 }
 

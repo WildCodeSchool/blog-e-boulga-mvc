@@ -12,7 +12,7 @@ class AuthorManager extends AbstractManager
     /* Récupération des infos concernant tous les authors */
     public function getAll(string $orderBy = '', string $direction = 'ASC'): array
     {
-        $query = 'SELECT u.firstName, u.lastName, a.fullDescription, a.linkedinUrl, a.githubUrl, a.websiteUrl,
+        $query = 'SELECT u.firstName, u.lastName, a.id,a.fullDescription, a.linkedinUrl, a.githubUrl, a.websiteUrl,
         a.imgSrc, a.userId FROM author as a INNER JOIN user as u ON u.id = a.userId';
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
@@ -23,7 +23,7 @@ class AuthorManager extends AbstractManager
     /* Récupération des infos concernant un author */
     public function getById(int $id): AuthorModel|false
     {
-        $query = 'SELECT u.firstName, u.lastName, a.shortDescription,
+        $query = 'SELECT u.firstName, u.lastName, a.id, a.shortDescription,
         a.imgSrc, a.userId FROM author as a INNER JOIN user as u ON u.id = a.userId WHERE a.id=:id';
 
         $statement = $this->pdo->prepare($query);

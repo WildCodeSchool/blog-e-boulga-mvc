@@ -1,6 +1,5 @@
 {% block content %}
     <form action="" method="post" enctype="multipart/form-data">
-        <p>Add un article</p>
         <div>
             <label for="title">Titre de votre article </label>
             <input type="text" name="title" id="title" required />
@@ -55,9 +54,9 @@
             <input type="file" name="imageUpload" id="imageUpload" required/>
         </div>
         <div>
-            <input type="submit" value="Valider">
+            <input id="validate" type="submit" value="Valider">
         </div>
     </form>
-    <button id="cancel">Annuler</button>
+    <a id="cancel" href="/admin/articles/" >Annuler</a>
 
 {% endblock %}

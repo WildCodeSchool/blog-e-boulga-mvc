@@ -52,7 +52,6 @@
 		<span class="separation_bar"><img class="separation" src="/assets/images/components/separation.svg" alt="Barre de séparation"></span>
 
 		<section class="article_list">
-            {{ slicer }}
             {% for allArticle in newArray|slice(3) %}
                 <a href="/article?id={{ allArticle.id }}">
                     <article class="article_block">

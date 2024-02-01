@@ -43,6 +43,13 @@ class ArticleController extends AbstractController
     {
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticle($id);
+
+        if (!$article) {
+            header("HTTP/1.0 404 Not Found");
+            echo '404 - Page not found';
+            exit();
+        }
+
         $authorId = $article->getAuthorId();
 
         $authorManager = new AuthorManager();

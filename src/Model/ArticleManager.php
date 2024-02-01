@@ -37,8 +37,23 @@ class ArticleManager extends AbstractManager
         return $statement->fetchAll();
     }
 
+add_article_form
     /*public function createArticle(array $form)
     {
         $query = 'INSERT INTO self::TABLE';
     }*/
+
+    public function setMainArticle(int $id)
+    {
+        $statement = $this->pdo->prepare('UPDATE mainArticle SET idArticle = :id WHERE id = 1');
+        $statement->bindValue('id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    public function getMainArticleId(): MainArticleModel
+    {
+        $statement = $this->pdo->query('SELECT idArticle FROM mainArticle WHERE id = 1');
+        $statement->setFetchMode(PDO::FETCH_CLASS, 'App\Model\MainArticleModel');
+        return $statement->fetch();
+    }
 }

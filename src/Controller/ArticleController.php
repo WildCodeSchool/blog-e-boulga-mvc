@@ -17,11 +17,14 @@ class ArticleController extends AbstractController implements UploadFile
         }
 
         $articleManager = new ArticleManager();
+        $mainArticleId = $articleManager->getMainArticleId();
 
         if (isset($_GET['status'])) {
             $list = $_GET['status'];
             if ($list === 'archived') {
                 $articles = $articleManager->selectByConditions('status', '3');
+            } elseif ($list === 'published') {
+                $articles = $articleManager->selectByConditions('status', '2');
             } elseif ($list === 'draft') {
                 $articles = $articleManager->selectByConditions('status', '1');
             } else {
@@ -33,7 +36,8 @@ class ArticleController extends AbstractController implements UploadFile
 
 
         return $this->twig->render('Admin/Article/index.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'mainArticleId' => $mainArticleId->getIdArticle(),
         ]);
     }
     /**
@@ -43,6 +47,13 @@ class ArticleController extends AbstractController implements UploadFile
     {
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticle($id);
+
+        if (!$article) {
+            header("HTTP/1.0 404 Not Found");
+            echo '404 - Page not found';
+            exit();
+        }
+
         $authorId = $article->getAuthorId();
 
         $authorManager = new AuthorManager();
@@ -55,6 +66,7 @@ class ArticleController extends AbstractController implements UploadFile
         ]);
     }
 
+add_article_form
     public function add(): string
     {
         $author = new AuthorManager();
@@ -106,5 +118,13 @@ class ArticleController extends AbstractController implements UploadFile
                 }
             }
         }
+
+    public function setMain(int $id): void
+    {
+        $articleManager = new ArticleManager();
+        $articleManager->setMainArticle($id);
+
+        header('Location: /admin/articles');
+        exit();
     }
 }

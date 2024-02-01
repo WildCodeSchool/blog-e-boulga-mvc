@@ -37,7 +37,6 @@ class ArticleManager extends AbstractManager
         return $statement->fetchAll();
     }
 
-add_article_form
     /*public function createArticle(array $form)
     {
         $query = 'INSERT INTO self::TABLE';

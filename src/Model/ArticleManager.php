@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\UploadFile;
 use PDO;
 
 class ArticleManager extends AbstractManager
@@ -30,6 +31,11 @@ class ArticleManager extends AbstractManager
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
         return $statement->fetchAll();
     }
+
+    /*public function createArticle(array $form)
+    {
+        $query = 'INSERT INTO self::TABLE';
+    }*/
 
     public function setMainArticle(int $id)
     {

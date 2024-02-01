@@ -40,6 +40,7 @@ class ArticleController extends AbstractController implements UploadFile
             'mainArticleId' => $mainArticleId->getIdArticle(),
         ]);
     }
+
     /**
      * Display article informations specified by $id.
      */
@@ -66,7 +67,6 @@ class ArticleController extends AbstractController implements UploadFile
         ]);
     }
 
-add_article_form
     public function add(): string
     {
         $author = new AuthorManager();
@@ -118,6 +118,7 @@ add_article_form
                 }
             }
         }
+    }
 
     public function setMain(int $id): void
     {

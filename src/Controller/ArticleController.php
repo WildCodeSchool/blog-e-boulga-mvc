@@ -20,6 +20,8 @@ class ArticleController extends AbstractController
             $list = $_GET['status'];
             if ($list === 'archived') {
                 $articles = $articleManager->selectByConditions('status', '3');
+            } elseif ($list === 'published') {
+                $articles = $articleManager->selectByConditions('status', '2');
             } elseif ($list === 'draft') {
                 $articles = $articleManager->selectByConditions('status', '1');
             } else {

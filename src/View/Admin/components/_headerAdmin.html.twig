@@ -6,7 +6,7 @@
     <ul id="list_nav_header">
         <li><a href="/admin/articles">Articles</a></li>
         <li><a href="#">Utilisateurs</a></li>
-        <li><a href="#">Déconnexion</a></li>
+        <li><a href="/admin/logout">Déconnexion</a></li>
     </ul>
 
     <button id="burger_icon" class="menuToggle menuBurgerGlobal"
@@ -28,3 +28,5 @@
         </ul>
     </div>
 </div>
+
+<p>{{ app.request.uri }}</p>

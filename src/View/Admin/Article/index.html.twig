@@ -31,8 +31,8 @@
                         </small>
                     </div>
                     <div class="buttons">
-                        <a class="seeButton" href="/article?id={{ article.id }}">Voir</a>
-                        <a href="/admin/articles/edit/{{ article.id }}">Modifier</a>
+                        <a class="seeButton articlesButton" href="/article?id={{ article.id }}"><img src="/assets/images/components/mdi_eye-outline.svg" alt="icone d'un oeil ouvert" /></a>
+                        <a class="editButton articlesButton" href="/admin/articles/edit/{{ article.id }}"><img src="/assets/images/components/bx_edit.svg" alt="icone d'un crayon dans un bloc" /></a>
                     </div>
                 </div>
             {% endfor %}

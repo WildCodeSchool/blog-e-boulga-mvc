@@ -75,15 +75,20 @@ class ArticleController extends AbstractController implements UploadFile
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->getAllCategory();
 
-        $this->uploadFile();
+        if ($_POST) {
+            $newArticle = $_POST;
+            $imageArticle = $this->uploadFile();
+            $newArticle['imgSrc'] = $imageArticle;
 
+            (new ArticleManager())->createArticle($newArticle);
+        }
         return $this->twig->render('Admin/Article/add.html.twig', [
             'authors' => $authors,
             'categories' => $categories
         ]);
     }
 
-    public function uploadFile(): void
+    public function uploadFile(): string
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors = [];
@@ -112,12 +117,13 @@ class ArticleController extends AbstractController implements UploadFile
                 $fileDestination = $uploadDir . $fileNameNew;
 
                 if (move_uploaded_file($fileTmp, $fileDestination)) {
-                    $uploaded[$fileName] = $fileDestination;
+                    return $uploaded[$fileName] = $fileDestination;
                 } else {
-                    $failed[$fileName] = "[{$fileName}] failed to upload.";
+                    return $failed[$fileName] = "[{$fileName}] failed to upload.";
                 }
             }
         }
+        return 'an error occured';
     }
 
     public function setMain(int $id): void

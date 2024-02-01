@@ -9,16 +9,24 @@
             <input type="text" name="title" id="title" required />
         </div>
         <div>
+            <label for="hometitle">Titre de votre article depuis la home</label>
+            <input type="text" name="hometitle" id="hometitle" required />
+        </div>
+        <div>
             <label for="description">Description de votre article </label>
-            <textarea id="description" rows="5" name="description"></textarea>
+            <textarea id="description" rows="5" name="description" required></textarea>
         </div>
         <div>
             <label for="introduction">Introduction de votre article </label>
-            <textarea id="introduction" rows="5" name="introduction"></textarea>
+            <textarea id="introduction" rows="5" name="introduction" required></textarea>
         </div>
         <div>
             <label for="detail">Le corps de votre article </label>
-            <textarea id="detail" rows="20" name="detail"></textarea>
+            <textarea id="detail" rows="10" name="detail" required></textarea>
+        </div>
+        <div>
+            <label for="homepreview">Courte description de votre article pour la home</label>
+            <textarea id="homepreview" rows="10" name="homepreview" required></textarea>
         </div>
         <div>
             <label for="category">Choix de la catégorie </label>
@@ -47,7 +55,7 @@
         </div>
         <div>
             <label for="imageUpload">Télécharger votre image d'article</label>
-            <input type="file" name="imageUpload" id="imageUpload" />
+            <input type="file" name="imageUpload" id="imageUpload" required/>
         </div>
         <div>
             <input type="submit" value="Valider">

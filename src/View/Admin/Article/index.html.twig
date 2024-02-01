@@ -20,7 +20,7 @@
                     <img src="/{{ article.imgSrc }}" alt="{{ article.altImg }}">
                     <div>
                         <p>{{ article.homeTitle }}</p>
-                        <small class="{{
+                        <small class="status {{
                         article.status == 1 ? 'draft' :
                         article.status == 2 ? 'live' :
                         article.status == 3 ? 'archived' :
@@ -32,11 +32,29 @@
                         </small>
                     </div>
                     <div class="buttons">
-                        <a class="seeButton articlesButton" href="/article?id={{ article.id }}"><img src="/assets/images/components/mdi_eye-outline.svg" alt="icone d'un oeil ouvert" /></a>
-                        <a class="editButton articlesButton" href="/admin/articles/edit/{{ article.id }}"><img src="/assets/images/components/bx_edit.svg" alt="icone d'un crayon dans un bloc" /></a>
+                        {% if article.status == 2 %}
+                            <img data-id="{{ article.id }}" data-title="{{ article.homeTitle }}" class="mainButton {{ article.id == mainArticleId ? 'disabled'}}" src="/assets/images/components/crown-{{ article.id == mainArticleId ? 'green' : 'gray'}}.svg" alt="icone d'un oeil ouvert" />
+                        {% endif %}
+                        <a class="seeButton articlesButton {{ article.status != 2 ? 'marged' }}" href="/article?id={{ article.id }}"><img src="/assets/images/components/mdi_eye-outline.svg" alt="icone d'un oeil ouvert" class="svg-icon" /></a>
+                        <a class="editButton articlesButton" href="/admin/articles/edit/{{ article.id }}"><img src="/assets/images/components/bx_edit.svg" alt="icone d'un crayon dans un bloc" class="svg-icon" /></a>
+
                     </div>
                 </div>
             {% endfor %}
         </section>
+        <section class="modalMain">
+            <div class="modalMainContent">
+                <p class="pConfirmation">Êtes-vous sûr de vouloir mettre cet article en avant ?</p>
+                <p class="articleTitle"></p>
+                <div class="modalMainButtons">
+                    <a class="globalButton modalMainButton" href="">Oui</a>
+                    <button class="globalButton modalNoButton">Retour</button>
+                </div>
+            </div>
+        </section>
     </main>
+{% endblock %}
+
+{% block javascript %}
+    <script src="/assets/js/admin/adminArticles.js"></script>
 {% endblock %}

@@ -20,4 +20,5 @@ return [
     'admin/login' => ['AdminUserController', 'login'],
     'admin/logout' => ['AdminUserController', 'logout'],
     'admin/articles' => ['ArticleController', 'index',],
+    'admin/article/main' => ['ArticleController', 'setMain', ['id']],
 ];

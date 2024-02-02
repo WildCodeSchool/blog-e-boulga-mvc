@@ -11,6 +11,6 @@ class CategoryManager extends AbstractManager
 
     public function getAllCategory(): array
     {
-        return $this->selectAll();
+        return $this->selectAll('categoryName');
     }
 }

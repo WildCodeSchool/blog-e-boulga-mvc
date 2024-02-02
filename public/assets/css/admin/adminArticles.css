@@ -179,3 +179,19 @@ main {
 .marged {
     margin-left: 5rem;
 }
+
+.plusDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.add {
+    width: 2rem;
+}
+
+.add:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}

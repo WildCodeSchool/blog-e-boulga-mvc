@@ -32,10 +32,57 @@ class ArticleManager extends AbstractManager
         return $statement->fetchAll();
     }
 
-    /*public function createArticle(array $form)
+    public function createArticle(array $form)
     {
-        $query = 'INSERT INTO self::TABLE';
-    }*/
+        $statement = $this->pdo->prepare(
+            "INSERT INTO " . self::TABLE . "
+            (
+            `authorId`,
+            `categoryId`,
+            `articleTitle`,
+            `homeTitle`,
+            `imgSrc`,
+            `altImg`,
+            `homePreview`,
+            `introduction`,
+            `detail`,
+            `description`,
+            `shadowColor`,
+            `status`,
+            `releaseDate`,
+            `updatedat`)
+            VALUES (
+            :authorId,
+            :categoryId,
+            :articleTitle,
+            :homeTitle,
+            :imgSrc,
+            :altImg,
+            :homePreview,
+            :introduction,
+            :detail,
+            :description,
+            :shadowColor,
+            :status,
+            NOW(),
+            NOW()
+            )"
+        );
+        $statement->bindValue('authorId', $form['author'], PDO::PARAM_INT);
+        $statement->bindValue('categoryId', $form['category'], PDO::PARAM_INT);
+        $statement->bindValue('articleTitle', $form['title'], PDO::PARAM_STR);
+        $statement->bindValue('homeTitle', $form['hometitle'], PDO::PARAM_STR);
+        $statement->bindValue('imgSrc', $form['imgSrc'], PDO::PARAM_STR);
+        $statement->bindValue('altImg', $form['title'], PDO::PARAM_STR);
+        $statement->bindValue('homePreview', $form['homepreview'], PDO::PARAM_STR);
+        $statement->bindValue('introduction', $form['introduction'], PDO::PARAM_STR);
+        $statement->bindValue('detail', $form['detail'], PDO::PARAM_STR);
+        $statement->bindValue('description', $form['description'], PDO::PARAM_STR);
+        $statement->bindValue('status', $form['status'], PDO::PARAM_INT);
+        $statement->bindValue('shadowColor', '', PDO::PARAM_STR);
+
+        $statement->execute();
+    }
 
     public function setMainArticle(int $id)
     {

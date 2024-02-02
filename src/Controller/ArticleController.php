@@ -76,49 +76,55 @@ class ArticleController extends AbstractController implements UploadFile
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->getAllCategory();
 
-        $this->uploadFile();
+        if ($_POST) {
+            $newArticle = $_POST;
+            $imageArticle = $this->uploadFile();
+            $newArticle['imgSrc'] = $imageArticle;
 
+            (new ArticleManager())->createArticle($newArticle);
+            header('Location: /admin/articles');
+            exit();
+        }
         return $this->twig->render('Admin/Article/add.html.twig', [
             'authors' => $authors,
             'categories' => $categories
         ]);
     }
 
-    public function uploadFile(): void
+    public function uploadFile(): string
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $errors = [];
+        $errors = [];
 
-            $image = $_FILES['imageUpload'];
+        $image = $_FILES['imageUpload'];
 
-            $fileTmp = $image['tmp_name'];
-            $fileName = $image['name'];
+        $fileTmp = $image['tmp_name'];
+        $fileName = $image['name'];
 
-            $uploadDir = 'assets/images/articles/';
-            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-            $typeOfFile = ['jpg', 'png', 'webp'];
-            $maxFileSize = 2000000;
+        $uploadDir = 'assets/images/articles/';
+        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $typeOfFile = ['jpg', 'png', 'webp'];
+        $maxFileSize = 2000000;
 
-            if ((!in_array($extension, $typeOfFile))) {
-                $errors[] = 'Veuillez sélectionner une image de type jpg, png ou webp !';
-            }
-            if (file_exists($fileTmp) && filesize($fileTmp) > $maxFileSize) {
-                $errors[] = 'Votre fichier doit faire moins de 2Mo !';
-            }
-            $uploaded = [];
-            $failed = [];
+        if ((!in_array($extension, $typeOfFile))) {
+            $errors[] = 'Veuillez sélectionner une image de type jpg, png ou webp !';
+        }
+        if (file_exists($fileTmp) && filesize($fileTmp) > $maxFileSize) {
+            $errors[] = 'Votre fichier doit faire moins de 2Mo !';
+        }
+        $uploaded = [];
+        $failed = [];
 
-            if (empty($errors)) {
-                $fileNameNew = uniqid('', true) . '.' . $extension;
-                $fileDestination = $uploadDir . $fileNameNew;
+        if (empty($errors)) {
+            $fileNameNew = uniqid('', true) . '.' . $extension;
+            $fileDestination = $uploadDir . $fileNameNew;
 
-                if (move_uploaded_file($fileTmp, $fileDestination)) {
-                    $uploaded[$fileName] = $fileDestination;
-                } else {
-                    $failed[$fileName] = "[{$fileName}] failed to upload.";
-                }
+            if (move_uploaded_file($fileTmp, $fileDestination)) {
+                return $uploaded[$fileName] = $fileDestination;
+            } else {
+                return $failed[$fileName] = "[{$fileName}] failed to upload.";
             }
         }
+        return 'an error occured';
     }
 
     public function setMain(int $id): void

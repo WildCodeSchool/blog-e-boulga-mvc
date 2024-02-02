@@ -20,20 +20,15 @@ class ArticleController extends AbstractController implements UploadFile
         $mainArticleId = $articleManager->getMainArticleId();
 
         if (isset($_GET['status'])) {
-            $list = $_GET['status'];
-            if ($list === 'archived') {
-                $articles = $articleManager->selectByConditions('status', '3');
-            } elseif ($list === 'published') {
-                $articles = $articleManager->selectByConditions('status', '2');
-            } elseif ($list === 'draft') {
-                $articles = $articleManager->selectByConditions('status', '1');
-            } else {
-                $articles = ['error' => 'Aucun article ne correspond à votre recherche'];
-            }
+            $articleStatus = $this->checkStatus($_GET['status']);
+            $errorMsg = 'Aucun article ne correspond à votre recherche';
+            $articles =
+                $articleStatus != 'error' ?
+                    $articleManager->selectByConditions('status', $articleStatus) :
+                    ['error' => $errorMsg];
         } else {
             $articles = $articleManager->selectAll();
         }
-
 
         return $this->twig->render('Admin/Article/index.html.twig', [
             'articles' => $articles,
@@ -50,6 +45,12 @@ class ArticleController extends AbstractController implements UploadFile
         $article = $articleManager->getArticle($id);
 
         if (!$article) {
+            header("HTTP/1.0 404 Not Found");
+            echo '404 - Page not found';
+            exit();
+        }
+
+        if ($article->getStatus() != '2') {
             header("HTTP/1.0 404 Not Found");
             echo '404 - Page not found';
             exit();
@@ -127,5 +128,15 @@ class ArticleController extends AbstractController implements UploadFile
 
         header('Location: /admin/articles');
         exit();
+    }
+
+    private function checkStatus(string $get)
+    {
+        return match ($get) {
+            'archived' => '3',
+            'published' => '2',
+            'draft' => '1',
+            default => 'error',
+        };
     }
 }

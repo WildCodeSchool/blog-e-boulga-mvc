@@ -14,10 +14,20 @@ class HomeController extends AbstractController
         $articleManager = new ArticleManager();
         $mainArticle = $articleManager->getMainArticle();
         $allArticles = $articleManager->getAllArticles();
-        $fusionArticles = array_merge([$mainArticle], $allArticles);
+
+        foreach ($allArticles as $key => $article) {
+            if ($article->getId() === $mainArticle->getId()) {
+                array_splice($allArticles, $key, 1);
+            }
+        }
+
+        $relatedArticles = [$allArticles[0], $allArticles[1]];
+        $allArticles = array_slice($allArticles, 2);
+
         return $this->twig->render('Home/index.html.twig', [
                 'mainArticle' => $mainArticle,
-                'fusion' => $fusionArticles,
+                'allArticles' => $allArticles,
+                'relatedArticles' => $relatedArticles,
                 ]);
     }
 }

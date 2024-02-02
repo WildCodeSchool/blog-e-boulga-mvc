@@ -17,22 +17,17 @@ class ArticleManager extends AbstractManager
 
     public function getMainArticle()
     {
-        $statement = $this->pdo->query('SELECT * FROM article ORDER BY releaseDate DESC LIMIT 1');
+        $mainArticle = $this->getMainArticleId();
+
+        $statement = $this->pdo->query('SELECT * FROM article WHERE id = ' . $mainArticle->getIdArticle());
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
 
         return $statement->fetch();
     }
 
-    public function getRelatedArticles()
-    {
-        $statement = $this->pdo->query('SELECT * FROM article ORDER BY releaseDate DESC LIMIT 2 OFFSET 1');
-        $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
-        return $statement->fetchAll();
-    }
-
     public function getAllArticles()
     {
-        $statement = $this->pdo->query('SELECT * FROM article ORDER BY releaseDate DESC LIMIT 15 OFFSET 3');
+        $statement = $this->pdo->query('SELECT * FROM article WHERE status = 2 ORDER BY releaseDate DESC LIMIT 15');
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
         return $statement->fetchAll();
     }

@@ -19,4 +19,5 @@ return [
     'about_us' => ['AuthorController','index'],
     'admin/login' => ['AdminUserController', 'login'],
     'admin/articles' => ['ArticleController', 'index',],
+    'admin/article/edit' => ['ArticleController', 'edit']
 ];

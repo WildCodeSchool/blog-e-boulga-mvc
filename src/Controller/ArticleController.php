@@ -52,4 +52,32 @@ class ArticleController extends AbstractController
             'authorId' => $authorId,
         ]);
     }
+
+    public function update(int $id)
+    {
+        if (!$this->user) {
+            header('Location: /admin/login');
+            exit();
+        }
+
+        $articleManager = new ArticleManager();
+        $articleUpdate = $this->$articleManager->getById($id);
+
+        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+            $articleUpdate = array_map('trim', $_POST);
+
+
+            // Update the article
+
+            $this->$articleManager->upDateArticle($articleManager);
+            //$confimation = true;
+        }
+
+        // Generate the web page
+        return $this->twig->render('Admin/Article/edit.html.twig', [
+            'articleUpdate' => $articleUpdate ,
+            //'confirmation' => true ?? ''
+            //voir confirmation dans le template
+        ]);
+    }
 }

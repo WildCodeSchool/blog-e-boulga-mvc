@@ -35,7 +35,7 @@ class AdminUserController extends AbstractController
     public function logout(): void
     {
         unset($_SESSION['user_id']);
-        header('Location: /');
+        header('Location: /admin/login');
         exit();
     }
 }

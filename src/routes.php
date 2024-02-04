@@ -17,7 +17,10 @@ return [
     'items/add' => ['ItemController', 'add',],
     'items/delete' => ['ItemController', 'delete',],
     'about_us' => ['AuthorController','index'],
+    'admin/article/add' => ['ArticleController', 'add'],
     'admin/login' => ['AdminUserController', 'login'],
-    'admin/articles' => ['ArticleController', 'index',],
-    'admin/article/edit' => ['ArticleController', 'edit']
+    'admin/logout' => ['AdminUserController', 'logout'],
+    'admin/articles' => ['ArticleController', 'index'],
+    'admin/article/main' => ['ArticleController', 'setMain', ['id']],
+    'admin/article/edit' => ['ArticleController', 'edit', ['id']],
 ];

@@ -1,0 +1,81 @@
+{% block content %}
+	<form action="" method="post" enctype="multipart/form-data">
+		<div class="articleTitle" "shortInput">
+			<label for="title">Titre de votre article
+			</label>
+			<input type="text" name="title" id="title" required value="{{articleUpdate.articleTitle}}"/>
+		</div>
+		<div>
+			<label for="hometitle">"Titre de votre article depuis la home"</label>
+			<input type="text" name="hometitle" id="hometitle" required value="{{articleUpdate.homeTitle}}"/>
+		</div>
+		<div>
+			<label for="description">Description de votre article
+			</label>
+			<textarea id="description" rows="5" name="description" required>{{articleUpdate.description}}</textarea>
+		</div>
+		<div>
+			<label for="introduction">Introduction de votre article
+			</label>
+			<textarea id="introduction" rows="5" name="introduction" required>{{articleUpdate.introduction}}</textarea>
+		</div>
+		<div>
+			<label for="detail">Le corps de votre article
+			</label>
+			<textarea id="detail" rows="10" name="detail" required>{{articleUpdate.detail}}</textarea>
+		</div>
+		<div>
+			<label for="homepreview">Courte description de votre article pour la home</label>
+			<textarea id="homepreview" rows="10" name="homepreview" required>{{articleUpdate.description}}</textarea>
+		</div>
+		<div class="blockSelect">
+            <div class="blockCategory">
+                <label for="category">Choix de la catégorie
+                </label>
+                <select name="category">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">
+                            {{ category.categoryName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="blockAuthor">
+                <label for="author">Choix de l'auteur
+                </label>
+                <select name="author">
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">
+                            {{ author.firstName }}
+                            {{ author
+                            .lastName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="blockStatus">
+                <label for="status">Choix du statut
+                </label>
+                <select name="status">
+                    <option value="1">Brouillon</option>
+                    <option value="2">Publié</option>
+                    <option value="3">Archivé</option>
+                </select>
+            </div>
+        </div>
+	<div class="blockUploadImg">
+        <div class="inputChoice">
+            <label for="imageUpload">Télécharger votre image d'article</label>
+            <button type="file" name="imageUpload" id="imageUpload" required>Sélectionner un fichier</button>
+        </div>
+		
+        <div class="blockImage">
+            <label for="actualImg">Image actuelle</label>
+            <img class="actualImg" src="/{{articleUpdate.imgSrc}}">
+        </div>
+	</div>
+	<div class="buttons">
+		<input id="validate" type="submit" value="Valider">
+        <a id="cancel" href="/admin/articles/">Annuler</a>
+    </div>
+	
+</form>
+{% endblock %}

@@ -78,6 +78,7 @@ class ArticleController extends AbstractController implements UploadFile
 
         if ($_POST) {
             $errors = $this->checkArticleForm($_POST, $_FILES);
+
             if (empty($errors)) {
                 $newArticle = $_POST;
                 $imageArticle = $this->uploadFile();
@@ -102,7 +103,7 @@ class ArticleController extends AbstractController implements UploadFile
                 $error[] = "Le champ " . $key . " n'est pas rensigné";
             }
         }
-        if (empty($file)) {
+        if (empty($file['name'])) {
             $error[] = 'No file found';
         }
         return $error;

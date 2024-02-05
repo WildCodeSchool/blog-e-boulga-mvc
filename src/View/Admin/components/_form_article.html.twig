@@ -60,9 +60,22 @@
             <input type="file" name="imageUpload" id="imageUpload" required/>
         </div>
         <div>
-            <input id="validate" type="submit" value="Valider">
+            <input id="validate" type="button" value="Valider">
         </div>
+        <section id="modal" class="modalMain">
+            <div class="modalMainContent">
+                <p id="modalText" class="pConfirmation"></p>
+                <div class="modalMainButtons">
+                    <input type="submit" id="validateForm" value="Confirmer" class="globalButton modalMainButton"/>
+                    <button type="button" class="globalButton modalNoButton" id="cancelForm">Annuler</button>
+                </div>
+            </div>
+        </section>
     </form>
-    <a id="cancel" href="/admin/articles/" >Annuler</a>
+<button id="cancel">Annuler</button>
 
+{% endblock %}
+
+{% block javascript %}
+<script src="/assets/js/admin/adminFormArticle.js"></script>
 {% endblock %}

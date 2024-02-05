@@ -77,6 +77,8 @@ class ArticleController extends AbstractController implements UploadFile
         $categories = $categoryManager->getAllCategory();
 
         if ($_POST) {
+            var_dump($_POST);
+            var_dump($_FILES);
             $errors = $this->checkArticleForm($_POST, $_FILES);
 
             if (empty($errors)) {
@@ -103,7 +105,7 @@ class ArticleController extends AbstractController implements UploadFile
                 $error[] = "Le champ " . $key . " n'est pas rensigné";
             }
         }
-        if (empty($file['name'])) {
+        if (empty($file['imageUpload']['name'])) {
             $error[] = 'No file found';
         }
         return $error;

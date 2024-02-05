@@ -126,7 +126,6 @@ class ArticleManager extends AbstractManager
         $statement->bindValue(':detail', $article['detail'], PDO::PARAM_STR);
         $statement->bindValue(':description', $article['description'], PDO::PARAM_STR);
         $statement->bindValue(':status', $article['status'], PDO::PARAM_INT);
-        
         return $statement->execute();
     }
 }

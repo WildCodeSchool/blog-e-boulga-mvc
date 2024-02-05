@@ -157,21 +157,16 @@ class ArticleController extends AbstractController implements UploadFile
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->getAllCategory();
 
-       
-
-
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $articleUpdate = array_map('trim', $_POST);
             $newImageArticle = $this->uploadFile();
             $articleUpdate['imgSrc'] = $newImageArticle;
-            
+
             //Update the article
             $articleManager->update($articleUpdate, $id);
-            
-           
+
             header('Location: edit?id=' . $id);
             exit();
-            //$confimation = true;
         }
 
         // Generate the web page
@@ -179,8 +174,6 @@ class ArticleController extends AbstractController implements UploadFile
             'articleUpdate' => $articleUpdate,
             'authors' => $authors,
             'categories' => $categories,
-            //'confirmation' => true ?? ''
-            //voir confirmation dans le template
         ]);
     }
 }

@@ -33,6 +33,8 @@ class ArticleController extends AbstractController implements UploadFile
         return $this->twig->render('Admin/Article/index.html.twig', [
             'articles' => $articles,
             'mainArticleId' => $mainArticleId->getIdArticle(),
+            'status' => $_GET['status'] ?? null,
+            'page' => 'articles',
         ]);
     }
 
@@ -50,7 +52,7 @@ class ArticleController extends AbstractController implements UploadFile
             exit();
         }
 
-        if ($article->getStatus() != '2') {
+        if ($article->getStatus() != '2' && !$this->user) {
             header("HTTP/1.0 404 Not Found");
             echo '404 - Page not found';
             exit();
@@ -144,12 +146,24 @@ class ArticleController extends AbstractController implements UploadFile
         return 'an error occured';
     }
 
-    public function setMain(int $id): void
+    public function setMain(int $id, string $filter = null): void
     {
         $articleManager = new ArticleManager();
         $articleManager->setMainArticle($id);
 
-        header('Location: /admin/articles');
+        if ($filter === null) {
+            header('Location: /admin/articles');
+            exit();
+        }
+
+        $filter = match ($filter) {
+            '3' => 'archived',
+            '2' => 'published',
+            '1' => 'draft',
+            default => null,
+        };
+
+        header('Location: /admin/articles?status=' . $filter);
         exit();
     }
 

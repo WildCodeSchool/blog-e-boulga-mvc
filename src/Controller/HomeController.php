@@ -24,10 +24,21 @@ class HomeController extends AbstractController
         $relatedArticles = [$allArticles[0], $allArticles[1]];
         $allArticles = array_slice($allArticles, 2);
 
+
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+
+        $host = $_SERVER['HTTP_HOST'];
+
+        $path = $_SERVER['REQUEST_URI'];
+
+        $currentUrl = $protocol . '://' . $host . $path;
+
         return $this->twig->render('Home/index.html.twig', [
                 'mainArticle' => $mainArticle,
                 'allArticles' => $allArticles,
                 'relatedArticles' => $relatedArticles,
+                'currentUrl' => $currentUrl,
+                'page' => 'home',
                 ]);
     }
 }

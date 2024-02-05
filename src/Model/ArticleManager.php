@@ -100,37 +100,33 @@ class ArticleManager extends AbstractManager
         return $statement->fetch();
     }
 
-    public function update(array $article): bool
+    public function update(array $article, int $id): bool
     {
         $statement = $this->pdo->prepare('UPDATE `article` 
-                                        SET `authorId` = :authorId,
-                                            `categoryId`=:categoryId,
-                                            `articleTitle` = :articleTitle,
-                                            `homeTitle` = :homeTitle,
+                                        SET `articleTitle` = :articleTitle,
+                                            `introduction` = :introduction,
                                             `imgSrc` = :imgSrc,
+                                            `authorId` = :authorId,
+                                            `categoryId`=:categoryId,
                                             `altImg` = :altImg,
                                             `homePreview` = :homePreview,
-                                            `introduction` = :introduction,
                                             `detail` = :detail,
-                                            `description` = :`description`, 
-                                            `status` = :`status`,
-                                            `updateAt` = :`update`,
-                                        WHERE id=:id');
-
-        $statement->bindValue('id', $article['id'], PDO::PARAM_INT);
-        $statement->bindValue(':authoId', $article['authorId'], PDO::PARAM_STR);
-        $statement->bindValue(':categoryId', $article['categoryId'], PDO::PARAM_STR);
-        $statement->bindValue(':articleTitle', $article['articleTitle'], PDO::PARAM_STR);
-        $statement->bindValue(':homeTitle', $article['homeTitle'], PDO::PARAM_STR);
-        $statement->bindValue(':imgSrc', $article['imgSrc'], PDO::PARAM_STR);
-        $statement->bindValue(':altImg', $article['altImg'], PDO::PARAM_STR);
-        $statement->bindValue(':homePreview', $article['homePreview'], PDO::PARAM_STR);
+                                            `description` = :description,
+                                            `status` = :status,
+                                            `updatedAt`= Now()
+                                        WHERE `id`=:id');
+        $statement->bindValue('id', $id, PDO::PARAM_INT);
+        $statement->bindValue(':articleTitle', $article['title'], PDO::PARAM_STR);
         $statement->bindValue(':introduction', $article['introduction'], PDO::PARAM_STR);
+        $statement->bindValue(':imgSrc', $article['imgSrc'], PDO::PARAM_STR);
+        $statement->bindValue(':authorId', $article['author'], PDO::PARAM_INT);
+        $statement->bindValue(':categoryId', $article['category'], PDO::PARAM_INT);
+        $statement->bindValue(':altImg', $article['title'], PDO::PARAM_STR);
+        $statement->bindValue(':homePreview', $article['homepreview'], PDO::PARAM_STR);
         $statement->bindValue(':detail', $article['detail'], PDO::PARAM_STR);
         $statement->bindValue(':description', $article['description'], PDO::PARAM_STR);
-        $statement->bindValue(':releaseDate', $article['releaseDate'], PDO::PARAM_STR);
-        $statement->bindValue(':status', $article['status'], PDO::PARAM_STR);
-        $statement->bindValue(':updateAt', $article['update'], PDO::PARAM_STR);
+        $statement->bindValue(':status', $article['status'], PDO::PARAM_INT);
+        
         return $statement->execute();
     }
 }

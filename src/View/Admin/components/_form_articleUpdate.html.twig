@@ -26,7 +26,7 @@
 		</div>
 		<div>
 			<label for="homepreview">Courte description de votre article pour la home</label>
-			<textarea id="homepreview" rows="10" name="homepreview" required>{{articleUpdate.description}}</textarea>
+			<textarea id="homepreview" rows="10" name="homepreview" required>{{articleUpdate.homepreview}}</textarea>
 		</div>
 		<div class="blockSelect">
             <div class="blockCategory">
@@ -64,7 +64,7 @@
 	<div class="blockUploadImg">
         <div class="inputChoice">
             <label for="imageUpload">Télécharger votre image d'article</label>
-            <button type="file" name="imageUpload" id="imageUpload" required>Sélectionner un fichier</button>
+            <input type="file" name="imageUpload" id="imageUpload" required value = "Sélectionner un fichier"/>
         </div>
 		
         <div class="blockImage">

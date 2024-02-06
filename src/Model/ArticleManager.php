@@ -5,8 +5,6 @@ namespace App\Model;
 use App\UploadFile;
 use PDO;
 
-use function Amp\Promise\all;
-
 class ArticleManager extends AbstractManager
 {
     public const TABLE = 'article';

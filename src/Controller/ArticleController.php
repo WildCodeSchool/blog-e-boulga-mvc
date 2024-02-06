@@ -177,19 +177,11 @@ class ArticleController extends AbstractController implements UploadFile
         $categories = $categoryManager->getAllCategory();
 
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-            $articleUpdate = [];
-            // foreach ($_POST as $field => $value) {
-            //     if (empty($value)) {
-            //     }
-            // }
             $articleUpdate = array_map('trim', $_POST);
-            if (empty($articleUpdate['title'])) {
-                //$errors[] = 'Le titre est obligatoire';
+            if ($_FILES['imageUpload']['error'] === 0) {
+                $newImageArticle = $this->uploadFile();
+                $articleUpdate['imgSrc'] = $newImageArticle;
             }
-
-            $newImageArticle = $this->uploadFile();
-            $articleUpdate['imgSrc'] = $newImageArticle;
-
             //Update the article
             $articleManager->update($articleUpdate, $id);
 

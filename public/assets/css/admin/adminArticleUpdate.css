@@ -45,45 +45,65 @@ div{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    
 }
 
-.blockImage {
+.blockImage, .blockNewImage {
     width: 300px;
     height: 179px;
     overflow: hidden;
 }
 
 .inputChoice {
-    width:300px;
-    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 800px;
+    gap: 3.8rem;
 }
-
 
 .inputChoice label {
     margin-top: 2px;
 }
 
-#imageUpload {
-    background-color:var(--admin-color);
-    width: 11rem;
-    height: 50px;
+.fileSelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    gap: 1rem;
+}
+
+.labelImage {
+    display: flex;
+    flex-direction: column;
+    background-color:green;
+    color: white;
+    text-align: center;
+    width: 20rem;
+    height: 70px;
     border-radius: 15px;
     font-size: 1rem;
     cursor: pointer;
-    object-fit: cover;
+    padding-top:0.80rem;
 }
 
-#previewImage {
+#imageUpload {
+    transform: translateY(-200%);
+    opacity:1;
+    cursor: pointer;
+
+}
+
+#preview {
     width: 300px;
     height: 187px;
 }
 
-
 .blockUploadImg {
+    height: 400px;
     display: flex;
     flex-direction: row-reverse;
-    justify-content: start;
+    justify-content: space-around;
     gap: 2rem;
 }
 

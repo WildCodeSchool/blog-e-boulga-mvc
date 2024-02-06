@@ -19,7 +19,19 @@ class ArticleManager extends AbstractManager
     {
         $mainArticle = $this->getMainArticleId();
 
-        $statement = $this->pdo->query('SELECT * FROM article WHERE id = ' . $mainArticle->getIdArticle());
+        $statement = $this->pdo->query("
+            SELECT
+                a.id, a.articleTitle, a.homeTitle, a.imgSrc, a.homePreview,
+                a.shadowColor,a.status, a.releaseDate, a.updatedAt, a.categoryId,
+                a.introduction, a.detail, a.description, a.altImg, a.authorId,
+                u.firstName, u.lastName, c.categoryName
+                    AS articleCategory,
+                a.altImg, a.authorId, u.firstName, u.lastName, c.categoryName AS articleCategory
+            FROM article AS a
+            INNER JOIN category AS c ON a.categoryId = c.id
+            INNER JOIN author AS au ON a.authorId = au.id
+            INNER JOIN user AS u ON a.authorId = u.id
+            WHERE a.id = " . $mainArticle->getIdArticle());
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
 
         return $statement->fetch();
@@ -27,7 +39,20 @@ class ArticleManager extends AbstractManager
 
     public function getAllArticles()
     {
-        $statement = $this->pdo->query('SELECT * FROM article WHERE status = 2 ORDER BY releaseDate DESC LIMIT 15');
+        $statement = $this->pdo->query('
+            SELECT
+                a.id, a.articleTitle, a.homeTitle, a.imgSrc, a.homePreview,
+                a.shadowColor, a.status, a.releaseDate, a.updatedAt, a.categoryId,
+                a.introduction, a.detail, a.description, a.altImg, a.authorId,
+                u.firstName, u.lastName, c.categoryName
+                    AS articleCategory,
+                a.altImg, a.authorId, u.firstName, u.lastName, c.categoryName AS articleCategory
+            FROM article AS a
+            INNER JOIN category AS c ON a.categoryId = c.id
+            INNER JOIN author AS au ON a.authorId = au.id
+            INNER JOIN user AS u ON a.authorId = u.id
+            ORDER BY releaseDate DESC LIMIT 15
+            ');
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
         return $statement->fetchAll();
     }

@@ -7,18 +7,21 @@ class ArticleModel
     private int $id;
     private ?int $authorId;
     private ?int $categoryId;
-    private string $articleTitle;
-    private string $homeTitle;
-    private string $imgSrc;
-    private string $altImg;
-    private string $homePreview;
-    private string $introduction;
-    private string $detail;
-    private string $description;
-    private string $shadowColor;
+    private ?string $articleTitle;
+    private ?string $homeTitle;
+    private ?string $imgSrc;
+    private ?string $altImg;
+    private ?string $homePreview;
+    private ?string $introduction;
+    private ?string $detail;
+    private ?string $description;
+    private ?string $shadowColor;
     private ?string $releaseDate;
     private int $status;
     private ?string $updatedAt;
+    private ?string $firstName;
+    private ?string $lastName;
+    private ?string $articleCategory;
 
     public function getId(): int
     {
@@ -140,7 +143,7 @@ class ArticleModel
         $this->shadowColor = $shadowColor;
     }
 
-    public function getReleaseDate(): string
+    public function getReleaseDate(): string | null
     {
         return $this->releaseDate;
     }
@@ -168,5 +171,35 @@ class ArticleModel
     public function setUpdatedAt(string $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getArticleCategory(): ?string
+    {
+        return $this->articleCategory;
+    }
+
+    public function setArticleCategory(?string $articleCategory): void
+    {
+        $this->articleCategory = $articleCategory;
     }
 }

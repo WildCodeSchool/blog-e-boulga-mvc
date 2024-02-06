@@ -8,6 +8,11 @@ class CategoriesController extends AbstractController
 {
     public function index(): string | null
     {
+        if (!$this->user) {
+            header('Location: /admin/login');
+            exit();
+        }
+
         $category = new CategoryManager();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -40,6 +45,11 @@ class CategoriesController extends AbstractController
 
     public function delete(): void
     {
+        if (!$this->user) {
+            header('Location: /admin/login');
+            exit();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = trim($_POST['categoryId']);
             $category = new CategoryManager();

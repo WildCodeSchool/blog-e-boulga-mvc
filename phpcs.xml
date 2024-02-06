@@ -19,12 +19,6 @@
         </message>
     </rule>
 
-    <rule ref="rulesets/codesize.xml/TooManyFields">
-        <properties>
-            <property name="maxFields" value="20"/>
-        </properties>
-    </rule>
-
     <file>config/</file>
     <file>public/</file>
     <file>src/</file>

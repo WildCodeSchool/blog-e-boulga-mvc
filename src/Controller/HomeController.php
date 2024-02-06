@@ -28,6 +28,7 @@ class HomeController extends AbstractController
                 'mainArticle' => $mainArticle,
                 'allArticles' => $allArticles,
                 'relatedArticles' => $relatedArticles,
+                'page' => 'home',
                 ]);
     }
 }

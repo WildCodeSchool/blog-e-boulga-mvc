@@ -78,18 +78,36 @@ class ArticleController extends AbstractController implements UploadFile
         $categories = $categoryManager->getAllCategory();
 
         if ($_POST) {
-            $newArticle = $_POST;
-            $imageArticle = $this->uploadFile();
-            $newArticle['imgSrc'] = $imageArticle;
+            $errors = $this->checkArticleForm($_POST, $_FILES);
 
-            (new ArticleManager())->createArticle($newArticle);
-            header('Location: /admin/articles');
-            exit();
+            if (empty($errors)) {
+                $newArticle = $_POST;
+                $imageArticle = $this->uploadFile();
+                $newArticle['imgSrc'] = $imageArticle;
+                (new ArticleManager())->createArticle($newArticle);
+                header('Location: /admin/articles');
+                exit();
+            }
         }
         return $this->twig->render('Admin/Article/add.html.twig', [
+            'errors' => $errors ?? null,
             'authors' => $authors,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
+    }
+
+    public function checkArticleForm(array $form, array $file): array
+    {
+        $error = [];
+        foreach ($form as $key => $item) {
+            if (empty($item)) {
+                $error[] = "Le champ " . $key . " n'est pas rensigné";
+            }
+        }
+        if (empty($file['name'])) {
+            $error[] = 'No file found';
+        }
+        return $error;
     }
 
     public function uploadFile(): string

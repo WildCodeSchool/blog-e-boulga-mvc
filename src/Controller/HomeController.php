@@ -22,17 +22,24 @@ class HomeController extends AbstractController
             }
             if ($article->getCategoryId() === $mainArticle->getCategoryId()) {
                 $relatedArticles[] = $article;
-                if (count($relatedArticles) === 2) {
-                    break;
-                }
+            }
+        }
+
+        foreach ($relatedArticles as $key => $article) {
+            if ($article->getId() === $mainArticle->getId()) {
+                array_splice($relatedArticles, $key, 1);
             }
         }
 
         if (count($relatedArticles) <= 0) {
-            $relatedArticles = [$allArticles[0], $allArticles[1]];
+            $relatedArticles = array_slice($allArticles, 0, 2);
+        } elseif (count($relatedArticles) <= 1) {
+            $relatedArticles[] = $allArticles[0];
+            $allArticles = array_slice($allArticles, 1);
+        } elseif (count($relatedArticles) <= 2) {
+            $relatedArticles[] = $allArticles[0];
+            $relatedArticles[] = $allArticles[1];
         }
-
-        $allArticles = array_slice($allArticles, 2);
 
         return $this->twig->render('Home/index.html.twig', [
                 'mainArticle' => $mainArticle,

@@ -1,4 +1,5 @@
 {% extends 'Admin/adminLayout.html.twig' %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/admin/adminArticleUpdate.css">{% endblock %}
 {% block title %} Update article {% endblock %}
 
 {% block content %}
@@ -7,4 +8,8 @@
     {% include 'Admin/components/_form_articleUpdate.html.twig' %}
 </main>
 
+{% endblock %}
+{% block javascript %}
+    <script src="/assets/js/admin/adminArticles.js"></script>
+    <script src="/assets/js/admin/updateForm.js"></script>
 {% endblock %}

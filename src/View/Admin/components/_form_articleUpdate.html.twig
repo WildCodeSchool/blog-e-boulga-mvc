@@ -1,4 +1,4 @@
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/admin/adminArticleUpdate.css">{% endblock %} 
+
 {% block content %}
 	<form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="imgSrc" value="{{articleUpdate.imgSrc}}"/>
@@ -66,11 +66,8 @@
 	<div class="blockUploadImg">
         <div class="inputChoice">
             <label for="imageUpload">Télécharger votre image d'article</label>
-            <input type="file" name="imageUpload" id="imageUpload" onchange="previewImage(event)"  value = "Sélectionner un fichier"/>
-            <div class="imgPreview">
-                <img id="preview"/>
-            </div>
-    
+            <input type="file" name="imageUpload" id="imageUpload" value = "Sélectionner un fichier"/>
+            <img id="preview"/>
         </div>
 		
         <div class="blockImage">
@@ -82,8 +79,5 @@
 		<input id="validate" type="submit" value="Valider">
         <a id="cancel" href="/admin/articles/">Annuler</a>
     </div>
-	
 </form>
 {% endblock %}
-
-{% block javascript %}<script> src=/assets/js/admin/updateForm.js </script> {% endblock %}

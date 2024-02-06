@@ -6,6 +6,7 @@ use App\Model\ArticleManager;
 use App\Model\AuthorManager;
 use App\Model\CategoryManager;
 use App\Interface\UploadFile;
+use Exception;
 
 class ArticleController extends AbstractController implements UploadFile
 {
@@ -24,8 +25,8 @@ class ArticleController extends AbstractController implements UploadFile
             $errorMsg = 'Aucun article ne correspond à votre recherche';
             $articles =
                 $articleStatus != 'error' ?
-                    $articleManager->selectByConditions('status', $articleStatus) :
-                    ['error' => $errorMsg];
+                $articleManager->selectByConditions('status', $articleStatus) :
+                ['error' => $errorMsg];
         } else {
             $articles = $articleManager->selectAll();
         }
@@ -162,5 +163,37 @@ class ArticleController extends AbstractController implements UploadFile
             'draft' => '1',
             default => 'error',
         };
+    }
+
+    public function edit(int $id): ?string
+    {
+        $articleManager = new ArticleManager();
+        $articleUpdate = $articleManager->getArticle($id);
+
+        $author = new AuthorManager();
+        $authors = $author->getAll();
+
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->getAllCategory();
+
+        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+            $articleUpdate = array_map('trim', $_POST);
+            if ($_FILES['imageUpload']['error'] === 0) {
+                $newImageArticle = $this->uploadFile();
+                $articleUpdate['imgSrc'] = $newImageArticle;
+            }
+            //Update the article
+            $articleManager->update($articleUpdate, $id);
+
+            header('Location: edit?id=' . $id);
+            exit();
+        }
+
+        // Generate the web page
+        return $this->twig->render('Admin/Article/edit.html.twig', [
+            'articleUpdate' => $articleUpdate,
+            'authors' => $authors,
+            'categories' => $categories,
+        ]);
     }
 }

@@ -97,4 +97,33 @@ class ArticleManager extends AbstractManager
         $statement->setFetchMode(PDO::FETCH_CLASS, 'App\Model\MainArticleModel');
         return $statement->fetch();
     }
+
+    public function update(array $article, int $id): bool
+    {
+        $statement = $this->pdo->prepare('UPDATE `article` 
+                                        SET `articleTitle` = :articleTitle,
+                                            `introduction` = :introduction,
+                                            `imgSrc` = :imgSrc,
+                                            `authorId` = :authorId,
+                                            `categoryId`=:categoryId,
+                                            `altImg` = :altImg,
+                                            `homePreview` = :homePreview,
+                                            `detail` = :detail,
+                                            `description` = :description,
+                                            `status` = :status,
+                                            `updatedAt`= Now()
+                                        WHERE `id`=:id');
+        $statement->bindValue('id', $id, PDO::PARAM_INT);
+        $statement->bindValue(':articleTitle', $article['title'], PDO::PARAM_STR);
+        $statement->bindValue(':introduction', $article['introduction'], PDO::PARAM_STR);
+        $statement->bindValue(':imgSrc', $article['imgSrc'], PDO::PARAM_STR);
+        $statement->bindValue(':authorId', $article['author'], PDO::PARAM_INT);
+        $statement->bindValue(':categoryId', $article['category'], PDO::PARAM_INT);
+        $statement->bindValue(':altImg', $article['title'], PDO::PARAM_STR);
+        $statement->bindValue(':homePreview', $article['homepreview'], PDO::PARAM_STR);
+        $statement->bindValue(':detail', $article['detail'], PDO::PARAM_STR);
+        $statement->bindValue(':description', $article['description'], PDO::PARAM_STR);
+        $statement->bindValue(':status', $article['status'], PDO::PARAM_INT);
+        return $statement->execute();
+    }
 }

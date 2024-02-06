@@ -39,7 +39,7 @@
                             <img data-id="{{ article.id }}" data-title="{{ article.homeTitle }}" class="mainButton {{ article.id == mainArticleId ? 'disabled'}}" src="/assets/images/components/crown-{{ article.id == mainArticleId ? 'green' : 'gray'}}.svg" alt="icone d'un oeil ouvert" />
                         {% endif %}
                         <a class="seeButton articlesButton {{ article.status != 2 ? 'marged' }}" href="/article?id={{ article.id }}"><img src="/assets/images/components/mdi_eye-outline.svg" alt="icone d'un oeil ouvert" class="svg-icon" /></a>
-                        <a class="editButton articlesButton" href="/admin/articles/edit/{{ article.id }}"><img src="/assets/images/components/bx_edit.svg" alt="icone d'un crayon dans un bloc" class="svg-icon" /></a>
+                        <a class="editButton articlesButton" href="/admin/article/edit?id={{ article.id }}"><img src="/assets/images/components/bx_edit.svg" alt="icone d'un crayon dans un bloc" class="svg-icon" /></a>
 
                     </div>
                 </div>

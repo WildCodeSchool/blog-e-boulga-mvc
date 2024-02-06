@@ -6,6 +6,7 @@ use App\Model\ArticleManager;
 use App\Model\AuthorManager;
 use App\Model\CategoryManager;
 use App\Interface\UploadFile;
+use Exception;
 
 class ArticleController extends AbstractController implements UploadFile
 {
@@ -24,8 +25,8 @@ class ArticleController extends AbstractController implements UploadFile
             $errorMsg = 'Aucun article ne correspond à votre recherche';
             $articles =
                 $articleStatus != 'error' ?
-                    $articleManager->selectByConditions('status', $articleStatus) :
-                    ['error' => $errorMsg];
+                $articleManager->selectByConditions('status', $articleStatus) :
+                ['error' => $errorMsg];
         } else {
             $articles = $articleManager->selectAll();
         }
@@ -33,6 +34,8 @@ class ArticleController extends AbstractController implements UploadFile
         return $this->twig->render('Admin/Article/index.html.twig', [
             'articles' => $articles,
             'mainArticleId' => $mainArticleId->getIdArticle(),
+            'status' => $_GET['status'] ?? null,
+            'page' => 'articles',
         ]);
     }
 
@@ -50,7 +53,7 @@ class ArticleController extends AbstractController implements UploadFile
             exit();
         }
 
-        if ($article->getStatus() != '2') {
+        if ($article->getStatus() != '2' && !$this->user) {
             header("HTTP/1.0 404 Not Found");
             echo '404 - Page not found';
             exit();
@@ -78,6 +81,7 @@ class ArticleController extends AbstractController implements UploadFile
 
         if ($_POST) {
             $errors = $this->checkArticleForm($_POST, $_FILES);
+
             if (empty($errors)) {
                 $newArticle = $_POST;
                 $imageArticle = $this->uploadFile();
@@ -102,7 +106,7 @@ class ArticleController extends AbstractController implements UploadFile
                 $error[] = "Le champ " . $key . " n'est pas rensigné";
             }
         }
-        if (empty($file)) {
+        if (empty($file['name'])) {
             $error[] = 'No file found';
         }
         return $error;
@@ -144,12 +148,24 @@ class ArticleController extends AbstractController implements UploadFile
         return 'an error occured';
     }
 
-    public function setMain(int $id): void
+    public function setMain(int $id, string $filter = null): void
     {
         $articleManager = new ArticleManager();
         $articleManager->setMainArticle($id);
 
-        header('Location: /admin/articles');
+        if ($filter === null) {
+            header('Location: /admin/articles');
+            exit();
+        }
+
+        $filter = match ($filter) {
+            '3' => 'archived',
+            '2' => 'published',
+            '1' => 'draft',
+            default => null,
+        };
+
+        header('Location: /admin/articles?status=' . $filter);
         exit();
     }
 
@@ -161,5 +177,37 @@ class ArticleController extends AbstractController implements UploadFile
             'draft' => '1',
             default => 'error',
         };
+    }
+
+    public function edit(int $id): ?string
+    {
+        $articleManager = new ArticleManager();
+        $articleUpdate = $articleManager->getArticle($id);
+
+        $author = new AuthorManager();
+        $authors = $author->getAll();
+
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->getAllCategory();
+
+        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+            $articleUpdate = array_map('trim', $_POST);
+            if ($_FILES['imageUpload']['error'] === 0) {
+                $newImageArticle = $this->uploadFile();
+                $articleUpdate['imgSrc'] = $newImageArticle;
+            }
+            //Update the article
+            $articleManager->update($articleUpdate, $id);
+
+            header('Location: edit?id=' . $id);
+            exit();
+        }
+
+        // Generate the web page
+        return $this->twig->render('Admin/Article/edit.html.twig', [
+            'articleUpdate' => $articleUpdate,
+            'authors' => $authors,
+            'categories' => $categories,
+        ]);
     }
 }

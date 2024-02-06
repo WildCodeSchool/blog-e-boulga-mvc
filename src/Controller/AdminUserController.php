@@ -28,7 +28,8 @@ class AdminUserController extends AbstractController
 
         return $this->twig->render('Admin/Login/index.html.twig', [
             'error' => $error ?? null,
-            'login' => $credentials['login'] ?? null
+            'login' => $credentials['login'] ?? null,
+            'page' => 'login',
         ]);
     }
 

@@ -9,7 +9,9 @@ class ContactController extends AbstractController
     public function showForm(): string|false
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return $this->twig->render('Contact/contact.html.twig');
+            return $this->twig->render('Contact/contact.html.twig', [
+                'page' => 'contact',
+            ]);
         }
 
         $errors = $this->validateForm();
@@ -23,6 +25,7 @@ class ContactController extends AbstractController
         return $this->twig->render('Contact/contact.html.twig', [
             'errors' => $errors,
             'post' => $_POST,
+            'page' => 'contact',
         ]);
     }
 
@@ -104,6 +107,7 @@ class ContactController extends AbstractController
     {
         return $this->twig->render('Contact/contact.html.twig', [
             'success' => 'Votre message a bien été envoyé',
+            'page' => 'contact',
         ]);
     }
 }

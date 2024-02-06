@@ -11,6 +11,9 @@ class AuthorController extends AbstractController
         $author = new AuthorManager();
         $authors = $author->getAll();
 
-        return $this->twig->render('AboutUs/index.html.twig', ['authors' => $authors]);
+        return $this->twig->render('AboutUs/index.html.twig', [
+            'authors' => $authors,
+            'page' => 'about',
+        ]);
     }
 }

@@ -22,4 +22,5 @@ return [
     'admin/logout' => ['AdminUserController', 'logout'],
     'admin/articles' => ['ArticleController', 'index'],
     'admin/article/main' => ['ArticleController', 'setMain', ['id', 'filter']],
+    'admin/article/edit' => ['ArticleController', 'edit', ['id']],
 ];

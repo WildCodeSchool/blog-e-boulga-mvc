@@ -18,27 +18,21 @@ class HomeController extends AbstractController
 
         foreach ($allArticles as $key => $article) {
             if ($article->getId() === $mainArticle->getId()) {
-                array_splice($allArticles, $key, 1);
-            }
-            if ($article->getCategoryId() === $mainArticle->getCategoryId()) {
-                $relatedArticles[] = $article;
-            }
-        }
-
-        foreach ($relatedArticles as $key => $article) {
-            if ($article->getId() === $mainArticle->getId()) {
-                array_splice($relatedArticles, $key, 1);
+                unset($allArticles[$key]);
+            } elseif ($article->getCategoryId() === $mainArticle->getCategoryId()) {
+                if (count($relatedArticles) < 2) {
+                    $relatedArticles[] = $article;
+                    unset($allArticles[$key]);
+                }
             }
         }
 
-        if (count($relatedArticles) <= 0) {
-            $relatedArticles = array_slice($allArticles, 0, 2);
-        } elseif (count($relatedArticles) <= 1) {
+        if (count($relatedArticles) < 1) {
+            $relatedArticles = [$allArticles[0], $allArticles[1]];
+            unset($allArticles[0], $allArticles[1]);
+        } elseif (count($relatedArticles) < 2) {
             $relatedArticles[] = $allArticles[0];
-            $allArticles = array_slice($allArticles, 1);
-        } elseif (count($relatedArticles) <= 2) {
-            $relatedArticles[] = $allArticles[0];
-            $relatedArticles[] = $allArticles[1];
+            unset($allArticles[0]);
         }
 
         return $this->twig->render('Home/index.html.twig', [

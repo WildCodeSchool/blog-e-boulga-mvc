@@ -36,6 +36,9 @@
             <property name="maxFields" value="20"/>
         </properties>
     </rule>
+    <rule ref="rulesets/codesize.xml" >
+        <exclude name="TooManyFields" />
+    </rule>
 
     <exclude-pattern>src/Migrations</exclude-pattern>
 </ruleset>

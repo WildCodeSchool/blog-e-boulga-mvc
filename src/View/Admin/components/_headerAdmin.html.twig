@@ -2,9 +2,6 @@
     <a id="aHeaderLogo" href="/">
         <img id="logo_header" src="/assets/images/components/logo-black.svg" alt="logo du site Blog-e-Boulga">
     </a>
-    <ul class="nav admin-header ">
-            <li><a href="/admin/articles">Articles</a></li>
-            <li><a href="/admin/categories">Catégories</a></li>
     {% if page != 'login' %}
         <ul class="list_nav_header">
             <li><a href="/admin/articles" id="{{ page == 'articles' ? 'thisPage' : '' }}">Articles</a></li>

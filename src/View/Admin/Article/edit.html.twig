@@ -1,6 +1,8 @@
 {% extends 'Admin/adminLayout.html.twig' %}
 {% block title %} Update article {% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/adminArticle.css">
+{% endblock %}
 {% block content %}
 <main>
     <h1>Edition de l'article : {{articleUpdate.articleTitle}} </h1>

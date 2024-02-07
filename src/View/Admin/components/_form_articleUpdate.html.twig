@@ -1,15 +1,20 @@
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/admin/adminArticleUpdate.css">{% endblock %} 
 {% block content %}
-	<form action="" method="post" enctype="multipart/form-data">
+    {% if errors is defined %}
+    {% for error in errors %}
+        <p class="error">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
+    <form class="formArticle" action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="imgSrc" value="{{articleUpdate.imgSrc}}"/>
-		<div class="articleTitle" "shortInput">
+		<div class="articleTitle">
 			<label for="title">Titre de votre article
 			</label>
 			<input type="text" name="title" id="title" required value="{{articleUpdate.articleTitle}}"/>
 		</div>
 		<div>
-			<label for="hometitle">"Titre de votre article depuis la home"</label>
-			<input type="text" name="hometitle" id="hometitle" required value="{{articleUpdate.homeTitle}}"/>
+			<label for="hometitle">Titre de votre article depuis la home</label>
+			<input type="text" name="homeTitle" id="hometitle" required value="{{articleUpdate.homeTitle}}"/>
 		</div>
 		<div>
 			<label for="description">Description de votre article
@@ -28,7 +33,7 @@
 		</div>
 		<div>
 			<label for="homepreview">Courte description de votre article pour la home</label>
-			<textarea id="homepreview" rows="10" name="homepreview" required>{{articleUpdate.homepreview}}</textarea>
+			<textarea id="homepreview" rows="10" name="homePreview" required>{{articleUpdate.homepreview}}</textarea>
 		</div>
 		<div class="blockSelect">
             <div class="blockCategory">
@@ -70,20 +75,34 @@
             <div class="imgPreview">
                 <img id="preview"/>
             </div>
-    
+
         </div>
-		
+
         <div class="blockImage">
             <label for="actualImg">Image actuelle</label>
             <img class="actualImg" src="/{{articleUpdate.imgSrc}}">
         </div>
 	</div>
-	<div class="buttons">
-		<input id="validate" type="submit" value="Valider">
-        <a id="cancel" href="/admin/articles/">Annuler</a>
-    </div>
-	
+        <div class="buttons">
+            <div>
+                <input class="formValidate" type="button" value="Valider">
+            </div>
+            <section class="modalMain">
+                <div class="modalMainContent">
+                    <p class="pConfirmation"></p>
+                    <div class="modalMainButtons">
+                        <input type="submit" id="validateForm" value="Confirmer" class="globalButton modalMainButton"/>
+                        <button type="button" class="globalButton modalNoButton" id="cancelForm">Annuler</button>
+                    </div>
+                </div>
+            </section>
+            <button type="button" class="formCancel">Annuler</button>
+        </div>
+
 </form>
 {% endblock %}
 
-{% block javascript %}<script> src=/assets/js/admin/updateForm.js </script> {% endblock %}
+{% block javascript %}
+<script src="/assets/js/admin/updateForm.js"></script>
+<script src="/assets/js/admin/adminFormArticle.js"></script>
+{% endblock %}

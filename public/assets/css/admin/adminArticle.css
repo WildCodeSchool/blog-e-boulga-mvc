@@ -1,26 +1,166 @@
 main {
     min-width: 30rem;
     margin: 0 auto;
-    max-width: 60rem;
-    width: auto;
+    max-width: 70rem;
+    width: auto; 
+}
+
+h1 {
+    margin-top: 30px;
+}
+
+form {
+    font-weight: bold;
+    font-family: 'Titillium Web', sans-serif;
+    margin-top: 30px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    height: 1500px;   
+}
+
+.littleInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+}
+
+#title {
+    margin-bottom: 1rem;
+    border: 1px solid var(--admin-color );
+    padding: 0.5rem;
+    text-transform: capitalize;
+}
+
+#hometitle {
+    border: 1px solid var(--admin-color);
+    padding: 0.5rem;
+}
+
+input:focus{
+    outline: 5px solid var(--admin-color);
+    font-weight: bold;
+}
+
+textarea:focus{
+    border: 5px solid var(--admin-color);
+    font-weight: bold;
+}
+
+textarea {
+    margin-bottom: 1rem;
+    border: 1px solid var(--admin-color );
+    outline: none;
+    padding: 0.5rem;
+}
+
+.blockCategory, .blockAuthor, .blockStatus {
+    width: 300px;
+    justify-content: space-around;
 }
 
 div{
     display: flex;
+    flex-direction: column;  
+}
+
+.blockSelect{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.blockImage, .blockNewImage {
+    width: 300px;
+    height: 179px;
+    overflow: hidden;
+}
+
+.inputChoice {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 800px;
+    gap: 3.8rem;
+}
+
+.inputChoice label {
+    margin-top: 2px;
+}
+
+.fileSelection {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 400px;
+    gap: 1rem;
+}
+
+.labelImage {
+    display: flex;
+    flex-direction: column;
+    background-color: #149b1b;
+    color: white;
+    text-align: center;
+    width: 20rem;
+    height: 70px;
+    border-radius: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    padding-top: 20px;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.8);
+}
+
+.labelImage:hover {
+    background-color:green;
+}
+
+.labelImage:active {
+    background-color: #149b1b;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
+}
+
+#imageUpload {
+    display: none;
+    cursor: pointer;
+}
+
+#preview {
+    width: 300px;
+    height: 187px;
+}
+
+.blockUploadImg {
+    margin-top: 50px;
+    height: 250px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.blockImage {
+    object-fit: cover;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 50px;
 }
 
 #validate{
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: bold;
     background: green;
     margin: 0.5rem;
     width: 10rem;
     height: 2.5rem;
     border-radius: 10px;
-    color: var(--our-black);
+    color: whitesmoke;
     display: flex;
     justify-content: center;
     align-self: center;
@@ -28,24 +168,36 @@ div{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+#validate:hover{
+    background: #149b1b;
+}
+
+#validate:active{
+    background: green;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
 #cancel{
+    font-size: 1.3rem;
+    font-weight: bold;
     background: red;
     margin: 0.5rem;
     width: 10rem;
     height: 2.5rem;
     border-radius: 10px;
-    color: var(--our-black);
+    color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.error {
-    color: red;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+#cancel:hover{
+    background: #f52828;
+}
+
+#cancel:active{
+    background: red;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }

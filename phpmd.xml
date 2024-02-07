@@ -13,13 +13,13 @@
     <rule ref="rulesets/codesize.xml" >
         <exclude name="TooManyFields" />
     </rule>
-    <rule ref="rulesets/controversial.xml" >
-        <exclude name="Superglobals" />
-    </rule>
     <rule ref="rulesets/codesize.xml/TooManyFields">
         <properties>
             <property name="maxFields" value="20"/>
         </properties>
+    </rule>
+    <rule ref="rulesets/controversial.xml" >
+        <exclude name="Superglobals" />
     </rule>
     <rule ref="rulesets/design.xml" >
         <exclude name="CouplingBetweenObjects" />

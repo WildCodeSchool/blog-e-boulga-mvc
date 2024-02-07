@@ -19,7 +19,19 @@ class ArticleManager extends AbstractManager
     {
         $mainArticle = $this->getMainArticleId();
 
-        $statement = $this->pdo->query('SELECT * FROM article WHERE id = ' . $mainArticle->getIdArticle());
+        $statement = $this->pdo->query("
+            SELECT
+                a.id, a.articleTitle, a.homeTitle, a.imgSrc, a.homePreview,
+                a.shadowColor,a.status, a.releaseDate, a.updatedAt, a.categoryId,
+                a.introduction, a.detail, a.description, a.altImg, a.authorId,
+                u.firstName, u.lastName, c.categoryName
+                    AS articleCategory,
+                a.altImg, a.authorId, u.firstName, u.lastName, c.categoryName AS articleCategory
+            FROM article AS a
+            INNER JOIN category AS c ON a.categoryId = c.id
+            INNER JOIN author AS au ON a.authorId = au.id
+            INNER JOIN user AS u ON a.authorId = u.id
+            WHERE a.id = " . $mainArticle->getIdArticle());
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
 
         return $statement->fetch();
@@ -27,7 +39,20 @@ class ArticleManager extends AbstractManager
 
     public function getAllArticles()
     {
-        $statement = $this->pdo->query('SELECT * FROM article WHERE status = 2 ORDER BY releaseDate DESC LIMIT 15');
+        $statement = $this->pdo->query('
+            SELECT
+                a.id, a.articleTitle, a.homeTitle, a.imgSrc, a.homePreview,
+                a.shadowColor, a.status, a.releaseDate, a.updatedAt, a.categoryId,
+                a.introduction, a.detail, a.description, a.altImg, a.authorId,
+                u.firstName, u.lastName, c.categoryName
+                    AS articleCategory,
+                a.altImg, a.authorId, u.firstName, u.lastName, c.categoryName AS articleCategory
+            FROM article AS a
+            INNER JOIN category AS c ON a.categoryId = c.id
+            INNER JOIN author AS au ON a.authorId = au.id
+            INNER JOIN user AS u ON a.authorId = u.id
+            ORDER BY releaseDate DESC LIMIT 15
+            ');
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
         return $statement->fetchAll();
     }
@@ -71,10 +96,10 @@ class ArticleManager extends AbstractManager
         $statement->bindValue('authorId', $form['author'], PDO::PARAM_INT);
         $statement->bindValue('categoryId', $form['category'], PDO::PARAM_INT);
         $statement->bindValue('articleTitle', $form['title'], PDO::PARAM_STR);
-        $statement->bindValue('homeTitle', $form['hometitle'], PDO::PARAM_STR);
+        $statement->bindValue('homeTitle', $form['homeTitle'], PDO::PARAM_STR);
         $statement->bindValue('imgSrc', $form['imgSrc'], PDO::PARAM_STR);
         $statement->bindValue('altImg', $form['title'], PDO::PARAM_STR);
-        $statement->bindValue('homePreview', $form['homepreview'], PDO::PARAM_STR);
+        $statement->bindValue('homePreview', $form['homePreview'], PDO::PARAM_STR);
         $statement->bindValue('introduction', $form['introduction'], PDO::PARAM_STR);
         $statement->bindValue('detail', $form['detail'], PDO::PARAM_STR);
         $statement->bindValue('description', $form['description'], PDO::PARAM_STR);
@@ -100,8 +125,9 @@ class ArticleManager extends AbstractManager
 
     public function update(array $article, int $id): bool
     {
-        $statement = $this->pdo->prepare('UPDATE `article` 
+        $statement = $this->pdo->prepare('UPDATE `article`
                                         SET `articleTitle` = :articleTitle,
+                                            `homeTitle` = :homeTitle,
                                             `introduction` = :introduction,
                                             `imgSrc` = :imgSrc,
                                             `authorId` = :authorId,
@@ -115,12 +141,13 @@ class ArticleManager extends AbstractManager
                                         WHERE `id`=:id');
         $statement->bindValue('id', $id, PDO::PARAM_INT);
         $statement->bindValue(':articleTitle', $article['title'], PDO::PARAM_STR);
+        $statement->bindValue('homeTitle', $article['homeTitle'], PDO::PARAM_STR);
         $statement->bindValue(':introduction', $article['introduction'], PDO::PARAM_STR);
         $statement->bindValue(':imgSrc', $article['imgSrc'], PDO::PARAM_STR);
         $statement->bindValue(':authorId', $article['author'], PDO::PARAM_INT);
         $statement->bindValue(':categoryId', $article['category'], PDO::PARAM_INT);
         $statement->bindValue(':altImg', $article['title'], PDO::PARAM_STR);
-        $statement->bindValue(':homePreview', $article['homepreview'], PDO::PARAM_STR);
+        $statement->bindValue(':homePreview', $article['homePreview'], PDO::PARAM_STR);
         $statement->bindValue(':detail', $article['detail'], PDO::PARAM_STR);
         $statement->bindValue(':description', $article['description'], PDO::PARAM_STR);
         $statement->bindValue(':status', $article['status'], PDO::PARAM_INT);

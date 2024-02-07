@@ -3,12 +3,12 @@
         <img id="logo_header" src="assets/images/components/logo-black.svg" alt="logo du site Blog-e-Boulga">
     </a>
 
-    <ul id="list_nav_header">
-        <li><a href="/"><img src="assets/images/components/home.svg" alt="icône d'une
+    <ul class="list_nav_header">
+        <li><a id="{{ page == 'home' ? 'thisPage' : ''}}" href="/"><img src="assets/images/components/home.svg" alt="icône d'une
         maison" /> Accueil</a></li>
-        <li><a href="/about_us"><img src="assets/images/components/buste.svg" alt="icône
+        <li><a id="{{ page == 'about' ? 'thisPage' : ''}}" href="/about_us"><img src="assets/images/components/buste.svg" alt="icône
         d'un buste d'homme" /> Qui sommes-nous ?</a></li>
-        <li><a href="/contact_us"><img src="assets/images/components/enveloppe.svg" alt="icône d'une enveloppe" /> Contactez-nous</a></li>
+        <li><a id="{{ page == 'contact' ? 'thisPage' : ''}}" href="/contact_us"><img src="assets/images/components/enveloppe.svg" alt="icône d'une enveloppe" /> Contactez-nous</a></li>
     </ul>
 
     <button id="burger_icon" class="menuToggle menuBurgerGlobal"

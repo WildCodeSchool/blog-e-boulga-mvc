@@ -25,8 +25,8 @@ class ArticleController extends AbstractController implements UploadFile
             $errorMsg = 'Aucun article ne correspond à votre recherche';
             $articles =
                 $articleStatus != 'error' ?
-                $articleManager->selectByConditions('status', $articleStatus) :
-                ['error' => $errorMsg];
+                    $articleManager->selectByConditions('status', $articleStatus) :
+                    ['error' => $errorMsg];
         } else {
             $articles = $articleManager->selectAll();
         }
@@ -80,15 +80,19 @@ class ArticleController extends AbstractController implements UploadFile
         $categories = $categoryManager->getAllCategory();
 
         if ($_POST) {
-            $errors = $this->checkArticleForm($_POST, $_FILES);
+            $errors = [];
+            $this->checkArticleForm($_POST, $errors);
+            $this->checkUploadFile($_FILES, $errors);
 
             if (empty($errors)) {
                 $newArticle = $_POST;
-                $imageArticle = $this->uploadFile();
-                $newArticle['imgSrc'] = $imageArticle;
-                (new ArticleManager())->createArticle($newArticle);
-                header('Location: /admin/articles');
-                exit();
+                $imageArticle = $this->uploadFile($errors);
+                if (empty($errors)) {
+                    $newArticle['imgSrc'] = $imageArticle;
+                    (new ArticleManager())->createArticle($newArticle);
+                    header('Location: /admin/articles');
+                    exit();
+                }
             }
         }
         return $this->twig->render('Admin/Article/add.html.twig', [
@@ -98,23 +102,24 @@ class ArticleController extends AbstractController implements UploadFile
         ]);
     }
 
-    public function checkArticleForm(array $form, array $file): array
+    private function checkArticleForm(array $form, array &$errors): void
     {
-        $error = [];
         foreach ($form as $key => $item) {
             if (empty($item)) {
-                $error[] = "Le champ " . $key . " n'est pas rensigné";
+                $errors[] = "Le champ " . $key . " n'est pas rensigné";
             }
         }
-        if (empty($file['name'])) {
-            $error[] = 'No file found';
-        }
-        return $error;
     }
 
-    public function uploadFile(): string
+    private function checkUploadFile(array $file, array &$errors): void
     {
-        $errors = [];
+        if (empty($file['imageUpload']['name'])) {
+            $errors[] = 'No file found';
+        }
+    }
+
+    public function uploadFile(array &$errors): string
+    {
 
         $image = $_FILES['imageUpload'];
 
@@ -134,7 +139,6 @@ class ArticleController extends AbstractController implements UploadFile
         }
         $uploaded = [];
         $failed = [];
-
         if (empty($errors)) {
             $fileNameNew = uniqid('', true) . '.' . $extension;
             $fileDestination = $uploadDir . $fileNameNew;
@@ -189,22 +193,30 @@ class ArticleController extends AbstractController implements UploadFile
 
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->getAllCategory();
+        $errors = [];
 
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $articleUpdate = array_map('trim', $_POST);
-            if ($_FILES['imageUpload']['error'] === 0) {
-                $newImageArticle = $this->uploadFile();
-                $articleUpdate['imgSrc'] = $newImageArticle;
+            $this->checkArticleForm($articleUpdate, $errors);
+
+            if (empty($errors) && $_FILES['imageUpload']['error'] === 0) {
+                $newImageArticle = $this->uploadFile($errors);
+                if (empty($errors)) {
+                    $articleUpdate['imgSrc'] = $newImageArticle;
+                }
             }
             //Update the article
-            $articleManager->update($articleUpdate, $id);
+            if (empty($errors)) {
+                $articleManager->update($articleUpdate, $id);
 
-            header('Location: edit?id=' . $id);
-            exit();
+                header('Location: edit?id=' . $id);
+                exit();
+            }
         }
 
         // Generate the web page
         return $this->twig->render('Admin/Article/edit.html.twig', [
+            'errors' => $errors,
             'articleUpdate' => $articleUpdate,
             'authors' => $authors,
             'categories' => $categories,

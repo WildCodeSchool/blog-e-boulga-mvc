@@ -96,10 +96,10 @@ class ArticleManager extends AbstractManager
         $statement->bindValue('authorId', $form['author'], PDO::PARAM_INT);
         $statement->bindValue('categoryId', $form['category'], PDO::PARAM_INT);
         $statement->bindValue('articleTitle', $form['title'], PDO::PARAM_STR);
-        $statement->bindValue('homeTitle', $form['hometitle'], PDO::PARAM_STR);
+        $statement->bindValue('homeTitle', $form['homeTitle'], PDO::PARAM_STR);
         $statement->bindValue('imgSrc', $form['imgSrc'], PDO::PARAM_STR);
         $statement->bindValue('altImg', $form['title'], PDO::PARAM_STR);
-        $statement->bindValue('homePreview', $form['homepreview'], PDO::PARAM_STR);
+        $statement->bindValue('homePreview', $form['homePreview'], PDO::PARAM_STR);
         $statement->bindValue('introduction', $form['introduction'], PDO::PARAM_STR);
         $statement->bindValue('detail', $form['detail'], PDO::PARAM_STR);
         $statement->bindValue('description', $form['description'], PDO::PARAM_STR);
@@ -125,8 +125,9 @@ class ArticleManager extends AbstractManager
 
     public function update(array $article, int $id): bool
     {
-        $statement = $this->pdo->prepare('UPDATE `article` 
+        $statement = $this->pdo->prepare('UPDATE `article`
                                         SET `articleTitle` = :articleTitle,
+                                            `homeTitle` = :homeTitle,
                                             `introduction` = :introduction,
                                             `imgSrc` = :imgSrc,
                                             `authorId` = :authorId,
@@ -140,12 +141,13 @@ class ArticleManager extends AbstractManager
                                         WHERE `id`=:id');
         $statement->bindValue('id', $id, PDO::PARAM_INT);
         $statement->bindValue(':articleTitle', $article['title'], PDO::PARAM_STR);
+        $statement->bindValue('homeTitle', $article['homeTitle'], PDO::PARAM_STR);
         $statement->bindValue(':introduction', $article['introduction'], PDO::PARAM_STR);
         $statement->bindValue(':imgSrc', $article['imgSrc'], PDO::PARAM_STR);
         $statement->bindValue(':authorId', $article['author'], PDO::PARAM_INT);
         $statement->bindValue(':categoryId', $article['category'], PDO::PARAM_INT);
         $statement->bindValue(':altImg', $article['title'], PDO::PARAM_STR);
-        $statement->bindValue(':homePreview', $article['homepreview'], PDO::PARAM_STR);
+        $statement->bindValue(':homePreview', $article['homePreview'], PDO::PARAM_STR);
         $statement->bindValue(':detail', $article['detail'], PDO::PARAM_STR);
         $statement->bindValue(':description', $article['description'], PDO::PARAM_STR);
         $statement->bindValue(':status', $article['status'], PDO::PARAM_INT);

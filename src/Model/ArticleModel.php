@@ -2,6 +2,13 @@
 
 namespace App\Model;
 
+/**
+
+This will suppress all the PMD warnings in
+this class.
+ *
+ * @SuppressWarnings(PHPMD)
+ */
 class ArticleModel
 {
     private int $id;

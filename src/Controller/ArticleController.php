@@ -169,7 +169,7 @@ class ArticleController extends AbstractController implements UploadFile
         exit();
     }
 
-    private function checkStatus(string $get)
+    private function checkStatus(string $get): string
     {
         return match ($get) {
             'archived' => '3',

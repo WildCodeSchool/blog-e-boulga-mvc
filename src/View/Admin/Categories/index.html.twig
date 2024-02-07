@@ -1,0 +1,47 @@
+{% extends 'Admin/adminLayout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/adminCategories.css">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>Gestion des catégories</h1>
+        <h2 href="">Créer une nouvelle catégorie</h2>
+
+        <form class="creationForm" action="" method="post">
+            <div class="formGroup">
+                <input type="text" id="categoryName" name="categoryName" placeholder="Nouveautés">
+            </div>
+            <button type="submit" class="createButton">Créer</button>
+        </form>
+
+        <p class="error">{{ error ?? '' }}</p>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td>{{ category.categoryName }}</td>
+                                <td>
+                                    <form action="/admin/categories/delete" method="post">
+                                        <input type="hidden" name="categoryId" value="{{ category.id }}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -2,11 +2,10 @@
     <a id="aHeaderLogo" href="/">
         <img id="logo_header" src="/assets/images/components/logo-black.svg" alt="logo du site Blog-e-Boulga">
     </a>
-
     {% if page != 'login' %}
         <ul class="list_nav_header">
-            <li><a href="/admin/articles" id="{{ page == 'articles' ? 'thisPage' : ''}}">Articles</a></li>
-            <li><a href="#">Utilisateurs</a></li>
+            <li><a href="/admin/articles" id="{{ page == 'articles' ? 'thisPage' : '' }}">Articles</a></li>
+            <li><a href="/admin/categories" id="{{ page == 'categories' ? 'thisPage' : '' }}">Catégories</a></li>
             <li><a href="/admin/logout">Déconnexion</a></li>
         </ul>
 
@@ -29,7 +28,7 @@
         <div id="menu-mainmenu">
             <ul class="nav admin-header ">
                 <li><a href="/admin/articles">Articles</a></li>
-                <li><a href="#">Utilisateurs</a></li>
+                <li><a href="/admin/categories">Catégories</a></li>
                 <li><a href="/admin/logout">Déconnexion</a></li>
             </ul>
         </div>

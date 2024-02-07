@@ -9,13 +9,18 @@
 		<section class="hotNews_block">
 			<article class="card bigNews">
 				<a href="/article?id={{mainArticle.id}}">
-					<pre></pre>
 					<div class="title_bigNews title_news">
-						<img class="big" src="{{ mainArticle.imgSrc }}" alt="{{ mainArticle.altImg}}">
+                        <p class="categoryBox">{{ mainArticle.articleCategory }}</p>
+                        <img class="big" src="{{ mainArticle.imgSrc }}" alt="{{ mainArticle.altImg}}">
 						<div class="articleTeasing">
 							<h1>{{ mainArticle.homeTitle }}</h1>
-							<p>{{ mainArticle.homePreview }}</p>
-						</div>
+							<p>
+                                {{ mainArticle.homePreview }}
+                                <br>
+                                <br>
+                                <span class="authorName">Écrit par {{ mainArticle.firstName }} {{ mainArticle.lastName }}</span>
+                            </p>
+                        </div>
 					</div>
 				</a>
 			</article>
@@ -24,6 +29,7 @@
                 {% for relatedArticle in relatedArticles %}
                     <a href="/article?id={{ relatedArticle.id }}">
                         <div class="card1">
+                            <p class="categoryBox">{{ relatedArticle.articleCategory }}</p>
                             <img class="small" src="{{ relatedArticle.imgSrc }}" alt="{{ relatedArticle.altImg }}">
                             <h2>{{ relatedArticle.homeTitle }}</h2>
                         </div>
@@ -39,6 +45,7 @@
                     <article class="article_block">
                         <div class="card_container">
                             <div class="card2">
+                                <p class="categoryBox">{{ allArticle.articleCategory }}</p>
                                 <img class="medium" src="{{ allArticle.imgSrc }}" alt="{{ allArticle.altImg }}">
                             </div>
                         </div>
@@ -46,7 +53,8 @@
                             <h3>
                                 {{ allArticle.homeTitle }}
                             </h3>
-                            <p>{{ allArticle.description }}</p>
+                            <p class="authorName">Écrit par {{ allArticle.firstName }} {{ allArticle.lastName }}</p>
+                            <p class="articleDescription">{{ allArticle.description }}</p>
                         </div>
                     </article>
                 </a>

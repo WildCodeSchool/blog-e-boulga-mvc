@@ -231,6 +231,22 @@ main {
     margin-bottom: 88px;
 }
 
+.categoryBox {
+    position: absolute;
+    padding: 10px 20px;
+    background-color: rgb(136, 0, 68, .9);
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 0px 10px 0px 10px;
+    color: #d9d9d9;
+    z-index: 1;
+}
+
+.authorName {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
 /* animation scroll artlicle*/
 
 @media (prefers-recuced-motion: no-preference) {

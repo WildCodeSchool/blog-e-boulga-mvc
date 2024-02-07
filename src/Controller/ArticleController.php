@@ -25,8 +25,8 @@ class ArticleController extends AbstractController implements UploadFile
             $errorMsg = 'Aucun article ne correspond à votre recherche';
             $articles =
                 $articleStatus != 'error' ?
-                $articleManager->selectByConditions('status', $articleStatus) :
-                ['error' => $errorMsg];
+                    $articleManager->selectByConditions('status', $articleStatus) :
+                    ['error' => $errorMsg];
         } else {
             $articles = $articleManager->selectAll();
         }
@@ -87,7 +87,7 @@ class ArticleController extends AbstractController implements UploadFile
             if (empty($errors)) {
                 $newArticle = $_POST;
                 $imageArticle = $this->uploadFile($errors);
-                if(empty($errors)) {
+                if (empty($errors)) {
                     $newArticle['imgSrc'] = $imageArticle;
                     (new ArticleManager())->createArticle($newArticle);
                     header('Location: /admin/articles');
@@ -102,13 +102,15 @@ class ArticleController extends AbstractController implements UploadFile
         ]);
     }
 
-    private function checkArticleForm(array $form, array &$errors): void    {
+    private function checkArticleForm(array $form, array &$errors): void
+    {
         foreach ($form as $key => $item) {
             if (empty($item)) {
                 $errors[] = "Le champ " . $key . " n'est pas rensigné";
             }
         }
     }
+
     private function checkUploadFile(array $file, array &$errors): void
     {
         if (empty($file['imageUpload']['name'])) {
@@ -192,26 +194,21 @@ class ArticleController extends AbstractController implements UploadFile
 
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->getAllCategory();
+        $errors = [];
 
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+            $articleUpdate = array_map('trim', $_POST);
+            $this->checkArticleForm($articleUpdate, $errors);
 
-            $errors = [];
-            $this->checkArticleForm($_POST, $errors);
-
-            if (empty($errors)) {
-                $articleUpdate = array_map('trim', $_POST);
-                if ($_FILES['imageUpload']['error'] === 0){
-                    $this->checkUploadFile($_FILES, $errors);
-                    if(empty($errors)) {
-                        $newImageArticle = $this->uploadFile($errors);
-                        if (empty($errors)) {
-                            $articleUpdate['imgSrc'] = $newImageArticle;
-                        }
-                        else
-                            goto end;
-                    }
+            if (empty($errors) && $_FILES['imageUpload']['error'] === 0) {
+                //$this->checkUploadFile($_FILES, $errors);
+                $newImageArticle = $this->uploadFile($errors);
+                if (empty($errors)) {
+                    $articleUpdate['imgSrc'] = $newImageArticle;
                 }
-                //Update the article
+            }
+            //Update the article
+            if (empty($errors)) {
                 $articleManager->update($articleUpdate, $id);
 
                 header('Location: edit?id=' . $id);
@@ -220,9 +217,8 @@ class ArticleController extends AbstractController implements UploadFile
         }
 
         // Generate the web page
-        end :
         return $this->twig->render('Admin/Article/edit.html.twig', [
-            'errors' => $errors ?? null,
+            'errors' => $errors,
             'articleUpdate' => $articleUpdate,
             'authors' => $authors,
             'categories' => $categories,

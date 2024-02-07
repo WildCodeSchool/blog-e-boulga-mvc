@@ -128,7 +128,6 @@ class ArticleController extends AbstractController implements UploadFile
 
         $uploadDir = 'assets/images/articles/';
         $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        var_dump($extension);
         $typeOfFile = ['jpg', 'png', 'webp'];
         $maxFileSize = 2000000;
 
@@ -201,7 +200,6 @@ class ArticleController extends AbstractController implements UploadFile
             $this->checkArticleForm($articleUpdate, $errors);
 
             if (empty($errors) && $_FILES['imageUpload']['error'] === 0) {
-                //$this->checkUploadFile($_FILES, $errors);
                 $newImageArticle = $this->uploadFile($errors);
                 if (empty($errors)) {
                     $articleUpdate['imgSrc'] = $newImageArticle;

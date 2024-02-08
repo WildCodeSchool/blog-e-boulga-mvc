@@ -58,8 +58,18 @@
         </div>
         </div>
         <div>
-            <label for="imageUpload">Télécharger votre image d'article</label>
-            <input type="file" name="imageUpload" id="imageUpload" required/>
+            <div class="blockUploadImg">
+                <div class="inputChoice">
+                    <div class="fileSelection">
+                        <label for="imageUpload" class="labelImage">Télécharger votre image d'article</label>
+                        <input type="file" name="imageUpload" id="imageUpload" onchange="previewImage(event)" value="Sélectionner un fichier"/>
+                    </div>
+                    <div class="blockNewImage">
+                        <label for="newImg">Aperçu de votre image</label>
+                        <img id="preview"/>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="buttons">
         <div>
@@ -82,4 +92,5 @@
 
 {% block javascript %}
 <script src="/assets/js/admin/adminFormArticle.js"></script>
+<script src="/assets/js/admin/updateForm.js"></script>
 {% endblock %}

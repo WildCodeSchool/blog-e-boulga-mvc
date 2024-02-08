@@ -1,6 +1,7 @@
 * {
     --main-color: #FFA458;
     --color-hover: #793700;
+    --admin-color: #9EA7D8;
     --our-black: rgb(11, 11, 11);
     --header-height-desktop: 8rem;
     --footer-height-desktop: 195px;
@@ -10,4 +11,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Titillium Web', sans-serif;
+}
+
+#thisPage {
+    border-bottom: 1px solid var(--our-black);
 }

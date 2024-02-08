@@ -1,0 +1,68 @@
+{% extends 'Admin/adminLayout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/adminArticles.css">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <section class="filterButtons">
+            <a class="filterButton {{ status == null ? 'filtered' : '' }}" href="/admin/articles/">Tous les articles</a>
+            <a class="filterButton {{ status == 'published' ? 'filtered' : '' }}" href="/admin/articles?status=published">Articles publiés</a>
+            <a class="filterButton {{ status == 'archived' ? 'filtered' : '' }}" href="/admin/articles?status=archived">Articles archivés</a>
+            <a class="filterButton {{ status == 'draft' ? 'filtered' : '' }}" href="/admin/articles?status=draft">Brouillons</a>
+        </section>
+        <div class="plusDiv">
+            <a href="/admin/article/add"><img class="add" src="/assets/images/components/plus.svg" alt="Ajoutez un article" /></a>
+        </div>
+        <section class="articles">
+            {{ articles.error ?? '' }}
+
+            {% for article in articles %}
+                {% set status =
+                    article.status == 1 ? 'Brouillon' :
+                    article.status == 2 ? 'Publié' :
+                    article.status == 3 ? 'Archivé' :
+                    'Error: Unknown status'
+                %}
+                {% set statusClass =
+                    article.status == 1 ? 'draft' :
+                    article.status == 2 ? 'live' :
+                    article.status == 3 ? 'archived' :
+                    'Error: Unknown status'
+                %}
+                <div class="article">
+                    <img src="/{{ article.imgSrc }}" alt="{{ article.altImg }}">
+                    <div>
+                        <p>{{ article.homeTitle }}</p>
+                        <small class="status {{ statusClass }}">
+                            {{ status }}
+                        </small>
+                    </div>
+                    <div class="buttons">
+                        {% if article.status == 2 %}
+                            <img data-status="{{ article.status }}" data-id="{{ article.id }}" data-title="{{ article.homeTitle }}" class="mainButton {{ article.id == mainArticleId ? 'disabled'}}" src="/assets/images/components/crown-{{ article.id == mainArticleId ? 'green' : 'gray'}}.svg" alt="icone d'un oeil ouvert" />
+                        {% endif %}
+                        <a class="seeButton articlesButton {{ article.status != 2 ? 'marged' }}" href="/article?id={{ article.id }}"><img src="/assets/images/components/mdi_eye-outline.svg" alt="icone d'un oeil ouvert" class="svg-icon" /></a>
+                        <a class="editButton articlesButton" href="/admin/article/edit?id={{ article.id }}"><img src="/assets/images/components/bx_edit.svg" alt="icone d'un crayon dans un bloc" class="svg-icon" /></a>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+        <section class="modalMain">
+            <div class="modalMainContent">
+                <p class="pConfirmation">Êtes-vous sûr de vouloir mettre cet article en avant ?</p>
+                <p class="articleTitle"></p>
+                <div class="modalMainButtons">
+                    <a class="globalButton modalMainButton" href="">Oui</a>
+                    <button class="globalButton modalNoButton">Retour</button>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascript %}
+    <script src="/assets/js/admin/adminArticles.js"></script>
+{% endblock %}

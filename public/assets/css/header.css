@@ -9,6 +9,10 @@ header {
     width: 100%;
 }
 
+.admin-header {
+    background-color: var(--admin-color) !important;
+}
+
 #aHeaderLogo {
     display: flex;
     align-items: center;
@@ -28,22 +32,22 @@ header {
     cursor: pointer;
 }
 
-#list_nav_header a {
+.list_nav_header a {
     color: var(--our-black);
     text-decoration: none;
 }
 
-#list_nav_header a:hover {
+.list_nav_header a:hover {
     cursor: pointer;
     color: var(--color-hover);
     text-decoration: none;
 }
 
-#list_nav_header {
+.list_nav_header {
     font-weight: 600;
     font-size: 1.25rem;
     padding: 0;
-    width: 40rem;
+    width: 35rem;
     list-style-type: none;
     display: flex;
     justify-content: space-between;
@@ -62,12 +66,16 @@ header {
     display: none;
 }
 
+.loginTitle {
+    font-size: 1.2rem;
+}
+
 /*
 Gestion des media querries
 */
 
 @media screen and (max-width: 1270px) {
-    #list_nav_header {
+    .list_nav_header {
         width: 35rem;
     }
 }
@@ -80,7 +88,7 @@ Gestion des media querries
         align-content: center;
     }
 
-    #list_nav_header {
+    .list_nav_header {
         display: none;
     }
 
@@ -187,7 +195,6 @@ Gestion des media querries
     height: 6rem;
 }
 .nav a:hover {
-    background-color: var(--color-hover);
     color: white;
 }
 

@@ -1,0 +1,12 @@
+{% extends 'Admin/adminLayout.html.twig' %}
+{% block title %} Add article {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/adminArticle.css">
+{% endblock %}
+{% block content %}
+<main>
+    <h1>Ajouter un article</h1>
+    {% include 'Admin/components/_form_article.html.twig' %}
+</main>
+
+{% endblock %}

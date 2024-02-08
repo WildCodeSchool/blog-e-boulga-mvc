@@ -2,54 +2,63 @@
 {% block stylesheet %}
 	<link rel="stylesheet" href="/assets/css/home.css">
 {% endblock %}
+{% set mainId = mainArticle.id %}
+
 {% block content %}
-	<main>
+    <main>
 		<section class="hotNews_block">
 			<article class="card bigNews">
 				<a href="/article?id={{mainArticle.id}}">
-					<pre></pre>
 					<div class="title_bigNews title_news">
-						<img class="big" src="{{ mainArticle.imgSrc }}" alt="{{ mainArticle.altImg}}">
+                        <p class="categoryBox">{{ mainArticle.articleCategory }}</p>
+                        <img class="big" src="{{ mainArticle.imgSrc }}" alt="{{ mainArticle.altImg}}">
 						<div class="articleTeasing">
 							<h1>{{ mainArticle.homeTitle }}</h1>
-							<p>{{ mainArticle.homePreview }}</p>
-						</div>
+							<p>
+                                {{ mainArticle.homePreview }}
+                                <br>
+                                <br>
+                                <span class="authorName">Écrit par {{ mainArticle.firstName }} {{ mainArticle.lastName }}</span>
+                            </p>
+                        </div>
 					</div>
 				</a>
 			</article>
 
 			<article class="card middle_news">
-				{% for relatedArticle in relatedArticles %}
-					<a href="/article?id={{relatedArticle.id }}">
-						<div class="card1">
-							<img class="small" src="{{ relatedArticle.imgSrc }}" alt="{{ relatedArticle.altImg }}">
-							<h2>{{ relatedArticle.homeTitle }}</h2>
-						</div>
-					</a>
-				{% endfor  %}
+                {% for relatedArticle in relatedArticles %}
+                    <a href="/article?id={{ relatedArticle.id }}">
+                        <div class="card1">
+                            <p class="categoryBox">{{ relatedArticle.articleCategory }}</p>
+                            <img class="small" src="{{ relatedArticle.imgSrc }}" alt="{{ relatedArticle.altImg }}">
+                            <h2>{{ relatedArticle.homeTitle }}</h2>
+                        </div>
+                    </a>
+                {% endfor %}
 			</article>
 		</section>
 		<span class="separation_bar"><img class="separation" src="/assets/images/components/separation.svg" alt="Barre de séparation"></span>
 
 		<section class="article_list">
-			{% for allArticle in allArticles %}
-				<a href="/article?id={{ allArticle.id }}">
-					<article class="article_block">
-						<div class="card_container">
-							<div class="card2">
-								<img class="medium" src="{{ allArticle.imgSrc }}" alt="{{ allArticle.altImg }}">
-							</div>
-						</div>
-						<div class="little_article">
-							<h3>
-								{{ allArticle.homeTitle }}
-							</h3>
-							<p>{{ allArticle.description }}
-							</p>
-						</div>
-					</article>
-				</a>
-			{% endfor %}
+            {% for allArticle in allArticles %}
+                <a href="/article?id={{ allArticle.id }}">
+                    <article class="article_block">
+                        <div class="card_container">
+                            <div class="card2">
+                                <p class="categoryBox">{{ allArticle.articleCategory }}</p>
+                                <img class="medium" src="{{ allArticle.imgSrc }}" alt="{{ allArticle.altImg }}">
+                            </div>
+                        </div>
+                        <div class="little_article">
+                            <h3>
+                                {{ allArticle.homeTitle }}
+                            </h3>
+                            <p class="authorName">Écrit par {{ allArticle.firstName }} {{ allArticle.lastName }}</p>
+                            <p class="articleDescription">{{ allArticle.description }}</p>
+                        </div>
+                    </article>
+                </a>
+            {% endfor %}
 		</section>
 	</main>
 {% endblock %}

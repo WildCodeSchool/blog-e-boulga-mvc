@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block javascript %}
+{% if success is not defined %}
 <script src="assets/js/contact.js"></script>
+{% endif %}
 {% endblock %}
 
 {% block content %}

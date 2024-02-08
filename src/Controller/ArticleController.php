@@ -79,13 +79,13 @@ class ArticleController extends AbstractController implements UploadFile
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->getAllCategory();
 
-        if ($_POST) {
+        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $errors = [];
-            $this->checkArticleForm($_POST, $errors);
-            $this->checkUploadFile($_FILES, $errors);
+            $newArticle = array_map('trim', $_POST);
+            $this->checkArticleForm($newArticle, $errors);
+            $this->checkUploadFile($newArticle, $errors);
 
             if (empty($errors)) {
-                $newArticle = array_map('trim', $_POST);
                 $imageArticle = $this->uploadFile($errors);
                 if (empty($errors)) {
                     $newArticle['imgSrc'] = $imageArticle;

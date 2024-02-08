@@ -151,44 +151,6 @@ div{
     padding-bottom: 50px;
 }
 
-#validate{
-    background: green;
-    margin: 0.5rem;
-    width: 10rem;
-    height: 2.5rem;
-    border-radius: 10px;
-    color: var(--our-black);
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    text-decoration: none;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border: none;
-}
-
-#validate:hover{
-    background: #149b1b;
-}
-
-#validate:active{
-    background: green;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-}
-
-#cancel{
-    background: red;
-    margin: 0.5rem;
-    width: 10rem;
-    height: 2.5rem;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border: none;
-}
-
 .modalMainButton {
     background: green;
     cursor: pointer;
@@ -210,12 +172,55 @@ div{
     background: #b30000;
 }
 
+.formValidate{
+    cursor: pointer;
+    background: green;
+    color: whitesmoke;
+    font-weight: bold;
+    margin: 0.5rem;
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    text-decoration: none;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8);
+    border: none;
+}
+
 .formValidate:hover{
     background: #189b18;
 }
 
+.formValidate:active{
+    background: green;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
+}
+
 .formCancel:hover{
     background: #b30000;
+}
+
+.formCancel{
+    background: red;
+    color: whitesmoke;
+    font-weight: bold;
+    margin: 0.5rem;
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8);
+    border: none;
+}
+
+.formCancel:active{
+    background: red;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
 }
 
 .modalMain {
@@ -271,6 +276,11 @@ div{
     border: none;
 }
 
+.modalMainButton:active{
+    background: green;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
+}
+
 .modalNoButton {
     background: #d90000;
     border: none;
@@ -286,11 +296,7 @@ div{
     background: #b30000;
 }
 
-#cancel:hover{
-    background: #f52828;
-}
-
-#cancel:active{
+.modalNoButton:active{
     background: red;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
 }

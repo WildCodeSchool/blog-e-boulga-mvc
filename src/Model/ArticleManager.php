@@ -30,7 +30,7 @@ class ArticleManager extends AbstractManager
             FROM article AS a
             INNER JOIN category AS c ON a.categoryId = c.id
             INNER JOIN author AS au ON a.authorId = au.id
-            INNER JOIN user AS u ON a.authorId = u.id
+            INNER JOIN user AS u ON au.userId = u.id
             WHERE a.id = " . $mainArticle->getIdArticle());
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);
 
@@ -50,7 +50,7 @@ class ArticleManager extends AbstractManager
             FROM article AS a
             INNER JOIN category AS c ON a.categoryId = c.id
             INNER JOIN author AS au ON a.authorId = au.id
-            INNER JOIN user AS u ON a.authorId = u.id
+            INNER JOIN user AS u ON au.userId = u.id
             ORDER BY releaseDate DESC LIMIT 15
             ');
         $statement->setFetchMode(PDO::FETCH_CLASS, static::CLASSNAME);

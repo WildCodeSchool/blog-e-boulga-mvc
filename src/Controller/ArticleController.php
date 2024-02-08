@@ -83,7 +83,7 @@ class ArticleController extends AbstractController implements UploadFile
             $errors = [];
             $newArticle = array_map('trim', $_POST);
             $this->checkArticleForm($newArticle, $errors);
-            $this->checkUploadFile($newArticle, $errors);
+            $this->checkUploadFile($_FILES, $errors);
 
             if (empty($errors)) {
                 $imageArticle = $this->uploadFile($errors);

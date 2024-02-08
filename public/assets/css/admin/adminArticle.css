@@ -28,7 +28,7 @@ form {
 
 #title {
     margin-bottom: 1rem;
-    border: 1px solid var(--admin-color );
+    border: 1px solid var(--admin-color);
     padding: 0.5rem;
     text-transform: capitalize;
 }
@@ -38,19 +38,19 @@ form {
     padding: 0.5rem;
 }
 
-input:focus{
+input:focus {
     outline: 5px solid var(--admin-color);
     font-weight: bold;
 }
 
-textarea:focus{
+textarea:focus {
     border: 5px solid var(--admin-color);
     font-weight: bold;
 }
 
 textarea {
     margin-bottom: 1rem;
-    border: 1px solid var(--admin-color );
+    border: 1px solid var(--admin-color);
     outline: none;
     padding: 0.5rem;
 }
@@ -60,12 +60,12 @@ textarea {
     justify-content: space-around;
 }
 
-div{
+div {
     display: flex;
     flex-direction: column;
 }
 
-.blockSelect{
+.blockSelect {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -113,7 +113,7 @@ div{
 }
 
 .labelImage:hover {
-    background-color:green;
+    background-color: green;
 }
 
 .labelImage:active {
@@ -172,7 +172,7 @@ div{
     background: #b30000;
 }
 
-.formValidate{
+.formValidate {
     cursor: pointer;
     background: green;
     color: whitesmoke;
@@ -189,20 +189,20 @@ div{
     border: none;
 }
 
-.formValidate:hover{
+.formValidate:hover {
     background: #189b18;
 }
 
-.formValidate:active{
+.formValidate:active {
     background: green;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
 }
 
-.formCancel:hover{
+.formCancel:hover {
     background: #b30000;
 }
 
-.formCancel{
+.formCancel {
     cursor: pointer;
     background: red;
     color: whitesmoke;
@@ -219,14 +219,14 @@ div{
     border: none;
 }
 
-.formCancel:active{
+.formCancel:active {
     background: red;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
 }
 
 .modalMain {
     position: fixed;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
     top: 0;
@@ -277,7 +277,7 @@ div{
     border: none;
 }
 
-.modalMainButton:active{
+.modalMainButton:active {
     background: green;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
 }
@@ -297,11 +297,16 @@ div{
     background: #b30000;
 }
 
-.modalNoButton:active{
+.modalNoButton:active {
     background: red;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
 }
 
-.error{
+
+.error {
     color: red;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

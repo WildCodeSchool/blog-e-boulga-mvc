@@ -8,27 +8,33 @@
     <form action="" method="post" enctype="multipart/form-data">
         <div class="articleTitle">
             <label for="title">Titre de votre article </label>
-            <input type="text" name="title" id="title" required />
+            <input type="text" name="articleTitle" id="title" required value="{%
+                if post is defined %}{{ post.articleTitle }}{% endif %}"/>
         </div>
         <div>
             <label for="hometitle">Titre de votre article depuis la home</label>
-            <input type="text" name="homeTitle" id="hometitle" required />
+            <input type="text" name="homeTitle" id="hometitle" required value="{%
+                if post is defined %}{{ post.homeTitle }}{% endif %}"/>
         </div>
         <div>
             <label for="description">Description de votre article </label>
-            <textarea id="description" rows="5" name="description" required></textarea>
+            <textarea id="description" rows="5" name="description" required>{%
+                if post is defined %}{{ post.description }}{% endif %}</textarea>
         </div>
         <div>
             <label for="introduction">Introduction de votre article </label>
-            <textarea id="introduction" rows="5" name="introduction" required></textarea>
+            <textarea id="introduction" rows="5" name="introduction" required>{%
+                if post is defined %}{{ post.introduction }}{% endif %}</textarea>
         </div>
         <div>
             <label for="detail">Le corps de votre article </label>
-            <textarea id="detail" rows="10" name="detail" required></textarea>
+            <textarea id="detail" rows="10" name="detail" required>{%
+                if post is defined %}{{ post.detail }}{% endif %}</textarea>
         </div>
         <div>
             <label for="homepreview">Courte description de votre article pour la home</label>
-            <textarea id="homepreview" rows="10" name="homePreview" required></textarea>
+            <textarea id="homepreview" rows="10" name="homePreview" required>{%
+                if post is defined %}{{ post.homePreview }}{% endif %}</textarea>
         </div>
         <div class="blockSelect">
             <div class="blockCategory">

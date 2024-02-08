@@ -4,12 +4,8 @@
 {% block content %}
 <main>
     <h1>Edition de l'article : </h1>
-    <h2>{{articleUpdate.articleTitle}}</h3>
+    <h2>{{articleUpdate.articleTitle}}</h2>
     {% include 'Admin/components/_form_articleUpdate.html.twig' %}
 </main>
 
-{% endblock %}
-{% block javascript %}
-    <script src="/assets/js/admin/adminArticles.js"></script>
-    <script src="/assets/js/admin/updateForm.js"></script>
 {% endblock %}

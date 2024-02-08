@@ -203,6 +203,7 @@ div{
 }
 
 .formCancel{
+    cursor: pointer;
     background: red;
     color: whitesmoke;
     font-weight: bold;

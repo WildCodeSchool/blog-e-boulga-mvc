@@ -1,34 +1,20 @@
 {% block content %}
-<<<<<<< HEAD
-	<form action="" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="imgSrc" value="{{articleUpdate.imgSrc}}"/>
-		<div class="littleInput">
-			<div class="articleTitle" "shortInput">
-				<label for="title">Titre de votre article
-				</label>
-				<input type="text" name="title" id="title" required value="{{articleUpdate.articleTitle}}"/>
-			</div>
-			<div>
-				<label for="hometitle">Titre de votre article depuis la home</label>
-				<input type="text" name="hometitle" id="hometitle" required value="{{articleUpdate.homeTitle}}"/>
-			</div>
-=======
-    {% if errors is defined %}
-    {% for error in errors %}
-        <p class="error">{{ error }}</p>
-    {% endfor %}
-    {% endif %}
 
-    <form class="formArticle" action="" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="imgSrc" value="{{articleUpdate.imgSrc}}"/>
+	{% if errors is defined %}
+		{% for error in errors %}
+			<p class="error">{{ error }}</p>
+		{% endfor %}
+	{% endif %}
+	<form class="formArticle" action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="imgSrc" value="{{articleUpdate.imgSrc}}"/>
 		<div class="articleTitle">
 			<label for="title">Titre de votre article</label>
 			<input type="text" name="title" id="title" required value="{{articleUpdate.articleTitle}}"/>
 		</div>
+
 		<div>
 			<label for="hometitle">Titre de votre article depuis la home</label>
 			<input type="text" name="homeTitle" id="hometitle" required value="{{articleUpdate.homeTitle}}"/>
->>>>>>> 6641439077193b08b1e5f3e061f6dafbcc003990
 		</div>
 		<div>
 			<label for="description">Description de votre article
@@ -69,7 +55,7 @@
 							{{ author.firstName }}
 							{{ author
                             .lastName }}</option>
-<<<<<<< HEAD
+
 					{% endfor %}
 				</select>
 			</div>
@@ -86,8 +72,8 @@
 		<div class="blockUploadImg">
 			<div class="inputChoice">
 				<div class="fileSelection">
-					<label for="imageUpload" class="labelImage">Télécharger votre nouvelle image d'article</label>
-					<input type="file" name="imageUpload" id="imageUpload" value="Sélectionner un fichier"/>
+					<label for="imageUpload" class="labelImage">Télécharger votre image d'article</label>
+					<input type="file" name="imageUpload" id="imageUpload" onchange="previewImage(event)" value="Sélectionner un fichier"/>
 				</div>
 				<div class="blockNewImage">
 					<label for="newImg">Aperçu de votre nouvelle image</label>
@@ -97,63 +83,28 @@
 
 			<div class="blockImage">
 				<label for="actualImg">Image actuelle</label>
-				<img class="actualImg" src="/{{articleUpdate.imgSrc}}" alt="L'image n'existe pas dans le fichier !">
+				<img class="actualImg" src="/{{articleUpdate.imgSrc}}">
 			</div>
 		</div>
 		<div class="buttons">
-			<input id="validate" type="submit" value="Valider">
-			<a id="cancel" href="/admin/articles/">Annuler</a>
+			<div>
+				<input class="formValidate" type="button" value="Valider">
+			</div>
+			<section class="modalMain">
+				<div class="modalMainContent">
+					<p class="pConfirmation"></p>
+					<div class="modalMainButtons">
+						<input type="submit" id="validateForm" value="Confirmer" class="globalButton modalMainButton"/>
+						<button type="button" class="globalButton modalNoButton" id="cancelForm">Annuler</button>
+					</div>
+				</div>
+			</section>
+			<button type="button" class="formCancel">Annuler</button>
 		</div>
 	</form>
-=======
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="blockStatus">
-                <label for="status">Choix du statut
-                </label>
-                <select name="status">
-                    <option value="1">Brouillon</option>
-                    <option value="2">Publié</option>
-                    <option value="3">Archivé</option>
-                </select>
-            </div>
-        </div>
-	<div class="blockUploadImg">
-        <div class="inputChoice">
-            <label for="imageUpload">Télécharger votre image d'article</label>
-            <input type="file" name="imageUpload" id="imageUpload" onchange="previewImage(event)"  value = "Sélectionner un fichier"/>
-            <div class="imgPreview">
-                <img id="preview"/>
-            </div>
-
-        </div>
-
-        <div class="blockImage">
-            <label for="actualImg">Image actuelle</label>
-            <img class="actualImg" src="/{{articleUpdate.imgSrc}}">
-        </div>
-	</div>
-        <div class="buttons">
-            <div>
-                <input class="formValidate" type="button" value="Valider">
-            </div>
-            <section class="modalMain">
-                <div class="modalMainContent">
-                    <p class="pConfirmation"></p>
-                    <div class="modalMainButtons">
-                        <input type="submit" id="validateForm" value="Confirmer" class="globalButton modalMainButton"/>
-                        <button type="button" class="globalButton modalNoButton" id="cancelForm">Annuler</button>
-                    </div>
-                </div>
-            </section>
-            <button type="button" class="formCancel">Annuler</button>
-        </div>
-</form>
 {% endblock %}
 
 {% block javascript %}
-<script src="/assets/js/admin/updateForm.js"></script>
-<script src="/assets/js/admin/adminFormArticle.js"></script>
->>>>>>> 6641439077193b08b1e5f3e061f6dafbcc003990
+	 <script src="/assets/js/admin/updateForm.js"></script>
+	 <script src="/assets/js/admin/adminFormArticle.js"></script>
 {% endblock %}

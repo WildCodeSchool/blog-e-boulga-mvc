@@ -95,10 +95,10 @@ class ArticleManager extends AbstractManager
         );
         $statement->bindValue('authorId', $form['author'], PDO::PARAM_INT);
         $statement->bindValue('categoryId', $form['category'], PDO::PARAM_INT);
-        $statement->bindValue('articleTitle', $form['title'], PDO::PARAM_STR);
+        $statement->bindValue('articleTitle', $form['articleTitle'], PDO::PARAM_STR);
         $statement->bindValue('homeTitle', $form['homeTitle'], PDO::PARAM_STR);
         $statement->bindValue('imgSrc', $form['imgSrc'], PDO::PARAM_STR);
-        $statement->bindValue('altImg', $form['title'], PDO::PARAM_STR);
+        $statement->bindValue('altImg', $form['articleTitle'], PDO::PARAM_STR);
         $statement->bindValue('homePreview', $form['homePreview'], PDO::PARAM_STR);
         $statement->bindValue('introduction', $form['introduction'], PDO::PARAM_STR);
         $statement->bindValue('detail', $form['detail'], PDO::PARAM_STR);
@@ -140,13 +140,13 @@ class ArticleManager extends AbstractManager
                                             `updatedAt`= Now()
                                         WHERE `id`=:id');
         $statement->bindValue('id', $id, PDO::PARAM_INT);
-        $statement->bindValue(':articleTitle', $article['title'], PDO::PARAM_STR);
+        $statement->bindValue(':articleTitle', $article['articleTitle'], PDO::PARAM_STR);
         $statement->bindValue('homeTitle', $article['homeTitle'], PDO::PARAM_STR);
         $statement->bindValue(':introduction', $article['introduction'], PDO::PARAM_STR);
         $statement->bindValue(':imgSrc', $article['imgSrc'], PDO::PARAM_STR);
         $statement->bindValue(':authorId', $article['author'], PDO::PARAM_INT);
         $statement->bindValue(':categoryId', $article['category'], PDO::PARAM_INT);
-        $statement->bindValue(':altImg', $article['title'], PDO::PARAM_STR);
+        $statement->bindValue(':altImg', $article['articleTitle'], PDO::PARAM_STR);
         $statement->bindValue(':homePreview', $article['homePreview'], PDO::PARAM_STR);
         $statement->bindValue(':detail', $article['detail'], PDO::PARAM_STR);
         $statement->bindValue(':description', $article['description'], PDO::PARAM_STR);

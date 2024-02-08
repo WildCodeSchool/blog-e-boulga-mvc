@@ -85,7 +85,7 @@ class ArticleController extends AbstractController implements UploadFile
             $this->checkUploadFile($_FILES, $errors);
 
             if (empty($errors)) {
-                $newArticle = $_POST;
+                $newArticle = array_map('trim', $_POST);
                 $imageArticle = $this->uploadFile($errors);
                 if (empty($errors)) {
                     $newArticle['imgSrc'] = $imageArticle;
@@ -97,6 +97,7 @@ class ArticleController extends AbstractController implements UploadFile
         }
         return $this->twig->render('Admin/Article/add.html.twig', [
             'errors' => $errors ?? null,
+            'post' => $_POST,
             'authors' => $authors,
             'categories' => $categories,
         ]);
@@ -149,7 +150,7 @@ class ArticleController extends AbstractController implements UploadFile
                 return $failed[$fileName] = "[{$fileName}] failed to upload.";
             }
         }
-        return 'an error occured';
+        return 'An error occured';
     }
 
     public function setMain(int $id, string $filter = null): void
@@ -213,7 +214,6 @@ class ArticleController extends AbstractController implements UploadFile
                 exit();
             }
         }
-
         // Generate the web page
         return $this->twig->render('Admin/Article/edit.html.twig', [
             'errors' => $errors,

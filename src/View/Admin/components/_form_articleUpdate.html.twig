@@ -1,17 +1,16 @@
 {% block content %}
+    {% if errors is defined %}
+    {% for error in errors %}
+        <p class="error">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
 
-	{% if errors is defined %}
-		{% for error in errors %}
-			<p class="error">{{ error }}</p>
-		{% endfor %}
-	{% endif %}
-	<form class="formArticle" action="" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="imgSrc" value="{{articleUpdate.imgSrc}}"/>
+    <form class="formArticle" action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="imgSrc" value="{{articleUpdate.imgSrc}}"/>
 		<div class="articleTitle">
 			<label for="title">Titre de votre article</label>
 			<input type="text" name="title" id="title" required value="{{articleUpdate.articleTitle}}"/>
 		</div>
-
 		<div>
 			<label for="hometitle">Titre de votre article depuis la home</label>
 			<input type="text" name="homeTitle" id="hometitle" required value="{{articleUpdate.homeTitle}}"/>
@@ -36,75 +35,72 @@
 			<textarea id="homepreview" rows="10" name="homePreview" required>{{articleUpdate.homepreview}}</textarea>
 		</div>
 		<div class="blockSelect">
-			<div class="blockCategory">
-				<label for="category">Choix de la catégorie
-				</label>
-				<select name="category">
-					{% for category in categories %}
-						<option value="{{ category.id }}">
-							{{ category.categoryName }}</option>
-					{% endfor %}
-				</select>
-			</div>
-			<div class="blockAuthor">
-				<label for="author">Choix de l'auteur
-				</label>
-				<select name="author">
-					{% for author in authors %}
-						<option value="{{ author.id }}">
-							{{ author.firstName }}
-							{{ author
+            <div class="blockCategory">
+                <label for="category">Choix de la catégorie
+                </label>
+                <select name="category">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">
+                            {{ category.categoryName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="blockAuthor">
+                <label for="author">Choix de l'auteur
+                </label>
+                <select name="author">
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">
+                            {{ author.firstName }}
+                            {{ author
                             .lastName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="blockStatus">
+                <label for="status">Choix du statut
+                </label>
+                <select name="status">
+                    <option value="1">Brouillon</option>
+                    <option value="2">Publié</option>
+                    <option value="3">Archivé</option>
+                </select>
+            </div>
+        </div>
+	<div class="blockUploadImg">
+        <div class="inputChoice">
+            <label for="imageUpload">Télécharger votre image d'article</label>
+            <input type="file" name="imageUpload" id="imageUpload" onchange="previewImage(event)"  value = "Sélectionner un fichier"/>
+            <div class="imgPreview">
+                <img id="preview"/>
+            </div>
 
-					{% endfor %}
-				</select>
-			</div>
-			<div class="blockStatus">
-				<label for="status">Choix du statut
-				</label>
-				<select name="status">
-					<option value="1">Brouillon</option>
-					<option value="2">Publié</option>
-					<option value="3">Archivé</option>
-				</select>
-			</div>
-		</div>
-		<div class="blockUploadImg">
-			<div class="inputChoice">
-				<div class="fileSelection">
-					<label for="imageUpload" class="labelImage">Télécharger votre image d'article</label>
-					<input type="file" name="imageUpload" id="imageUpload" onchange="previewImage(event)" value="Sélectionner un fichier"/>
-				</div>
-				<div class="blockNewImage">
-					<label for="newImg">Aperçu de votre nouvelle image</label>
-					<img id="preview"/>
-				</div>
-			</div>
+        </div>
 
-			<div class="blockImage">
-				<label for="actualImg">Image actuelle</label>
-				<img class="actualImg" src="/{{articleUpdate.imgSrc}}">
-			</div>
-		</div>
-		<div class="buttons">
-			<div>
-				<input class="formValidate" type="button" value="Valider">
-			</div>
-			<section class="modalMain">
-				<div class="modalMainContent">
-					<p class="pConfirmation"></p>
-					<div class="modalMainButtons">
-						<input type="submit" id="validateForm" value="Confirmer" class="globalButton modalMainButton"/>
-						<button type="button" class="globalButton modalNoButton" id="cancelForm">Annuler</button>
-					</div>
-				</div>
-			</section>
-			<button type="button" class="formCancel">Annuler</button>
-		</div>
-	</form>
+        <div class="blockImage">
+            <label for="actualImg">Image actuelle</label>
+            <img class="actualImg" src="/{{articleUpdate.imgSrc}}">
+        </div>
+	</div>
+        <div class="buttons">
+            <div>
+                <input class="formValidate" type="button" value="Valider">
+            </div>
+            <section class="modalMain">
+                <div class="modalMainContent">
+                    <p class="pConfirmation"></p>
+                    <div class="modalMainButtons">
+                        <input type="submit" id="validateForm" value="Confirmer" class="globalButton modalMainButton"/>
+                        <button type="button" class="globalButton modalNoButton" id="cancelForm">Annuler</button>
+                    </div>
+                </div>
+            </section>
+            <button type="button" class="formCancel">Annuler</button>
+        </div>
+</form>
 {% endblock %}
 
 {% block javascript %}
-	 <script src="/assets/js/admin/updateForm.js"></script>
-	 <script src="/assets/js/admin/adminFormArticle.js"></script>
+<script src="/assets/js/admin/updateForm.js"></script>
+<script src="/assets/js/admin/adminFormArticle.js"></script>
 {% endblock %}

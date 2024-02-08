@@ -2,55 +2,26 @@ main {
     min-width: 30rem;
     margin: 0 auto;
     max-width: 70rem;
-    width: auto; 
-}   
+    width: auto;
+}
 
 h1 {
     margin-top: 30px;
 }
 
 form {
-    font-weight: bold;
-    font-family: 'Titillium Web', sans-serif;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 1500px;   
+    height: 1500px;
 }
 
-.littleInput {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 200px;
-}
 
-#title {
+input :not(:last-child){
     margin-bottom: 1rem;
-    border: 1px solid var(--admin-color );
-    padding: 0.5rem;
-    text-transform: capitalize;
-}
-
-#hometitle {
-    border: 1px solid var(--admin-color);
-    padding: 0.5rem;
-}
-
-input:focus{
-    outline: 5px solid var(--admin-color);
-    font-weight: bold;
-}
-
-textarea:focus{
-    border: 5px solid var(--admin-color);
-    font-weight: bold;
-}
-
-textarea {
-    margin-bottom: 1rem;
-    border: 1px solid var(--admin-color );
+    border: none;
+    border-bottom: 1px solid black;
     outline: none;
     padding: 0.5rem;
 }
@@ -62,81 +33,51 @@ textarea {
 
 div{
     display: flex;
-    flex-direction: column;  
+    flex-direction: column;
 }
 
 .blockSelect{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+
 }
 
-.blockImage, .blockNewImage {
+.blockImage {
     width: 300px;
     height: 179px;
     overflow: hidden;
 }
 
 .inputChoice {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 800px;
-    gap: 3.8rem;
+    width:300px;
+    gap: 1rem;
 }
+
 
 .inputChoice label {
     margin-top: 2px;
 }
 
-.fileSelection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-    gap: 1rem;
-}
-
-.labelImage {
-    display: flex;
-    flex-direction: column;
-    background-color: #149b1b;
-    color: white;
-    text-align: center;
-    width: 20rem;
-    height: 70px;
+#imageUpload {
+    background-color:var(--admin-color);
+    width: 11rem;
+    height: 50px;
     border-radius: 15px;
     font-size: 1rem;
     cursor: pointer;
-    padding-top: 20px;
-    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.8);
+    object-fit: cover;
 }
 
-.labelImage:hover {
-    background-color:green;
+.imgPreview {
+    object-fit: cover;
 }
 
-.labelImage:active {
-    background-color: #149b1b;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
-}
-
-#imageUpload {
-    display: none;
-    cursor: pointer;
-}
-
-#preview {
-    width: 300px;
-    height: 187px;
-}
 
 .blockUploadImg {
-    margin-top: 50px;
-    height: 250px;
     display: flex;
     flex-direction: row-reverse;
-    justify-content: space-around;
+    justify-content: start;
     gap: 2rem;
 }
 
@@ -149,34 +90,12 @@ div{
     flex-direction: row;
     justify-content: space-around;
     padding-bottom: 50px;
-}
 
-.modalMainButton {
-    background: green;
-    cursor: pointer;
-    border: none;
-}
-
-.modalNoButton {
-    background: #d90000;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.modalMainButton:hover {
-    background: #189b18;
-}
-
-.modalNoButton:hover {
-    background: #b30000;
 }
 
 .formValidate{
     cursor: pointer;
     background: green;
-    color: whitesmoke;
-    font-weight: bold;
     margin: 0.5rem;
     width: 10rem;
     height: 2.5rem;
@@ -185,27 +104,13 @@ div{
     justify-content: center;
     align-self: center;
     text-decoration: none;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: none;
 }
 
-.formValidate:hover{
-    background: #189b18;
-}
-
-.formValidate:active{
-    background: green;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
-}
-
-.formCancel:hover{
-    background: #b30000;
-}
-
 .formCancel{
+    cursor: pointer;
     background: red;
-    color: whitesmoke;
-    font-weight: bold;
     margin: 0.5rem;
     width: 10rem;
     height: 2.5rem;
@@ -214,13 +119,16 @@ div{
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: none;
 }
 
-.formCancel:active{
-    background: red;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
+.formValidate:hover{
+    background: #189b18;
+}
+
+.formCancel:hover{
+    background: #b30000;
 }
 
 .modalMain {
@@ -262,23 +170,18 @@ div{
     width: 10rem;
     height: 2.5rem;
     border-radius: 10px;
-    color: whitesmoke;
+    color: var(--our-black);
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .modalMainButton {
     background: green;
     cursor: pointer;
     border: none;
-}
-
-.modalMainButton:active{
-    background: green;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
 }
 
 .modalNoButton {
@@ -296,7 +199,10 @@ div{
     background: #b30000;
 }
 
-.modalNoButton:active{
-    background: red;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.8) inset;
+.error {
+    color: red;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
